@@ -26,7 +26,7 @@ from ecmwf.opendata import Client
 from shapely import contains_xy
 from shapely.geometry import mapping, shape
 
-STEPS = (3, 6, 24, 72)
+STEPS = (3, 24, 72)
 THAILAND_BOUNDS = (96.0, 4.0, 107.0, 22.0)
 
 THAI_PROVINCES = {
@@ -184,7 +184,6 @@ def province_metrics(boundaries: dict[str, Any], fields: dict[int, dict[str, np.
             "centroid": [round(point.x, 5), round(point.y, 5)],
             "rainMm": {
                 "3hMean": round(float(np.mean(step_values[3])), 1),
-                "6hMean": round(float(np.mean(step_values[6])), 1),
                 "24hMean": round(mean24, 1),
                 "24hP90": round(p90_24, 1),
                 "24hMax": round(max24, 1),
@@ -240,7 +239,7 @@ def build_snapshot(boundary_path: Path, grib_path: Path) -> dict[str, Any]:
     fields, run_meta = load_fields(grib_path)
     provinces = province_metrics(boundaries, fields)
     generated_at = datetime.now(timezone.utc).isoformat().replace("+00:00", "Z")
-    run_key = f"ifs-{run_meta['modelRunUtc']}-tp-3-6-24-72"
+    run_key = f"ifs-{run_meta['modelRunUtc']}-tp-3-24-72"
     return {
         "schemaVersion": "0.1.0",
         "runKey": run_key,

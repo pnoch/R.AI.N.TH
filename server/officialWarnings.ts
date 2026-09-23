@@ -6,6 +6,7 @@ import * as db from "./db";
 type JsonObject = Record<string, any>;
 
 export const TMD_WARNING_API = "https://data.tmd.go.th/api/WeatherWarningNews/v2/?uid=demo&ukey=demokey";
+export const TMD_WARNING_TIMEOUT_MS = 8_000;
 const bundledPath = path.join(process.cwd(), "server", "data", "latest-warning.json");
 let activeRefresh: Promise<JsonObject> | null = null;
 
@@ -55,7 +56,7 @@ function normalizeWarning(raw: JsonObject, checkedAtUtc: number): JsonObject {
 export async function fetchOfficialWarning(): Promise<JsonObject> {
   const response = await fetch(TMD_WARNING_API, {
     headers: { accept: "application/xml", "user-agent": "RAIN-TH-Intelligence/0.3" },
-    signal: AbortSignal.timeout(30_000),
+    signal: AbortSignal.timeout(TMD_WARNING_TIMEOUT_MS),
   });
   if (!response.ok) throw new Error(`TMD warning API returned HTTP ${response.status}`);
   const xml = await response.text();

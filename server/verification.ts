@@ -9,6 +9,8 @@ const projectRoot = process.cwd();
 const bundledPath = path.join(projectRoot, "server", "data", "latest-verification.json");
 const boundaryPath = path.join(projectRoot, "pipeline", "data", "thailand-adm1.geojson");
 const pipelinePath = path.join(projectRoot, "pipeline", "verification_pipeline.py");
+export const VERIFICATION_PIPELINE_SOURCE = process.env.ECMWF_SOURCE || "google";
+export const VERIFICATION_PIPELINE_TIMEOUT_MS = 23_000;
 let activeVerification: Promise<JsonObject> | null = null;
 
 async function readBundled(): Promise<JsonObject> {
@@ -34,13 +36,13 @@ function executeVerification(): Promise<JsonObject> {
         "--output",
         outputPath,
         "--source",
-        "aws",
+        VERIFICATION_PIPELINE_SOURCE,
       ],
       { cwd: projectRoot, env: process.env },
     );
     let stdout = "";
     let stderr = "";
-    const timeout = setTimeout(() => child.kill("SIGKILL"), 150_000);
+    const timeout = setTimeout(() => child.kill("SIGKILL"), VERIFICATION_PIPELINE_TIMEOUT_MS);
     child.stdout.on("data", chunk => (stdout += String(chunk)));
     child.stderr.on("data", chunk => (stderr += String(chunk)));
     child.on("error", error => {

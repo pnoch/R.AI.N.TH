@@ -18,7 +18,7 @@ describe("weather snapshot contract", () => {
     expect(result.schemaVersion).toBe("0.1.0");
     expect(result.source.provider).toBe("ECMWF");
     expect(result.source.directAccess).toBe(true);
-    expect(result.source.forecastStepsHours).toEqual([3, 6, 24, 72]);
+    expect(result.source.forecastStepsHours).toEqual([3, 24, 72]);
     expect(result.provinces).toHaveLength(77);
     expect(new Set(result.provinces.map((province: any) => province.iso)).size).toBe(77);
     expect(result.provinces.every((province: any) => province.riskScore >= 0 && province.riskScore <= 100)).toBe(true);

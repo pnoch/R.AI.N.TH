@@ -10,6 +10,8 @@ const projectRoot = process.cwd();
 const bundledSnapshotPath = path.join(projectRoot, "server", "data", "latest-snapshot.json");
 const boundaryPath = path.join(projectRoot, "pipeline", "data", "thailand-adm1.geojson");
 const pipelinePath = path.join(projectRoot, "pipeline", "ecmwf_pipeline.py");
+export const WEATHER_PIPELINE_SOURCE = process.env.ECMWF_SOURCE || "google";
+export const WEATHER_PIPELINE_TIMEOUT_MS = 23_000;
 let activeRefresh: Promise<JsonObject> | null = null;
 
 async function readBundledSnapshot(): Promise<JsonObject> {
@@ -50,13 +52,13 @@ function executePipeline(): Promise<JsonObject> {
         "--output",
         outputPath,
         "--source",
-        "aws",
+        WEATHER_PIPELINE_SOURCE,
       ],
       { cwd: projectRoot, env: process.env },
     );
     let stdout = "";
     let stderr = "";
-    const timeout = setTimeout(() => child.kill("SIGKILL"), 150_000);
+    const timeout = setTimeout(() => child.kill("SIGKILL"), WEATHER_PIPELINE_TIMEOUT_MS);
 
     child.stdout.on("data", chunk => {
       stdout += String(chunk);

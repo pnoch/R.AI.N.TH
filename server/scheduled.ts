@@ -30,11 +30,21 @@ async function runTracked(jobKey: string, work: () => Promise<Record<string, any
 
 export function runForecastWarningRefresh() {
   return runTracked(FORECAST_REFRESH_JOB_KEY, async () => {
-    const [weather, warnings] = await Promise.all([refreshSnapshot(), refreshOfficialWarnings()]);
+    const [weatherResult, warningResult] = await Promise.allSettled([
+      refreshSnapshot(),
+      refreshOfficialWarnings(),
+    ]);
+    if (weatherResult.status === "rejected") throw weatherResult.reason;
+    const weather = weatherResult.value;
+    const warnings = warningResult.status === "fulfilled" ? warningResult.value : null;
     return {
       weatherRunKey: weather.runKey,
-      warningIssueNo: warnings.tmd.issueNo ?? null,
-      warningStatus: warnings.tmd.status,
+      warningIssueNo: warnings?.tmd.issueNo ?? null,
+      warningStatus: warnings?.tmd.status ?? "STALE_LAST_KNOWN",
+      warningError:
+        warningResult.status === "rejected"
+          ? String(warningResult.reason instanceof Error ? warningResult.reason.message : warningResult.reason).slice(0, 500)
+          : null,
     };
   });
 }

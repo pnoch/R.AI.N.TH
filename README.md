@@ -6,7 +6,7 @@ The current version is a **validation prototype**, not a public warning service.
 
 ## What works now
 
-The direct data path has been validated against a live ECMWF IFS run. The processor retrieves forecast steps for 3, 6, 24, and 72 hours from the ECMWF open-data replica on Amazon Web Services. It converts total precipitation from metres to millimetres, crops the global field to Thailand, and aggregates grid points within open province boundaries. Small provinces without an interior 0.25-degree grid point use their nearest grid point and receive lower confidence.
+The direct data path has been validated against live ECMWF IFS runs. The processor retrieves the 3-, 24-, and 72-hour fields used by the dashboard and risk score from ECMWF's Google Cloud open-data mirror, selected after bounded benchmarks against the scheduler's 30-second callback window. It converts total precipitation from metres to millimetres, crops the global field to Thailand, and aggregates grid points within open province boundaries. Small provinces without an interior 0.25-degree grid point use their nearest grid point and receive lower confidence.
 
 The web dashboard shows the resulting province map, leading signals, selected-province statistics, model provenance, scoring limitations, and a Thai draft. It performs a live 24-hour hindcast check against the public ThaiWater station feed, persists rolling verification runs, and charts absolute error nationally or for a selected province with Thai seasonal groupings. A separate official layer ingests TMD `WeatherWarningNews` bulletins with issue, announcement, effect timestamps, source PDF, and provenance. An authenticated operator can retrieve the latest ECMWF run, refresh official warnings or evidence, refine the copy with `gpt-5-mini`, or approve the draft. Approval is an internal state change only. The application has no Facebook, LINE, or public-publishing connection.
 
@@ -59,11 +59,11 @@ Managed HTTP callbacks after deployment
                 └──────────────► ThaiWater verification daily
 ```
 
-The production container combines the TypeScript application and a small Python runtime. A refresh runs within the initiating web request, which fits the managed hosting limit because the verified direct retrieval and aggregation usually complete in seconds. The code deduplicates simultaneous refresh requests within one application instance.
+The production container combines the TypeScript application and a small Python runtime. Scheduled subprocesses are capped at 23 seconds, the TMD request is capped at 8 seconds and cannot block a successful forecast, and simultaneous refresh requests are deduplicated within one application instance.
 
 ## Data sources and attribution
 
-ECMWF makes a subset of real-time IFS and Artificial Intelligence Forecasting System data available as GRIB2 files under Creative Commons Attribution 4.0. The open-data archive retains the most recent forecast runs rather than a full historical archive.[1] This project uses the deterministic IFS `oper` stream, surface-level total precipitation parameter `tp`, and forecast steps 3, 6, 24, and 72 hours.
+ECMWF makes a subset of real-time IFS and Artificial Intelligence Forecasting System data available as GRIB2 files under Creative Commons Attribution 4.0. The open-data archive retains the most recent forecast runs rather than a full historical archive.[1] This project uses the deterministic IFS `oper` stream, surface-level total precipitation parameter `tp`, and forecast steps 3, 24, and 72 hours.
 
 Province boundaries come from the `gbOpen` Thailand ADM1 release exposed by geoBoundaries. The application stores the downloaded source metadata beside the GeoJSON and includes source attribution in the interface.[2]
 
