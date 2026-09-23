@@ -5,8 +5,8 @@
   "license": "MIT",
   "scripts": {
     "dev": "NODE_ENV=development tsx watch server/_core/index.ts",
-    "build": "vite build && esbuild server/_core/index.ts --platform=node --packages=external --bundle --format=esm --outdir=dist",
-    "start": "NODE_ENV=production node dist/index.js",
+    "build": "vite build && esbuild server/production.ts --platform=node --bundle --format=cjs --outfile=dist/index.cjs",
+    "start": "NODE_ENV=production node dist/index.cjs",
     "check": "tsc --noEmit",
     "format": "prettier --write .",
     "test": "vitest run",
@@ -15,7 +15,8 @@
     "weather:refresh": "tsx scripts/smoke-refresh.ts",
     "weather:refine": "tsx scripts/smoke-refine.ts",
     "verification:refresh": "tsx scripts/smoke-verification.ts",
-    "warnings:refresh": "tsx scripts/smoke-warnings.ts"
+    "warnings:refresh": "tsx scripts/smoke-warnings.ts",
+    "smoke:production": "bash scripts/smoke-production.sh"
   },
   "dependencies": {
     "@aws-sdk/client-s3": "^3.693.0",

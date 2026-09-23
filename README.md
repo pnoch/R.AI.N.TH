@@ -112,8 +112,12 @@ Run the full quality gate with:
 ```bash
 pnpm check
 pnpm test
+pnpm test:python
 pnpm build
+pnpm smoke:production
 ```
+
+The production build uses a dedicated bundled server entrypoint and a two-stage image. The final image carries the compiled frontend/server, the Python GRIB runtime, pipeline code, and fallback data without retaining the JavaScript build toolchain or `node_modules`.
 
 Run a direct end-to-end ECMWF refresh and persist the result with:
 
