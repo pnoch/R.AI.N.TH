@@ -54,3 +54,35 @@ export const verificationRuns = mysqlTable("verification_runs", {
 
 export type VerificationRun = typeof verificationRuns.$inferSelect;
 export type InsertVerificationRun = typeof verificationRuns.$inferInsert;
+
+export const officialWarnings = mysqlTable("official_warnings", {
+  id: int("id").autoincrement().primaryKey(),
+  source: varchar("source", { length: 32 }).notNull(),
+  externalKey: varchar("externalKey", { length: 128 }).notNull().unique(),
+  issueNo: varchar("issueNo", { length: 32 }),
+  titleTh: text("titleTh").notNull(),
+  headlineTh: text("headlineTh"),
+  descriptionTh: text("descriptionTh"),
+  titleEn: text("titleEn"),
+  effectStartUtc: bigint("effectStartUtc", { mode: "number" }),
+  effectEndUtc: bigint("effectEndUtc", { mode: "number" }),
+  announcedAtUtc: bigint("announcedAtUtc", { mode: "number" }),
+  sourceUrl: text("sourceUrl"),
+  payload: json("payload").notNull(),
+  retrievedAtUtc: bigint("retrievedAtUtc", { mode: "number" }).notNull(),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+});
+
+export const automationJobs = mysqlTable("automation_jobs", {
+  id: int("id").autoincrement().primaryKey(),
+  jobKey: varchar("jobKey", { length: 64 }).notNull().unique(),
+  scheduleCronTaskUid: varchar("schedule_cron_task_uid", { length: 65 }).unique(),
+  cronExpression: varchar("cronExpression", { length: 64 }),
+  lastStartedAtUtc: bigint("lastStartedAtUtc", { mode: "number" }),
+  lastCompletedAtUtc: bigint("lastCompletedAtUtc", { mode: "number" }),
+  lastStatus: mysqlEnum("lastStatus", ["idle", "running", "success", "failed"]).default("idle").notNull(),
+  lastError: text("lastError"),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+});

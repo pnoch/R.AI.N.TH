@@ -14,7 +14,8 @@
     "db:push": "drizzle-kit generate && drizzle-kit migrate",
     "weather:refresh": "tsx scripts/smoke-refresh.ts",
     "weather:refine": "tsx scripts/smoke-refine.ts",
-    "verification:refresh": "tsx scripts/smoke-verification.ts"
+    "verification:refresh": "tsx scripts/smoke-verification.ts",
+    "warnings:refresh": "tsx scripts/smoke-warnings.ts"
   },
   "dependencies": {
     "@aws-sdk/client-s3": "^3.693.0",
@@ -60,6 +61,7 @@
     "drizzle-orm": "^0.44.5",
     "embla-carousel-react": "^8.6.0",
     "express": "^4.21.2",
+    "fast-xml-parser": "^5.11.1",
     "framer-motion": "^12.23.22",
     "input-otp": "^1.4.2",
     "jose": "6.1.0",

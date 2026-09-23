@@ -256,8 +256,8 @@ def build_snapshot(boundary_path: Path, grib_path: Path) -> dict[str, Any]:
         "analysis": {
             "type": "OUR_RISK_ANALYSIS",
             "title": "Rainfall-only impact screening",
-            "officialWarningStatus": "NOT_CHECKED_V0",
-            "officialWarningLabel": "ยังไม่ได้เชื่อมประกาศทางการใน V0",
+            "officialWarningStatus": "SEPARATE_TMD_FEED",
+            "officialWarningLabel": "ตรวจประกาศทางการจาก TMD ในชั้นข้อมูลแยก",
             "limitations": [
                 "Single deterministic ECMWF model only",
                 "No river, soil moisture, radar, observed rainfall, or population exposure yet",

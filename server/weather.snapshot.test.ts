@@ -29,7 +29,7 @@ describe("weather snapshot contract", () => {
     const result = (await caller.weather.latest()) as any;
 
     expect(result.analysis.type).toBe("OUR_RISK_ANALYSIS");
-    expect(result.analysis.officialWarningStatus).toBe("NOT_CHECKED_V0");
+    expect(result.analysis.officialWarningStatus).toBe("SEPARATE_TMD_FEED");
     expect(result.draft.status).toBe("DRAFT");
     expect(result.draft.publishedAtUtc).toBeNull();
     expect(result.draft.textTh).toContain("ไม่ใช่ประกาศเตือนภัยอย่างเป็นทางการ");

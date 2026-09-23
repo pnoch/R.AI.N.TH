@@ -27,4 +27,12 @@ describe("verification snapshot contract", () => {
     expect(result.summary.within10mmRate).toBeLessThanOrEqual(1);
     expect(Math.abs(result.summary.pearsonCorrelation)).toBeLessThanOrEqual(1);
   });
+
+  it("returns persisted verification history for rolling skill views", async () => {
+    const history = (await appRouter.createCaller(ctx).verification.history({ limit: 30 })) as any[];
+    expect(history.length).toBeGreaterThan(0);
+    expect(history.length).toBeLessThanOrEqual(30);
+    expect(history[0].summary.meanAbsoluteErrorMm).toBeGreaterThanOrEqual(0);
+    expect(history[0].provinces).toHaveLength(77);
+  });
 });

@@ -1,6 +1,7 @@
 import { useAuth } from "@/_core/hooks/useAuth";
 import ThailandRiskMap from "@/components/ThailandRiskMap";
 import VerificationPanel from "@/components/VerificationPanel";
+import OfficialWarningPanel from "@/components/OfficialWarningPanel";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
@@ -129,7 +130,7 @@ export default function Home() {
           <span className="live-pulse" />
           <span>ECMWF DIRECT</span>
           <span className="topbar-separator" />
-          <span>V0.1</span>
+          <span>V0.3</span>
         </div>
         <div className="topbar-actions">
           {user ? (
@@ -172,8 +173,10 @@ export default function Home() {
           <div><Database /><span><b>Source</b>ECMWF IFS Open Data</span></div>
           <div><Gauge /><span><b>Resolution</b>0.25° / 3–72h</span></div>
           <div><ShieldCheck /><span><b>Classification</b>OUR RISK ANALYSIS</span></div>
-          <div className="official-state"><AlertTriangle /><span><b>Official warning</b>{data.analysis.officialWarningLabel}</span></div>
+          <div className="official-state"><AlertTriangle /><span><b>Official warning</b>LIVE TMD FEED · SEPARATE LAYER</span></div>
         </section>
+
+        <OfficialWarningPanel />
 
         <section className="dashboard-grid">
           <div className="map-column">

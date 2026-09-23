@@ -249,6 +249,46 @@
 .verification-footnote strong { color: #f0c75e; font-family: "IBM Plex Mono", monospace; text-transform: uppercase; letter-spacing: .08em; }
 .verification-loading, .verification-error { min-height: 190px; display: flex; align-items: center; justify-content: center; gap: 10px; color: #789397; }
 
+.official-warning-panel { display: grid; grid-template-columns: 70px minmax(0, 1.4fr) minmax(300px, .55fr); margin-bottom: 18px; border: 1px solid var(--border); background: linear-gradient(110deg, rgba(64,27,28,.62), rgba(13,31,38,.96) 48%); box-shadow: 0 18px 55px rgba(0,0,0,.16); }
+.official-warning-panel.has-active-warning { border-color: rgba(239,113,57,.38); }
+.warning-icon { display: grid; place-items: start center; padding-top: 24px; color: #f0a547; border-right: 1px solid var(--border); }
+.warning-icon svg { width: 26px; height: 26px; }
+.warning-main { padding: 22px 25px 21px; }
+.warning-heading-row { display: flex; align-items: flex-start; justify-content: space-between; gap: 20px; }
+.warning-heading-row h2 { margin: 0; font-size: 23px; }
+.warning-active-badge { color: #ffb45a; background: rgba(239,113,57,.13); border: 1px solid rgba(239,113,57,.24); }
+.warning-clear-badge { color: #58c9be; background: rgba(88,201,190,.1); }
+.warning-main h3 { color: #f7e4c3; margin: 17px 0 8px; max-width: 940px; font-size: 16px; line-height: 1.55; }
+.warning-headline { color: #9eb2b4; margin: 0; font-size: 12px; line-height: 1.7; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+.warning-meta { display: flex; flex-wrap: wrap; gap: 9px 20px; margin-top: 15px; color: #708a8f; font: 500 9px "IBM Plex Mono", monospace; text-transform: uppercase; }
+.warning-meta span { display: flex; align-items: center; gap: 6px; }
+.warning-meta svg { width: 13px; color: #f0a547; }
+.warning-actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 17px; }
+.warning-side { border-left: 1px solid var(--border); padding: 20px 22px; background: rgba(3,13,18,.28); }
+.warning-side > div:not(.schedule-readiness) { padding: 9px 0; border-bottom: 1px solid rgba(136,184,187,.1); }
+.warning-side span { display: block; color: #668187; font: 600 8px "IBM Plex Mono", monospace; letter-spacing: .1em; text-transform: uppercase; }
+.warning-side b { display: block; margin-top: 4px; color: #dce9e7; font-size: 11px; }
+.warning-side > p { color: #6f898e; font-size: 9px; line-height: 1.55; }
+.schedule-readiness { display: flex; gap: 9px; padding-top: 12px; color: #f0c75e; }
+.schedule-readiness svg { width: 16px; flex: none; }
+.schedule-readiness span b { color: #f0c75e; margin: 0 0 3px; }
+.warning-loading, .warning-error { min-height: 120px; display: flex; align-items: center; justify-content: center; gap: 10px; color: #789397; }
+.history-panel { padding: 21px 24px; border-bottom: 1px solid var(--border); background: linear-gradient(90deg, rgba(55,140,139,.035), transparent 60%); }
+.history-title select { min-width: 210px; color: #dbe9e7; background: #0a1b22; border: 1px solid var(--border); padding: 8px 10px; font: 500 10px "IBM Plex Mono", monospace; }
+.history-grid { display: grid; grid-template-columns: minmax(0, 1fr) 270px; gap: 22px; align-items: stretch; }
+.history-chart { min-height: 200px; display: grid; align-items: center; }
+.history-chart svg { width: 100%; height: 190px; overflow: visible; }
+.history-line { fill: none; stroke: #58c9be; stroke-width: 2; }
+.history-point { fill: #f0c75e; stroke: #fff0b4; stroke-width: 1.2; }
+.history-empty { color: #6f898e; text-align: center; }
+.season-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 7px; }
+.season-cards article { display: flex; flex-direction: column; justify-content: center; min-width: 0; padding: 12px 10px; border: 1px solid rgba(136,184,187,.13); background: rgba(4,14,19,.35); }
+.season-cards span { color: #58c9be; font: 600 8px "IBM Plex Mono", monospace; }
+.season-cards b { margin-top: 7px; font: 650 19px "IBM Plex Mono", monospace; }
+.season-cards b small { font-size: 8px; color: #718a8e; }
+.season-cards em { margin-top: 5px; color: #617a80; font: normal 8px "IBM Plex Mono", monospace; }
+.history-note { color: #698388; font-size: 9px; margin: 11px 0 0; }
+
 .review-grid { display: grid; grid-template-columns: minmax(0, 1.42fr) minmax(320px, .58fr); gap: 18px; margin-top: 18px; }
 .status-draft, .status-approved { gap: 5px; font-family: "IBM Plex Mono", monospace; }
 .status-draft { color: #f0c75e; background: rgba(240,199,94,.1); }
@@ -284,7 +324,10 @@ footer { width: min(1500px, calc(100% - clamp(28px, 7vw, 96px))); margin: 0 auto
   .truth-strip > div:nth-child(2) { border-right: 0; }
   .truth-strip > div:nth-child(-n+2) { border-bottom: 1px solid var(--border); }
   .dashboard-grid, .review-grid { grid-template-columns: 1fr; }
+  .official-warning-panel { grid-template-columns: 62px 1fr; }
+  .warning-side { grid-column: 1 / -1; border-left: 0; border-top: 1px solid var(--border); }
   .verification-body { grid-template-columns: 1fr; }
+  .history-grid { grid-template-columns: 1fr; }
   .scatter-panel { border-right: 0; border-bottom: 1px solid var(--border); }
   .map-shell { min-height: 680px; }
   .signal-column { grid-template-columns: 1fr 1fr; grid-template-rows: none; }
@@ -302,12 +345,21 @@ footer { width: min(1500px, calc(100% - clamp(28px, 7vw, 96px))); margin: 0 auto
   .truth-strip > div { border-right: 0; border-bottom: 1px solid var(--border); }
   .truth-strip > div:last-child { border-bottom: 0; }
   .map-toolbar { flex-direction: column; }
+  .official-warning-panel { display: block; }
+  .warning-icon { display: none; }
+  .warning-main, .warning-side { padding: 18px 15px; }
+  .warning-heading-row { flex-direction: column; }
+  .warning-actions button, .warning-actions a { width: 100%; }
   .verification-heading { align-items: flex-start; flex-direction: column; }
   .verification-heading button { width: 100%; }
   .verification-metrics { grid-template-columns: 1fr 1fr; }
   .verification-metrics article:nth-child(2) { border-right: 0; }
   .verification-metrics article:nth-child(-n+2) { border-bottom: 1px solid var(--border); }
   .verification-body { display: block; }
+  .history-panel { padding: 18px 14px; }
+  .history-title { align-items: flex-start; flex-direction: column; }
+  .history-title select { width: 100%; }
+  .season-cards { grid-template-columns: 1fr 1fr 1fr; }
   .scatter-panel, .error-table { padding: 18px 14px; }
   .error-table-head, .error-row { grid-template-columns: minmax(100px, 1.4fr) repeat(3, .65fr); gap: 5px; }
   .metric-toggle { width: 100%; }

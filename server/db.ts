@@ -1,6 +1,13 @@
 import { desc, eq } from "drizzle-orm";
 import { drizzle } from "drizzle-orm/mysql2";
-import { InsertUser, users, verificationRuns, weatherRuns } from "../drizzle/schema";
+import {
+  automationJobs,
+  InsertUser,
+  officialWarnings,
+  users,
+  verificationRuns,
+  weatherRuns,
+} from "../drizzle/schema";
 import { ENV } from './_core/env';
 
 let _db: ReturnType<typeof drizzle> | null = null;
@@ -184,4 +191,101 @@ export async function saveVerificationRun(payload: Record<string, any>) {
     .where(eq(verificationRuns.verificationKey, payload.verificationKey))
     .limit(1);
   return rows[0];
+}
+
+export async function getVerificationHistory(limit = 30) {
+  const db = await getDb();
+  if (!db) return [];
+  return db
+    .select()
+    .from(verificationRuns)
+    .orderBy(desc(verificationRuns.validEndUtc))
+    .limit(Math.min(Math.max(limit, 1), 90));
+}
+
+export async function upsertOfficialWarning(payload: Record<string, any>) {
+  const db = await getDb();
+  if (!db) throw new Error("Database is not available");
+  const values = {
+    source: payload.source,
+    externalKey: payload.externalKey,
+    issueNo: payload.issueNo ?? null,
+    titleTh: payload.titleTh,
+    headlineTh: payload.headlineTh ?? null,
+    descriptionTh: payload.descriptionTh ?? null,
+    titleEn: payload.titleEn ?? null,
+    effectStartUtc: payload.effectStartUtc ?? null,
+    effectEndUtc: payload.effectEndUtc ?? null,
+    announcedAtUtc: payload.announcedAtUtc ?? null,
+    sourceUrl: payload.sourceUrl ?? null,
+    payload,
+    retrievedAtUtc: payload.retrievedAtUtc,
+  };
+  await db.insert(officialWarnings).values(values).onDuplicateKeyUpdate({ set: values });
+  return payload;
+}
+
+export async function getLatestOfficialWarning() {
+  const db = await getDb();
+  if (!db) return undefined;
+  const rows = await db
+    .select()
+    .from(officialWarnings)
+    .orderBy(desc(officialWarnings.announcedAtUtc), desc(officialWarnings.retrievedAtUtc))
+    .limit(1);
+  return rows[0];
+}
+
+export async function ensureAutomationJob(jobKey: string) {
+  const db = await getDb();
+  if (!db) throw new Error("Database is not available");
+  await db
+    .insert(automationJobs)
+    .values({ jobKey })
+    .onDuplicateKeyUpdate({ set: { jobKey } });
+  const rows = await db.select().from(automationJobs).where(eq(automationJobs.jobKey, jobKey)).limit(1);
+  return rows[0];
+}
+
+export async function getAutomationJob(jobKey: string) {
+  const db = await getDb();
+  if (!db) return undefined;
+  const rows = await db.select().from(automationJobs).where(eq(automationJobs.jobKey, jobKey)).limit(1);
+  return rows[0];
+}
+
+export async function getAutomationJobByTaskUid(taskUid: string) {
+  const db = await getDb();
+  if (!db) return undefined;
+  const rows = await db
+    .select()
+    .from(automationJobs)
+    .where(eq(automationJobs.scheduleCronTaskUid, taskUid))
+    .limit(1);
+  return rows[0];
+}
+
+export async function configureAutomationJob(jobKey: string, taskUid: string, cronExpression: string) {
+  const db = await getDb();
+  if (!db) throw new Error("Database is not available");
+  await ensureAutomationJob(jobKey);
+  await db
+    .update(automationJobs)
+    .set({ scheduleCronTaskUid: taskUid, cronExpression })
+    .where(eq(automationJobs.jobKey, jobKey));
+}
+
+export async function updateAutomationRun(
+  jobKey: string,
+  patch: {
+    lastStartedAtUtc?: number;
+    lastCompletedAtUtc?: number;
+    lastStatus?: "idle" | "running" | "success" | "failed";
+    lastError?: string | null;
+  },
+) {
+  const db = await getDb();
+  if (!db) throw new Error("Database is not available");
+  await ensureAutomationJob(jobKey);
+  await db.update(automationJobs).set(patch).where(eq(automationJobs.jobKey, jobKey));
 }
