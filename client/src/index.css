@@ -163,6 +163,7 @@
 .location-list-toggle svg { width: 15px; }
 .location-list-toggle svg:last-child { width: 13px; }
 .location-results, .province-browser { margin: 0 14px 14px; border: 1px solid rgba(136,184,187,.19); background: #08171e; box-shadow: 0 18px 42px rgba(0,0,0,.3); }
+.location-results { max-height: 430px; overflow-y: auto; overscroll-behavior: contain; scrollbar-color: #29515a #08171e; }
 .location-results-meta { min-height: 38px; padding: 9px 12px; display: flex; align-items: center; justify-content: space-between; gap: 12px; border-bottom: 1px solid rgba(136,184,187,.12); }
 .location-results-meta span { color: #d7e7e5; font-size: 11px; font-weight: 700; }
 .location-results-meta small { color: #627e84; font: 500 8px "IBM Plex Mono", monospace; text-transform: uppercase; }
@@ -195,6 +196,10 @@
 .thailand-map { height: min(670px, 73vh); width: 100%; max-width: 640px; position: relative; z-index: 2; overflow: visible; }
 .province-path { cursor: pointer; transition: fill 150ms, stroke 150ms, opacity 150ms; outline: none; }
 .province-path:hover, .province-path:focus-visible { stroke: #fff2b8; stroke-width: 1.8; opacity: 1; }
+.district-path { fill: transparent; stroke: rgba(221,241,238,.24); stroke-width: .7; pointer-events: none; }
+.district-path.selected { fill: rgba(240,199,94,.14); stroke: #ffe58a; stroke-width: 2.2; filter: url(#map-glow); }
+.location-pin circle:first-child { fill: rgba(240,199,94,.18); stroke: #f0c75e; stroke-width: 1.4; vector-effect: non-scaling-stroke; }
+.location-pin circle:last-child { fill: #fff4bf; stroke: #1a2527; stroke-width: 1.2; vector-effect: non-scaling-stroke; }
 .map-readout { position: absolute; top: 20px; left: 22px; z-index: 5; min-width: 170px; display: flex; flex-direction: column; padding-left: 13px; border-left: 2px solid #f0c75e; }
 .map-readout span { font-size: 15px; font-weight: 700; }
 .map-readout strong { font: 600 12px "IBM Plex Mono", monospace; color: #f0c75e; margin-top: 3px; }
@@ -387,6 +392,7 @@ footer { width: min(1500px, calc(100% - clamp(28px, 7vw, 96px))); margin: 0 auto
   .location-context { align-items: flex-start; flex-wrap: wrap; padding-bottom: 13px; }
   .location-context small { width: 100%; margin-left: 20px; text-align: left; line-height: 1.5; }
   .province-browser-grid { grid-template-columns: 1fr 1fr; max-height: 280px; }
+  .location-results { max-height: 330px; }
   .official-warning-panel { display: block; }
   .warning-icon { display: none; }
   .warning-main, .warning-side { padding: 18px 15px; }

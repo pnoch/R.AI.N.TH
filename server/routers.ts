@@ -3,6 +3,7 @@ import { getSessionCookieOptions } from "./_core/cookies";
 import { systemRouter } from "./_core/systemRouter";
 import { publicProcedure, router } from "./_core/trpc";
 import { automationRouter } from "./routers/automation";
+import { locationsRouter } from "./routers/locations";
 import { verificationRouter } from "./routers/verification";
 import { weatherRouter } from "./routers/weather";
 import { warningsRouter } from "./routers/warnings";
@@ -21,6 +22,7 @@ export const appRouter = router({
     }),
   }),
   automation: automationRouter,
+  locations: locationsRouter,
   weather: weatherRouter,
   verification: verificationRouter,
   warnings: warningsRouter,

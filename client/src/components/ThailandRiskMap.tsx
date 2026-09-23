@@ -1,15 +1,19 @@
+import type { LocationResult } from "@shared/locationSearch";
 import { useMemo, useState } from "react";
 
 type Metric = "risk" | "24h" | "72h";
 
 type Props = {
   boundaries: any;
+  districtBoundaries?: any;
   provinces: any[];
   selectedIso: string;
+  selectedLocation: LocationResult | null;
   onSelect: (iso: string) => void;
 };
 
 const VIEWBOX = { width: 520, height: 740, west: 96, east: 107, south: 4, north: 22 };
+const MAP_TRANSFORM = { x: 12, y: 2, scale: 0.93 };
 
 function project(point: number[]) {
   const [lon, lat] = point;
@@ -17,6 +21,11 @@ function project(point: number[]) {
     ((lon - VIEWBOX.west) / (VIEWBOX.east - VIEWBOX.west)) * VIEWBOX.width,
     ((VIEWBOX.north - lat) / (VIEWBOX.north - VIEWBOX.south)) * VIEWBOX.height,
   ];
+}
+
+function transformed(point: number[]) {
+  const [x, y] = project(point);
+  return [MAP_TRANSFORM.x + x * MAP_TRANSFORM.scale, MAP_TRANSFORM.y + y * MAP_TRANSFORM.scale];
 }
 
 function ringPath(ring: number[][]) {
@@ -29,13 +38,33 @@ function ringPath(ring: number[][]) {
 }
 
 function geometryPath(geometry: any) {
-  if (geometry.type === "Polygon") {
-    return geometry.coordinates.map(ringPath).join(" ");
-  }
+  if (geometry.type === "Polygon") return geometry.coordinates.map(ringPath).join(" ");
   if (geometry.type === "MultiPolygon") {
     return geometry.coordinates.flatMap((polygon: number[][][]) => polygon.map(ringPath)).join(" ");
   }
   return "";
+}
+
+function geometryPoints(geometry: any): number[][] {
+  if (geometry.type === "Polygon") return geometry.coordinates.flat();
+  if (geometry.type === "MultiPolygon") return geometry.coordinates.flat(2);
+  return [];
+}
+
+function focusedViewBox(feature?: any) {
+  if (!feature) return `0 0 ${VIEWBOX.width} ${VIEWBOX.height}`;
+  const points = geometryPoints(feature.geometry).map(transformed);
+  if (!points.length) return `0 0 ${VIEWBOX.width} ${VIEWBOX.height}`;
+  const xs = points.map(point => point[0]);
+  const ys = points.map(point => point[1]);
+  const minX = Math.min(...xs);
+  const maxX = Math.max(...xs);
+  const minY = Math.min(...ys);
+  const maxY = Math.max(...ys);
+  const width = Math.max(maxX - minX, 34);
+  const height = Math.max(maxY - minY, 34);
+  const padding = Math.max(width, height) * 0.5;
+  return `${(minX - padding).toFixed(2)} ${(minY - padding).toFixed(2)} ${(width + padding * 2).toFixed(2)} ${(height + padding * 2).toFixed(2)}`;
 }
 
 function palette(value: number, metric: Metric) {
@@ -64,7 +93,14 @@ function metricLabel(province: any, metric: Metric) {
   return `${province.rainMm["72hMean"].toFixed(1)} mm / 72h`;
 }
 
-export default function ThailandRiskMap({ boundaries, provinces, selectedIso, onSelect }: Props) {
+export default function ThailandRiskMap({
+  boundaries,
+  districtBoundaries,
+  provinces,
+  selectedIso,
+  selectedLocation,
+  onSelect,
+}: Props) {
   const [metric, setMetric] = useState<Metric>("risk");
   const [hoveredIso, setHoveredIso] = useState<string | null>(null);
   const provinceByIso = useMemo(
@@ -72,13 +108,20 @@ export default function ThailandRiskMap({ boundaries, provinces, selectedIso, on
     [provinces],
   );
   const active = provinceByIso.get(hoveredIso || selectedIso);
+  const selectedDistrict = districtBoundaries?.features?.find(
+    (feature: any) => feature.properties.districtCode === selectedLocation?.districtCode,
+  );
+  const mapViewBox = focusedViewBox(selectedDistrict);
+  const locationPoint = selectedLocation?.centerLon && selectedLocation?.centerLat
+    ? transformed([selectedLocation.centerLon, selectedLocation.centerLat])
+    : null;
 
   return (
     <section className="map-shell">
       <div className="map-toolbar">
         <div>
           <p className="eyebrow">Spatial signal</p>
-          <h2>Thailand rainfall screen</h2>
+          <h2>{selectedDistrict ? "District boundary focus" : "Thailand rainfall screen"}</h2>
         </div>
         <div className="metric-toggle" aria-label="Map metric">
           {([
@@ -86,12 +129,7 @@ export default function ThailandRiskMap({ boundaries, provinces, selectedIso, on
             ["24h", "24h rain"],
             ["72h", "72h rain"],
           ] as const).map(([value, label]) => (
-            <button
-              key={value}
-              className={metric === value ? "active" : ""}
-              onClick={() => setMetric(value)}
-              type="button"
-            >
+            <button key={value} className={metric === value ? "active" : ""} onClick={() => setMetric(value)} type="button">
               {label}
             </button>
           ))}
@@ -100,15 +138,19 @@ export default function ThailandRiskMap({ boundaries, provinces, selectedIso, on
 
       <div className="map-stage">
         <div className="map-readout" aria-live="polite">
-          <span>{active?.nameTh || "เลือกจังหวัด"}</span>
+          <span>{selectedLocation?.nameTh || active?.nameTh || "เลือกจังหวัด"}</span>
           <strong>{metricLabel(active, metric)}</strong>
-          {active ? <small>{active.gridPointCount} grid cells · {active.confidence} confidence</small> : null}
+          {active ? (
+            <small>
+              {selectedDistrict ? "ขอบเขตอำเภอ/เขต · ค่าฝนระดับจังหวัด" : `${active.gridPointCount} grid cells · ${active.confidence} confidence`}
+            </small>
+          ) : null}
         </div>
         <svg
-          className="thailand-map"
-          viewBox={`0 0 ${VIEWBOX.width} ${VIEWBOX.height}`}
+          className={selectedDistrict ? "thailand-map district-focus" : "thailand-map"}
+          viewBox={mapViewBox}
           role="img"
-          aria-label="Interactive map of Thailand province rainfall risk"
+          aria-label="Interactive map of Thailand province rainfall risk with selected district overlay"
         >
           <defs>
             <filter id="map-glow" x="-50%" y="-50%" width="200%" height="200%">
@@ -116,7 +158,7 @@ export default function ThailandRiskMap({ boundaries, provinces, selectedIso, on
               <feMerge><feMergeNode in="blur" /><feMergeNode in="SourceGraphic" /></feMerge>
             </filter>
           </defs>
-          <g transform="translate(12 2) scale(.93)">
+          <g transform={`translate(${MAP_TRANSFORM.x} ${MAP_TRANSFORM.y}) scale(${MAP_TRANSFORM.scale})`}>
             {boundaries.features.map((feature: any) => {
               const iso = feature.properties.shapeISO;
               const province = provinceByIso.get(iso);
@@ -130,7 +172,7 @@ export default function ThailandRiskMap({ boundaries, provinces, selectedIso, on
                   strokeOpacity={selected ? 1 : 0.48}
                   strokeWidth={selected ? 2.4 : 0.7}
                   vectorEffect="non-scaling-stroke"
-                  filter={selected ? "url(#map-glow)" : undefined}
+                  filter={selected && !selectedDistrict ? "url(#map-glow)" : undefined}
                   className="province-path"
                   onMouseEnter={() => setHoveredIso(iso)}
                   onMouseLeave={() => setHoveredIso(null)}
@@ -143,7 +185,25 @@ export default function ThailandRiskMap({ boundaries, provinces, selectedIso, on
                 />
               );
             })}
+            {districtBoundaries?.features?.map((feature: any) => {
+              const selected = feature.properties.districtCode === selectedLocation?.districtCode;
+              return (
+                <path
+                  key={`district-${feature.properties.districtCode}`}
+                  d={geometryPath(feature.geometry)}
+                  className={selected ? "district-path selected" : "district-path"}
+                  vectorEffect="non-scaling-stroke"
+                  aria-hidden="true"
+                />
+              );
+            })}
           </g>
+          {locationPoint ? (
+            <g className="location-pin" transform={`translate(${locationPoint[0]} ${locationPoint[1]})`} aria-hidden="true">
+              <circle r="9" />
+              <circle r="3" />
+            </g>
+          ) : null}
         </svg>
         <div className="map-legend">
           <span>Lower</span>

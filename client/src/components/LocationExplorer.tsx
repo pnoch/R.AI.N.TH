@@ -1,13 +1,12 @@
-import districtRows from "@/data/thailand-districts.compact.json";
+import { trpc } from "@/lib/trpc";
 import {
   type DistrictTuple,
   type LocationResult,
+  type SubdistrictTuple,
   searchLocations,
 } from "@shared/locationSearch";
-import { ChevronDown, List, MapPin, Search, X } from "lucide-react";
+import { ChevronDown, List, Loader2, MapPin, Search, X } from "lucide-react";
 import { useMemo, useState } from "react";
-
-const districts = districtRows as unknown as DistrictTuple[];
 
 type Props = {
   provinces: any[];
@@ -28,16 +27,29 @@ function provinceResult(province: any): LocationResult {
   };
 }
 
+function resultSubtitle(location: LocationResult) {
+  if (location.kind === "province") return `${location.nameEn} · จังหวัด`;
+  const postal = location.postalCode ? ` · ${location.postalCode}` : "";
+  if (location.kind === "district") return `${location.nameEn} · ${location.provinceNameTh}${postal}`;
+  return `${location.nameEn} · ${location.districtNameTh} · ${location.provinceNameTh}${postal}`;
+}
+
 export default function LocationExplorer({ provinces, selectedIso, selectedLocation, onSelect }: Props) {
   const [query, setQuery] = useState("");
   const [showProvinceList, setShowProvinceList] = useState(false);
+  const index = trpc.locations.index.useQuery(undefined, {
+    staleTime: Number.POSITIVE_INFINITY,
+    refetchOnWindowFocus: false,
+  });
   const provinceRecords = useMemo(
     () => provinces.map(province => ({ iso: province.iso, nameTh: province.nameTh, nameEn: province.nameEn })),
     [provinces],
   );
+  const districts = (index.data?.districts || []) as DistrictTuple[];
+  const subdistricts = (index.data?.subdistricts || []) as SubdistrictTuple[];
   const results = useMemo(
-    () => searchLocations(query, provinceRecords, districts),
-    [provinceRecords, query],
+    () => searchLocations(query, provinceRecords, districts, subdistricts),
+    [districts, provinceRecords, query, subdistricts],
   );
   const sortedProvinces = useMemo(
     () => [...provinces].sort((a, b) => a.nameTh.localeCompare(b.nameTh, "th")),
@@ -57,13 +69,14 @@ export default function LocationExplorer({ provinces, selectedIso, selectedLocat
     <div className="location-explorer">
       <div className="location-search-row">
         <div className="location-search-box">
-          <Search aria-hidden="true" />
+          {index.isLoading ? <Loader2 className="animate-spin" aria-hidden="true" /> : <Search aria-hidden="true" />}
           <input
-            aria-label="ค้นหาจังหวัด อำเภอ หรือเขต"
+            aria-label="ค้นหาจังหวัด อำเภอ เขต ตำบล หรือแขวง"
             autoComplete="off"
             inputMode="search"
-            placeholder="ค้นหา จังหวัด อำเภอ เขต หรือรหัสไปรษณีย์"
+            placeholder="ค้นหา จังหวัด อำเภอ เขต ตำบล แขวง หรือรหัสไปรษณีย์"
             value={query}
+            disabled={index.isLoading || index.isError}
             onChange={event => {
               setQuery(event.target.value);
               setShowProvinceList(false);
@@ -92,27 +105,27 @@ export default function LocationExplorer({ provinces, selectedIso, selectedLocat
         </button>
       </div>
 
-      {query ? (
+      {index.isError ? <div className="location-index-error">ไม่สามารถโหลดดัชนีพื้นที่ได้ · ลองรีเฟรชหน้าอีกครั้ง</div> : null}
+
+      {query && !index.isLoading ? (
         <div className="location-results" role="listbox" aria-label="ผลการค้นหาพื้นที่">
           <div className="location-results-meta">
             <span>{results.length ? `ผลลัพธ์ ${results.length} รายการ` : "ไม่พบพื้นที่"}</span>
-            <small>ค้นหาได้ 77 จังหวัด · 928 อำเภอ/เขต</small>
+            <small>77 จังหวัด · 928 อำเภอ/เขต · 7,425 ตำบล/แขวง</small>
           </div>
           {results.map(location => (
             <button key={location.key} type="button" onClick={() => choose(location)} role="option">
               <MapPin />
               <span>
                 <b>{location.nameTh}</b>
-                <small>
-                  {location.kind === "district"
-                    ? `${location.nameEn} · ${location.provinceNameTh}${location.postalCode ? ` · ${location.postalCode}` : ""}`
-                    : `${location.nameEn} · จังหวัด`}
-                </small>
+                <small>{resultSubtitle(location)}</small>
               </span>
-              <em>{location.kind === "district" ? "อำเภอ/เขต" : "จังหวัด"}</em>
+              <em>
+                {location.kind === "province" ? "จังหวัด" : location.kind === "district" ? "อำเภอ/เขต" : "ตำบล/แขวง"}
+              </em>
             </button>
           ))}
-          {!results.length ? <p>ลองค้นหา “จตุจักร”, “Chatuchak”, “เชียงใหม่” หรือรหัสไปรษณีย์</p> : null}
+          {!results.length ? <p>ลองค้นหา “ลาดยาว”, “จตุจักร”, “Chatuchak”, “เชียงใหม่” หรือรหัสไปรษณีย์</p> : null}
         </div>
       ) : null}
 
@@ -140,7 +153,11 @@ export default function LocationExplorer({ provinces, selectedIso, selectedLocat
       <div className="location-context">
         <MapPin />
         <span><b>พื้นที่ที่เลือก:</b> {activeLabel || "ยังไม่ได้เลือก"}</span>
-        <small>ผลระดับอำเภอ/เขตอ้างอิงค่าคาดการณ์ระดับจังหวัดจากกริด ECMWF 0.25°</small>
+        <small>
+          {selectedLocation?.kind === "subdistrict"
+            ? `${selectedLocation.districtNameTh} · ${selectedLocation.provinceNameTh} · ค่าคาดการณ์ระดับจังหวัด`
+            : "อำเภอ/เขตและตำบล/แขวงอ้างอิงค่าคาดการณ์ระดับจังหวัดจากกริด ECMWF 0.25°"}
+        </small>
       </div>
     </div>
   );
