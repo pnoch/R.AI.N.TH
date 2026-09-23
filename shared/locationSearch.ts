@@ -186,3 +186,72 @@ export function searchLocations(
     .slice(0, limit)
     .map(candidate => candidate.result);
 }
+
+function haversineKm(latitudeA: number, longitudeA: number, latitudeB: number, longitudeB: number) {
+  const radians = (value: number) => value * Math.PI / 180;
+  const earthRadiusKm = 6371.0088;
+  const latitudeDelta = radians(latitudeB - latitudeA);
+  const longitudeDelta = radians(longitudeB - longitudeA);
+  const a = Math.sin(latitudeDelta / 2) ** 2 +
+    Math.cos(radians(latitudeA)) * Math.cos(radians(latitudeB)) * Math.sin(longitudeDelta / 2) ** 2;
+  return earthRadiusKm * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+}
+
+export function findNearestSubdistrict(
+  latitude: number,
+  longitude: number,
+  provinces: ProvinceSearchRecord[],
+  districts: readonly DistrictTuple[],
+  subdistricts: readonly SubdistrictTuple[],
+  maximumDistanceKm = 120,
+): { location: LocationResult; distanceKm: number } | null {
+  if (!Number.isFinite(latitude) || !Number.isFinite(longitude) || latitude < -90 || latitude > 90 || longitude < -180 || longitude > 180) {
+    return null;
+  }
+  const provinceByCode = new Map(
+    provinces.map(province => [Number(province.iso.split("-")[1]), province]),
+  );
+  const districtByCode = new Map(districts.map(district => [district[1], district]));
+  let nearest: { row: SubdistrictTuple; distanceKm: number } | null = null;
+  for (const row of subdistricts) {
+    const distanceKm = haversineKm(latitude, longitude, row[6], row[7]);
+    if (!nearest || distanceKm < nearest.distanceKm) nearest = { row, distanceKm };
+  }
+  if (!nearest || nearest.distanceKm > maximumDistanceKm) return null;
+  const [provinceCode, districtCode, subdistrictCode, subdistrictNameTh, subdistrictNameEn, postalCode, centerLat, centerLon] = nearest.row;
+  const province = provinceByCode.get(provinceCode);
+  const district = districtByCode.get(districtCode);
+  if (!province || !district) return null;
+  const districtPrefix = provinceCode === 10 ? "เขต" : "อำเภอ";
+  const subdistrictPrefix = provinceCode === 10 ? "แขวง" : "ตำบล";
+  return {
+    distanceKm: nearest.distanceKm,
+    location: {
+      kind: "subdistrict",
+      key: `subdistrict-${subdistrictCode}`,
+      provinceIso: province.iso,
+      nameTh: `${subdistrictPrefix}${subdistrictNameTh}`,
+      nameEn: subdistrictNameEn,
+      provinceNameTh: province.nameTh,
+      provinceNameEn: province.nameEn,
+      districtCode,
+      districtNameTh: `${districtPrefix}${district[2]}`,
+      districtNameEn: district[3],
+      subdistrictCode,
+      postalCode,
+      centerLat,
+      centerLon,
+    },
+  };
+}
+
+export function toggleSavedLocation(
+  saved: readonly LocationResult[],
+  location: LocationResult,
+  limit = 8,
+) {
+  if (saved.some(item => item.key === location.key)) {
+    return saved.filter(item => item.key !== location.key);
+  }
+  return [location, ...saved.filter(item => item.key !== location.key)].slice(0, Math.max(1, limit));
+}

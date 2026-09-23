@@ -162,6 +162,28 @@
 .location-list-toggle.active, .location-list-toggle:hover { border-color: rgba(240,199,94,.42); color: #f0c75e; background: rgba(240,199,94,.07); }
 .location-list-toggle svg { width: 15px; }
 .location-list-toggle svg:last-child { width: 13px; }
+.location-utility-row { display: grid; grid-template-columns: auto auto minmax(0,1fr); gap: 8px; align-items: center; padding: 0 14px 12px; }
+.location-utility-row button { min-height: 34px; display: flex; align-items: center; justify-content: center; gap: 7px; padding: 0 11px; border: 1px solid rgba(136,184,187,.19); background: rgba(5,18,24,.68); color: #9bb1b3; font: 600 9px "Noto Sans Thai", sans-serif; }
+.location-utility-row button:hover, .location-utility-row button.active { border-color: rgba(240,199,94,.42); color: #f0c75e; background: rgba(240,199,94,.07); }
+.location-utility-row button:disabled { cursor: wait; opacity: .55; }
+.location-utility-row button svg { width: 14px; }
+.location-utility-row > small { color: #58757b; font-size: 8px; text-align: right; }
+.location-device-message, .location-index-error { margin: 0 14px 12px; padding: 9px 11px; border-left: 2px solid #58c9be; background: rgba(88,201,190,.06); color: #91aaa9; font-size: 9px; }
+.location-index-error { border-left-color: #e67c65; background: rgba(230,124,101,.06); }
+.saved-locations { margin: 0 14px 12px; padding: 10px; border: 1px solid rgba(136,184,187,.16); background: rgba(4,15,20,.52); }
+.saved-locations-heading { display: flex; align-items: center; gap: 7px; margin-bottom: 8px; color: #c8d9d7; font-size: 10px; font-weight: 700; }
+.saved-locations-heading svg { width: 14px; color: #f0c75e; }
+.saved-locations-heading small { margin-left: auto; color: #607c82; font: 500 8px "IBM Plex Mono", monospace; }
+.saved-location-list { display: flex; flex-wrap: wrap; gap: 7px; }
+.saved-location-list > div { display: flex; min-width: 135px; border: 1px solid rgba(136,184,187,.14); background: rgba(10,28,35,.72); }
+.saved-location-list > div.active { border-color: rgba(240,199,94,.42); background: rgba(240,199,94,.06); }
+.saved-location-list button { border: 0; background: transparent; color: inherit; }
+.saved-location-list button:first-child { min-width: 0; flex: 1; padding: 7px 9px; display: flex; flex-direction: column; align-items: flex-start; text-align: left; }
+.saved-location-list button:last-child { width: 31px; display: grid; place-items: center; color: #647f84; border-left: 1px solid rgba(136,184,187,.1); }
+.saved-location-list button:last-child:hover { color: #ef8d78; background: rgba(239,141,120,.06); }
+.saved-location-list b { max-width: 135px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 10px; }
+.saved-location-list small { color: #668187; font-size: 8px; }
+.saved-location-list svg { width: 13px; }
 .location-results, .province-browser { margin: 0 14px 14px; border: 1px solid rgba(136,184,187,.19); background: #08171e; box-shadow: 0 18px 42px rgba(0,0,0,.3); }
 .location-results { max-height: 430px; overflow-y: auto; overscroll-behavior: contain; scrollbar-color: #29515a #08171e; }
 .location-results-meta { min-height: 38px; padding: 9px 12px; display: flex; align-items: center; justify-content: space-between; gap: 12px; border-bottom: 1px solid rgba(136,184,187,.12); }
@@ -389,6 +411,10 @@ footer { width: min(1500px, calc(100% - clamp(28px, 7vw, 96px))); margin: 0 auto
   .map-toolbar { flex-direction: column; }
   .location-search-row { grid-template-columns: 1fr; }
   .location-list-toggle { justify-content: center; }
+  .location-utility-row { grid-template-columns: 1fr 1fr; }
+  .location-utility-row > small { grid-column: 1 / -1; text-align: left; }
+  .saved-location-list { display: grid; grid-template-columns: 1fr 1fr; }
+  .saved-location-list > div { min-width: 0; }
   .location-context { align-items: flex-start; flex-wrap: wrap; padding-bottom: 13px; }
   .location-context small { width: 100%; margin-left: 20px; text-align: left; line-height: 1.5; }
   .province-browser-grid { grid-template-columns: 1fr 1fr; max-height: 280px; }

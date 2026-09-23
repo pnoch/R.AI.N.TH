@@ -36,3 +36,9 @@ python3 pipeline/build_location_assets.py \
 ## Precision statement
 
 District search and overlays improve **navigation and geographic context**, not model resolution. A selected district receives its real administrative boundary, and a selected subdistrict receives its official centroid marker inside the parent district. Rainfall values remain the parent province's aggregate from the ECMWF 0.25-degree grid. The interface states this limitation next to the search result, in the map readout, and in the briefing panel.
+
+## Browser location and saved places
+
+The **Use my location** action calls the browser Geolocation API only after the user clicks the control. Coordinates are matched in-browser to the nearest official subdistrict centroid using great-circle distance. A result is rejected when the nearest centroid is more than 120 km away, preventing locations outside Thailand from being mislabeled. The coordinates are not sent to the application server or stored.
+
+Saved places are serialized to `localStorage` under `rain-th-saved-locations-v1`, capped at eight locations, and remain on the current browser/device. They are not linked to the Manus user account and are never included in weather refreshes or content drafts.

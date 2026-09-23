@@ -1,7 +1,9 @@
 import { describe, expect, it } from "vitest";
 import {
+  findNearestSubdistrict,
   normalizeLocationQuery,
   searchLocations,
+  toggleSavedLocation,
   type DistrictTuple,
   type SubdistrictTuple,
 } from "@shared/locationSearch";
@@ -60,5 +62,26 @@ describe("location search", () => {
 
   it("returns no suggestions for an empty query", () => {
     expect(searchLocations("   ", provinces, districts, subdistricts)).toEqual([]);
+  });
+
+  it("resolves browser coordinates to the nearest coded subdistrict", () => {
+    const nearest = findNearestSubdistrict(13.8434, 100.56, provinces, districts, subdistricts);
+    expect(nearest?.location).toMatchObject({
+      key: "subdistrict-103001",
+      nameTh: "แขวงลาดยาว",
+      districtNameTh: "เขตจตุจักร",
+      provinceIso: "TH-10",
+    });
+    expect(nearest?.distanceKm).toBeLessThan(0.1);
+  });
+
+  it("rejects invalid coordinates and toggles saved locations with a hard limit", () => {
+    expect(findNearestSubdistrict(100, 200, provinces, districts, subdistricts)).toBeNull();
+    expect(findNearestSubdistrict(0, 0, provinces, districts, subdistricts)).toBeNull();
+    const district = searchLocations("เขตจตุจักร", provinces, districts, subdistricts)[0]!;
+    const subdistrict = searchLocations("แขวงลาดยาว", provinces, districts, subdistricts)[0]!;
+    const saved = toggleSavedLocation([], district);
+    expect(toggleSavedLocation(saved, subdistrict, 1)).toEqual([subdistrict]);
+    expect(toggleSavedLocation(saved, district)).toEqual([]);
   });
 });

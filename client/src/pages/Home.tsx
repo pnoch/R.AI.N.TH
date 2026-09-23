@@ -143,7 +143,7 @@ export default function Home() {
           <span className="live-pulse" />
           <span>ECMWF DIRECT</span>
           <span className="topbar-separator" />
-          <span>V0.5</span>
+          <span>V0.6</span>
         </div>
         <div className="topbar-actions">
           {user ? (
