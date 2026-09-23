@@ -8,7 +8,7 @@ The current version is a **validation prototype**, not a public warning service.
 
 The direct data path has been validated against a live ECMWF IFS run. The processor retrieves forecast steps for 3, 6, 24, and 72 hours from the ECMWF open-data replica on Amazon Web Services. It converts total precipitation from metres to millimetres, crops the global field to Thailand, and aggregates grid points within open province boundaries. Small provinces without an interior 0.25-degree grid point use their nearest grid point and receive lower confidence.
 
-The web dashboard shows the resulting province map, leading signals, selected-province statistics, model provenance, scoring limitations, and a Thai draft. An authenticated operator can retrieve the latest ECMWF run, refine the copy with `gpt-5-mini`, or approve the draft. Approval is an internal state change only. The application has no Facebook, LINE, or public-publishing connection.
+The web dashboard shows the resulting province map, leading signals, selected-province statistics, model provenance, scoring limitations, and a Thai draft. It also performs a live 24-hour hindcast check against the public ThaiWater station feed. The evidence panel reports mean absolute error, bias, province correlation, the share of provinces within 10 millimetres, a forecast-versus-observed scatter plot, and the largest province differences. An authenticated operator can retrieve the latest ECMWF run, refresh the evidence, refine the copy with `gpt-5-mini`, or approve the draft. Approval is an internal state change only. The application has no Facebook, LINE, or public-publishing connection.
 
 ## Architecture
 
@@ -37,6 +37,17 @@ Express + tRPC API
                 │
                 ▼
 React review dashboard + SVG province map
+
+ThaiWater public 24-hour station observations
+                │
+                ▼
+Current 04:00–08:00 ICT reporting-window filter
+                │
+                ▼
+Matched previous-day ECMWF +24 h forecast
+                │
+                ▼
+77-province directional verification + MySQL snapshot
 ```
 
 The production container combines the TypeScript application and a small Python runtime. A refresh runs within the initiating web request, which fits the managed hosting limit because the verified direct retrieval and aggregation usually complete in seconds. The code deduplicates simultaneous refresh requests within one application instance.
@@ -46,6 +57,14 @@ The production container combines the TypeScript application and a small Python 
 ECMWF makes a subset of real-time IFS and Artificial Intelligence Forecasting System data available as GRIB2 files under Creative Commons Attribution 4.0. The open-data archive retains the most recent forecast runs rather than a full historical archive.[1] This project uses the deterministic IFS `oper` stream, surface-level total precipitation parameter `tp`, and forecast steps 3, 6, 24, and 72 hours.
 
 Province boundaries come from the `gbOpen` Thailand ADM1 release exposed by geoBoundaries. The application stores the downloaded source metadata beside the GeoJSON and includes source attribution in the interface.[2]
+
+Observed 24-hour rainfall comes from the public endpoint used by the ThaiWater rainfall page. The endpoint provides station rainfall totals, timestamps, coordinates, agency metadata, and province codes.[3] ThaiWater's published interchange standard defines the underlying rainfall request parameters and response structure.[4]
+
+## Forecast verification
+
+The verification pipeline aligns the ThaiWater reporting day ending near 07:00 Indochina Time with the deterministic ECMWF forecast from 00:00 UTC on the previous day to forecast step +24 hours. It keeps valid stations reporting from 04:00 through 08:00 local time. Each province's observed value is the mean across reporting point stations; each forecast value is the mean across the model grid cells assigned to that province.
+
+These quantities are not identical estimands. A point-station network does not equal an area-grid mean, and the station timestamps can differ by about one hour. The dashboard therefore calls this a **directional verification screen**, not a calibrated skill score. The first live matched run included all 77 provinces and more than 4,400 current station reports.
 
 ## Screening score
 
@@ -91,6 +110,12 @@ Run a direct end-to-end ECMWF refresh and persist the result with:
 pnpm weather:refresh
 ```
 
+Run the live ThaiWater fetch, matched ECMWF hindcast, province verification, and database persistence with:
+
+```bash
+pnpm verification:refresh
+```
+
 The standalone processor can also emit a JSON snapshot without starting the web application:
 
 ```bash
@@ -102,13 +127,15 @@ python3 pipeline/ecmwf_pipeline.py \
 
 ## Important files
 
-`pipeline/ecmwf_pipeline.py` contains retrieval, GRIB decoding, province aggregation, scoring, confidence assignment, and deterministic draft generation. `server/weather.ts` runs the processor and constrains optional language-model refinement. `server/routers/weather.ts` exposes public snapshot reads and authenticated operational mutations. `client/src/components/ThailandRiskMap.tsx` renders the original interactive SVG map. `server/data/latest-snapshot.json` is a verified fallback that keeps the dashboard usable before the first database-backed refresh.
+`pipeline/ecmwf_pipeline.py` contains retrieval, GRIB decoding, province aggregation, scoring, confidence assignment, and deterministic draft generation. `pipeline/verification_pipeline.py` retrieves ThaiWater observations and builds the time-matched 24-hour verification snapshot. `server/weather.ts` and `server/verification.ts` run and persist those processors. The tRPC routers expose public reads and authenticated operational mutations. `client/src/components/ThailandRiskMap.tsx` renders the original interactive SVG map, while `client/src/components/VerificationPanel.tsx` renders the evidence metrics and province comparison.
 
 ## Next implementation priorities
 
-The next technical milestone is observed-data verification. Add ThaiWater rainfall and river observations, then persist forecast-versus-actual pairs by model cycle and lead time. That produces the first defensible accuracy dashboard and enables score calibration. The following milestone should add official TMD warning ingestion as a separate source with its own timestamp and provenance. GFS comparison, radar nowcasting, antecedent rainfall, and watershed sensitivity should follow only after those two reliability layers are stable.
+The next technical milestone should add official Thai Meteorological Department warning ingestion as a separate source with its own timestamp and provenance. After that, store a rolling history of matched forecast-versus-observed runs so the dashboard can report skill by province, season, and lead time. GFS comparison, radar nowcasting, antecedent rainfall, and watershed sensitivity should follow only after those reliability layers are stable.
 
 ## References
 
 [1]: https://www.ecmwf.int/en/forecasts/datasets/open-data "ECMWF Open Data"
 [2]: https://www.geoboundaries.org/api.html "geoBoundaries API and Programmatic Access"
+[3]: https://www.thaiwater.net/weather/rainfall "ThaiWater 24-Hour Rainfall Monitoring"
+[4]: https://standard.thaiwater.net/docs/%E0%B8%81%E0%B8%B2%E0%B8%A3%E0%B8%88%E0%B8%B1%E0%B8%94%E0%B8%97%E0%B8%B3%E0%B8%A1%E0%B8%B2%E0%B8%95%E0%B8%A3%E0%B8%90%E0%B8%B2%E0%B8%99%E0%B8%99%E0%B9%89%E0%B8%B3-%E0%B8%A3%E0%B8%B0%E0%B8%A2%E0%B8%B0/%E0%B8%81%E0%B8%B2%E0%B8%A3%E0%B9%80%E0%B8%8A%E0%B8%B7%E0%B9%88%E0%B8%AD%E0%B8%A1%E0%B9%82%E0%B8%A2%E0%B8%87%E0%B8%82%E0%B9%89%E0%B8%AD%E0%B8%A1%E0%B8%B9%E0%B8%A5-%E0%B8%81%E0%B8%B2%E0%B8%A3%E0%B9%81/%E0%B8%81%E0%B8%B2%E0%B8%A3%E0%B9%81%E0%B8%A5%E0%B8%81%E0%B9%80%E0%B8%9B%E0%B8%A5%E0%B8%B5%E0%B8%A2%E0%B8%99%E0%B8%82%E0%B9%89%E0%B8%AD%E0%B8%A1%E0%B8%B9%E0%B8%A5%E0%B8%94%E0%B9%89%E0%B8%B2/%E0%B8%81%E0%B8%B2%E0%B8%A3%E0%B9%81%E0%B8%A5%E0%B8%81%E0%B9%80%E0%B8%9B%E0%B8%A5%E0%B8%B5%E0%B8%A2%E0%B8%99%E0%B8%82%E0%B9%89%E0%B8%AD%E0%B8%A1%E0%B8%B9%E0%B8%A5-online-%E0%B8%9C%E0%B9%88/api-%E0%B8%AA%E0%B8%B3%E0%B8%AB%E0%B8%A3%E0%B8%B1%E0%B8%9A%E0%B8%AD%E0%B9%88%E0%B8%B2%E0%B8%99%E0%B8%82%E0%B9%89%E0%B8%AD%E0%B8%A1%E0%B8%B9%E0%B8%A5%E0%B8%99%E0%B9%89%E0%B8%B3%E0%B8%9D%E0%B8%99/ "ThaiWater Rainfall API Standard"

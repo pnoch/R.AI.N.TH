@@ -40,3 +40,17 @@ export const weatherRuns = mysqlTable("weather_runs", {
 
 export type WeatherRun = typeof weatherRuns.$inferSelect;
 export type InsertWeatherRun = typeof weatherRuns.$inferInsert;
+
+export const verificationRuns = mysqlTable("verification_runs", {
+  id: int("id").autoincrement().primaryKey(),
+  verificationKey: varchar("verificationKey", { length: 128 }).notNull().unique(),
+  forecastRunUtc: bigint("forecastRunUtc", { mode: "number" }).notNull(),
+  validEndUtc: bigint("validEndUtc", { mode: "number" }).notNull(),
+  generatedAtUtc: bigint("generatedAtUtc", { mode: "number" }).notNull(),
+  payload: json("payload").notNull(),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+});
+
+export type VerificationRun = typeof verificationRuns.$inferSelect;
+export type InsertVerificationRun = typeof verificationRuns.$inferInsert;

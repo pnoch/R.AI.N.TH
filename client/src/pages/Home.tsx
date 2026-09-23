@@ -1,5 +1,6 @@
 import { useAuth } from "@/_core/hooks/useAuth";
 import ThailandRiskMap from "@/components/ThailandRiskMap";
+import VerificationPanel from "@/components/VerificationPanel";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
@@ -234,6 +235,8 @@ export default function Home() {
             </section>
           </aside>
         </section>
+
+        <VerificationPanel />
 
         <section className="review-grid">
           <article className="draft-panel">

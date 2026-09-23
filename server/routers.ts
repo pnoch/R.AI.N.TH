@@ -2,6 +2,7 @@ import { COOKIE_NAME } from "@shared/const";
 import { getSessionCookieOptions } from "./_core/cookies";
 import { systemRouter } from "./_core/systemRouter";
 import { publicProcedure, router } from "./_core/trpc";
+import { verificationRouter } from "./routers/verification";
 import { weatherRouter } from "./routers/weather";
 
 export const appRouter = router({
@@ -18,6 +19,7 @@ export const appRouter = router({
     }),
   }),
   weather: weatherRouter,
+  verification: verificationRouter,
 });
 
 export type AppRouter = typeof appRouter;

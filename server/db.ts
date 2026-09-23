@@ -1,6 +1,6 @@
 import { desc, eq } from "drizzle-orm";
 import { drizzle } from "drizzle-orm/mysql2";
-import { InsertUser, users, weatherRuns } from "../drizzle/schema";
+import { InsertUser, users, verificationRuns, weatherRuns } from "../drizzle/schema";
 import { ENV } from './_core/env';
 
 let _db: ReturnType<typeof drizzle> | null = null;
@@ -154,4 +154,34 @@ export async function approveWeatherRun(runKey: string, userId: number) {
     .set({ draftStatus: "approved", approvedAtUtc, approvedByUserId: userId })
     .where(eq(weatherRuns.runKey, runKey));
   return { runKey, draftStatus: "approved" as const, approvedAtUtc };
+}
+
+export async function getLatestVerificationRun() {
+  const db = await getDb();
+  if (!db) return undefined;
+  const rows = await db
+    .select()
+    .from(verificationRuns)
+    .orderBy(desc(verificationRuns.validEndUtc), desc(verificationRuns.generatedAtUtc))
+    .limit(1);
+  return rows[0];
+}
+
+export async function saveVerificationRun(payload: Record<string, any>) {
+  const db = await getDb();
+  if (!db) throw new Error("Database is not available");
+  const values = {
+    verificationKey: payload.verificationKey,
+    forecastRunUtc: Date.parse(payload.forecast.modelRunUtc),
+    validEndUtc: Date.parse(payload.forecast.validEndUtc),
+    generatedAtUtc: Date.parse(payload.generatedAtUtc),
+    payload,
+  };
+  await db.insert(verificationRuns).values(values).onDuplicateKeyUpdate({ set: values });
+  const rows = await db
+    .select()
+    .from(verificationRuns)
+    .where(eq(verificationRuns.verificationKey, payload.verificationKey))
+    .limit(1);
+  return rows[0];
 }
