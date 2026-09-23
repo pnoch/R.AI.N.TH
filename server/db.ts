@@ -1,6 +1,6 @@
-import { eq } from "drizzle-orm";
+import { desc, eq } from "drizzle-orm";
 import { drizzle } from "drizzle-orm/mysql2";
-import { InsertUser, users } from "../drizzle/schema";
+import { InsertUser, users, weatherRuns } from "../drizzle/schema";
 import { ENV } from './_core/env';
 
 let _db: ReturnType<typeof drizzle> | null = null;
@@ -89,4 +89,69 @@ export async function getUserByOpenId(openId: string) {
   return result.length > 0 ? result[0] : undefined;
 }
 
-// TODO: add feature queries here as your schema grows.
+export async function getLatestWeatherRun() {
+  const db = await getDb();
+  if (!db) return undefined;
+
+  const rows = await db
+    .select()
+    .from(weatherRuns)
+    .orderBy(desc(weatherRuns.modelRunUtc), desc(weatherRuns.generatedAtUtc))
+    .limit(1);
+  return rows[0];
+}
+
+export async function saveWeatherRun(payload: Record<string, any>) {
+  const db = await getDb();
+  if (!db) throw new Error("Database is not available");
+
+  const modelRunUtc = Date.parse(payload.source.modelRunUtc);
+  const generatedAtUtc = Date.parse(payload.generatedAtUtc);
+  await db
+    .insert(weatherRuns)
+    .values({
+      runKey: payload.runKey,
+      modelRunUtc,
+      generatedAtUtc,
+      payload,
+      draftStatus: "draft",
+    })
+    .onDuplicateKeyUpdate({
+      set: {
+        generatedAtUtc,
+        payload,
+        draftStatus: "draft",
+        approvedAtUtc: null,
+        approvedByUserId: null,
+      },
+    });
+
+  const rows = await db.select().from(weatherRuns).where(eq(weatherRuns.runKey, payload.runKey)).limit(1);
+  return rows[0];
+}
+
+export async function replaceWeatherPayload(runKey: string, payload: Record<string, any>) {
+  const db = await getDb();
+  if (!db) throw new Error("Database is not available");
+  await db
+    .update(weatherRuns)
+    .set({
+      payload,
+      generatedAtUtc: Date.parse(payload.generatedAtUtc),
+      draftStatus: "draft",
+      approvedAtUtc: null,
+      approvedByUserId: null,
+    })
+    .where(eq(weatherRuns.runKey, runKey));
+}
+
+export async function approveWeatherRun(runKey: string, userId: number) {
+  const db = await getDb();
+  if (!db) throw new Error("Database is not available");
+  const approvedAtUtc = Date.now();
+  await db
+    .update(weatherRuns)
+    .set({ draftStatus: "approved", approvedAtUtc, approvedByUserId: userId })
+    .where(eq(weatherRuns.runKey, runKey));
+  return { runKey, draftStatus: "approved" as const, approvedAtUtc };
+}

@@ -1,4 +1,4 @@
-import { int, mysqlEnum, mysqlTable, text, timestamp, varchar } from "drizzle-orm/mysql-core";
+import { bigint, int, json, mysqlEnum, mysqlTable, text, timestamp, varchar } from "drizzle-orm/mysql-core";
 
 /**
  * Core user table backing auth flow.
@@ -25,4 +25,18 @@ export const users = mysqlTable("users", {
 export type User = typeof users.$inferSelect;
 export type InsertUser = typeof users.$inferInsert;
 
-// TODO: Add your tables here
+export const weatherRuns = mysqlTable("weather_runs", {
+  id: int("id").autoincrement().primaryKey(),
+  runKey: varchar("runKey", { length: 128 }).notNull().unique(),
+  modelRunUtc: bigint("modelRunUtc", { mode: "number" }).notNull(),
+  generatedAtUtc: bigint("generatedAtUtc", { mode: "number" }).notNull(),
+  payload: json("payload").notNull(),
+  draftStatus: mysqlEnum("draftStatus", ["draft", "approved"]).default("draft").notNull(),
+  approvedAtUtc: bigint("approvedAtUtc", { mode: "number" }),
+  approvedByUserId: int("approvedByUserId"),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+});
+
+export type WeatherRun = typeof weatherRuns.$inferSelect;
+export type InsertWeatherRun = typeof weatherRuns.$inferInsert;

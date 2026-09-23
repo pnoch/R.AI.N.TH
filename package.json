@@ -10,7 +10,10 @@
     "check": "tsc --noEmit",
     "format": "prettier --write .",
     "test": "vitest run",
-    "db:push": "drizzle-kit generate && drizzle-kit migrate"
+    "test:python": "python3 -m unittest pipeline/test_ecmwf_pipeline.py",
+    "db:push": "drizzle-kit generate && drizzle-kit migrate",
+    "weather:refresh": "tsx scripts/smoke-refresh.ts",
+    "weather:refine": "tsx scripts/smoke-refine.ts"
   },
   "dependencies": {
     "@aws-sdk/client-s3": "^3.693.0",
