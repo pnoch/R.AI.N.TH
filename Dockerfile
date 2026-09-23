@@ -17,7 +17,7 @@ RUN python3 -m venv /opt/weather-venv \
 FROM node:22-slim AS runtime
 
 RUN apt-get update \
-  && apt-get install -y --no-install-recommends python3-minimal ca-certificates \
+  && apt-get install -y --no-install-recommends python3 ca-certificates \
   && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /app
@@ -26,6 +26,8 @@ COPY --from=builder /app/dist ./dist
 COPY --from=builder /app/pipeline ./pipeline
 COPY --from=builder /app/server/data ./server/data
 COPY --from=builder /app/package.json ./package.json
+
+RUN /opt/weather-venv/bin/python -c "import json, numpy, shapely, eccodes"
 
 ENV NODE_ENV=production \
     PYTHON_BIN=/opt/weather-venv/bin/python

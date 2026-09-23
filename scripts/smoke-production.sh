@@ -17,6 +17,7 @@ cp -a "$ROOT/dist" "$ROOT/pipeline" "$ROOT/package.json" "$RUNTIME_DIR/"
 cp -a "$ROOT/server/data" "$RUNTIME_DIR/server/"
 
 test ! -d "$RUNTIME_DIR/node_modules"
+"${PYTHON_BIN:-python3}" -c "import json, numpy, shapely, eccodes"
 (
   cd "$RUNTIME_DIR"
   PORT="$PORT" NODE_ENV=production PYTHON_BIN="${PYTHON_BIN:-python3}" node dist/index.cjs
