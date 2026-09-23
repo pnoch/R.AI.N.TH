@@ -11,16 +11,40 @@ const boundaryPath = path.join(projectRoot, "pipeline", "data", "thailand-adm1.g
 const pipelinePath = path.join(projectRoot, "pipeline", "verification_pipeline.py");
 export const VERIFICATION_PIPELINE_SOURCE = process.env.ECMWF_SOURCE || "google";
 export const VERIFICATION_PIPELINE_TIMEOUT_MS = 23_000;
+export const MIN_VERIFICATION_STATIONS = 1_000;
+export const MIN_PAIRED_PROVINCES = 50;
 let activeVerification: Promise<JsonObject> | null = null;
 
 async function readBundled(): Promise<JsonObject> {
   return JSON.parse(await readFile(bundledPath, "utf8")) as JsonObject;
 }
 
+export function isUsableVerification(payload: JsonObject) {
+  return (
+    payload?.provinces?.length === 77 &&
+    Number(payload?.summary?.stationCount) >= MIN_VERIFICATION_STATIONS &&
+    Number(payload?.summary?.pairedProvinceCount) >= MIN_PAIRED_PROVINCES &&
+    Number.isFinite(Number(payload?.summary?.meanAbsoluteErrorMm)) &&
+    Number.isFinite(Number(payload?.summary?.within10mmRate))
+  );
+}
+
 export async function getLatestVerification(): Promise<JsonObject> {
-  const latest = await db.getLatestVerificationRun();
+  const history = await db.getVerificationHistory(90);
+  const latest = history.find(row => isUsableVerification(row.payload as JsonObject));
   if (latest) return { ...(latest.payload as JsonObject), persisted: true };
   return { ...(await readBundled()), persisted: false };
+}
+
+export async function getUsableVerificationHistory(limit = 30): Promise<JsonObject[]> {
+  const rows = await db.getVerificationHistory(90);
+  const usable = rows
+    .map(row => row.payload as JsonObject)
+    .filter(isUsableVerification)
+    .slice(0, Math.min(Math.max(limit, 1), 90));
+  if (usable.length) return usable;
+  const fallback = await readBundled();
+  return isUsableVerification(fallback) ? [fallback] : [];
 }
 
 function executeVerification(): Promise<JsonObject> {
@@ -68,6 +92,11 @@ export function refreshVerification(): Promise<JsonObject> {
   if (activeVerification) return activeVerification;
   activeVerification = (async () => {
     const payload = await executeVerification();
+    if (!isUsableVerification(payload)) {
+      throw new Error(
+        `Verification coverage incomplete: ${payload?.summary?.stationCount ?? 0} stations across ${payload?.summary?.pairedProvinceCount ?? 0} paired provinces`,
+      );
+    }
     await db.saveVerificationRun(payload);
     return { ...payload, persisted: true };
   })().finally(() => {

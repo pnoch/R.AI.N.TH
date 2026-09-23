@@ -1,4 +1,5 @@
 import { useAuth } from "@/_core/hooks/useAuth";
+import LocationExplorer from "@/components/LocationExplorer";
 import ThailandRiskMap from "@/components/ThailandRiskMap";
 import VerificationPanel from "@/components/VerificationPanel";
 import OfficialWarningPanel from "@/components/OfficialWarningPanel";
@@ -7,6 +8,7 @@ import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import { startLogin } from "@/const";
 import { trpc } from "@/lib/trpc";
+import type { LocationResult } from "@shared/locationSearch";
 import {
   AlertTriangle,
   Bot,
@@ -49,6 +51,7 @@ export default function Home() {
   const { user, isAuthenticated, logout } = useAuth();
   const latest = trpc.weather.latest.useQuery(undefined, { refetchOnWindowFocus: false });
   const [selectedIso, setSelectedIso] = useState("");
+  const [selectedLocation, setSelectedLocation] = useState<LocationResult | null>(null);
   const data = latest.data as any;
 
   useEffect(() => {
@@ -59,6 +62,7 @@ export default function Home() {
     onSuccess: async snapshot => {
       await utils.weather.latest.invalidate();
       setSelectedIso((snapshot as any).summary.topProvinceIso);
+      setSelectedLocation(null);
       toast.success("Direct ECMWF run completed and persisted");
     },
     onError: error => toast.error(error.message),
@@ -130,7 +134,7 @@ export default function Home() {
           <span className="live-pulse" />
           <span>ECMWF DIRECT</span>
           <span className="topbar-separator" />
-          <span>V0.3</span>
+          <span>V0.4</span>
         </div>
         <div className="topbar-actions">
           {user ? (
@@ -180,11 +184,23 @@ export default function Home() {
 
         <section className="dashboard-grid">
           <div className="map-column">
+            <LocationExplorer
+              provinces={data.provinces}
+              selectedIso={selected?.iso || ""}
+              selectedLocation={selectedLocation}
+              onSelect={location => {
+                setSelectedIso(location.provinceIso);
+                setSelectedLocation(location);
+              }}
+            />
             <ThailandRiskMap
               boundaries={data.boundaries}
               provinces={data.provinces}
               selectedIso={selected?.iso || ""}
-              onSelect={setSelectedIso}
+              onSelect={iso => {
+                setSelectedIso(iso);
+                setSelectedLocation(null);
+              }}
             />
           </div>
 
@@ -193,7 +209,10 @@ export default function Home() {
               <div className="panel-heading">
                 <div>
                   <p className="eyebrow">Province briefing</p>
-                  <h2>{selected.nameTh}</h2>
+                  <h2>{selectedLocation && selectedLocation.provinceIso === selected.iso ? selectedLocation.nameTh : selected.nameTh}</h2>
+                  {selectedLocation && selectedLocation.kind === "district" && selectedLocation.provinceIso === selected.iso ? (
+                    <span className="district-parent">ค่าคาดการณ์ระดับจังหวัด: {selected.nameTh}</span>
+                  ) : null}
                   <span>{selected.nameEn} · {selected.iso}</span>
                 </div>
                 <div className={`risk-orb ${riskClass(selected.riskLevel)}`}>
@@ -227,7 +246,10 @@ export default function Home() {
                   <button
                     key={province.iso}
                     className={selected.iso === province.iso ? "selected" : ""}
-                    onClick={() => setSelectedIso(province.iso)}
+                    onClick={() => {
+                      setSelectedIso(province.iso);
+                      setSelectedLocation(null);
+                    }}
                   >
                     <span className="rank">{String(index + 1).padStart(2, "0")}</span>
                     <span className="province-name"><b>{province.nameTh}</b><small>{province.rainMm["24hMean"]} mm / 24h</small></span>
@@ -285,6 +307,7 @@ export default function Home() {
               <div><dt>Parameter</dt><dd>tp · total precipitation</dd></div>
               <div><dt>License</dt><dd>{data.source.license}</dd></div>
               <div><dt>Boundary source</dt><dd>geoBoundaries ADM1 · 77 units</dd></div>
+              <div><dt>Location index</dt><dd>Thailand Geography JSON · 928 districts · MIT</dd></div>
               <div><dt>Persistence</dt><dd>{data.persisted ? "Database snapshot" : "Bundled verified snapshot"}</dd></div>
             </dl>
             <div className="limitations">
@@ -297,7 +320,8 @@ export default function Home() {
 
       <footer>
         <span>ECMWF data © ECMWF, licensed CC BY 4.0.</span>
-        <span>Administrative boundaries: geoBoundaries / ODbL.</span>
+        <span>Administrative boundaries: geoBoundaries / CC BY 3.0 IGO.</span>
+        <span>District names: Thailand Geography JSON / MIT.</span>
         <span>For operational awareness only.</span>
       </footer>
     </div>

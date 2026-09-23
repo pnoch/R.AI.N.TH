@@ -1,8 +1,7 @@
 import { TRPCError } from "@trpc/server";
 import { z } from "zod";
-import * as db from "../db";
 import { protectedProcedure, publicProcedure, router } from "../_core/trpc";
-import { getLatestVerification, refreshVerification } from "../verification";
+import { getLatestVerification, getUsableVerificationHistory, refreshVerification } from "../verification";
 
 function fail(error: unknown): never {
   throw new TRPCError({
@@ -22,8 +21,7 @@ export const verificationRouter = router({
   history: publicProcedure
     .input(z.object({ limit: z.number().int().min(1).max(90).default(30) }).optional())
     .query(async ({ input }) => {
-      const rows = await db.getVerificationHistory(input?.limit ?? 30);
-      return rows.map(row => row.payload as Record<string, any>);
+      return getUsableVerificationHistory(input?.limit ?? 30);
     }),
   refresh: protectedProcedure.mutation(async () => {
     try {
