@@ -1,0 +1,4288 @@
+{
+  "schemaVersion": "1.0.0",
+  "radarKey": "tmd-radar-2026-09-24T07:15:00.000Z",
+  "generatedAtUtc": "2026-09-24T07:25:18.083Z",
+  "source": {
+    "provider": "Thai Meteorological Department",
+    "product": "National PCAPPI Z-R composite",
+    "viewerUrl": "https://weather.tmd.go.th/composite/index_composite.html",
+    "frameListUrl": "https://weather.tmd.go.th/composite/images_composite.list",
+    "spatialBounds": {
+      "west": 95,
+      "east": 108,
+      "north": 22.5,
+      "south": 4
+    },
+    "imageSize": {
+      "width": 1800,
+      "height": 2644
+    },
+    "temporalResolutionMinutes": 15,
+    "measurementAltitudeKm": 2,
+    "conversion": "Marshall-Palmer Z = 200 R^1.6",
+    "palette": "Official discrete TMD mm/h classes; values report class lower bounds."
+  },
+  "window": {
+    "startUtc": "2026-09-24T06:15:00.000Z",
+    "endUtc": "2026-09-24T07:15:00.000Z",
+    "minutes": 60
+  },
+  "frames": [
+    {
+      "timestampUtc": "2026-09-24T06:15:00.000Z",
+      "relativePath": "zr/20.png"
+    },
+    {
+      "timestampUtc": "2026-09-24T06:30:00.000Z",
+      "relativePath": "zr/21.png"
+    },
+    {
+      "timestampUtc": "2026-09-24T06:45:00.000Z",
+      "relativePath": "zr/22.png"
+    },
+    {
+      "timestampUtc": "2026-09-24T07:00:00.000Z",
+      "relativePath": "zr/23.png"
+    },
+    {
+      "timestampUtc": "2026-09-24T07:15:00.000Z",
+      "relativePath": "zr/24.png"
+    }
+  ],
+  "summary": {
+    "provincePointCount": 77,
+    "rainingPointCount": 9,
+    "intensifyingPointCount": 2,
+    "representativeMeanRateMmH": 0.2,
+    "representativeMaxRateMmH": 4,
+    "maxProvinceIso": "TH-25",
+    "maxProvinceNameTh": "ปราจีนบุรี"
+  },
+  "method": {
+    "description": "Five official 15-minute TMD composite PNG frames are sampled at one administrative centroid per province. The latest official rain-rate class and an indicative one-hour accumulation are reported.",
+    "nowcast": "The 15–60 minute values are a persistence baseline: current class rain rate multiplied by elapsed time. They are not motion-vector or numerical forecasts.",
+    "caveat": "Radar classes can be affected by beam blockage, ground clutter, range, attenuation, and gaps. Centroid samples do not resolve every street or drainage path."
+  },
+  "rainViewer": {
+    "generatedAtUtc": "2026-09-24T07:20:24.000Z",
+    "frames": [
+      {
+        "timeUtc": "2026-09-24T05:20:00.000Z",
+        "path": "/v2/radar/5a9d6cd8b6b0"
+      },
+      {
+        "timeUtc": "2026-09-24T05:30:00.000Z",
+        "path": "/v2/radar/1fece4b3ffc8"
+      },
+      {
+        "timeUtc": "2026-09-24T05:40:00.000Z",
+        "path": "/v2/radar/ab6a99d4cd3c"
+      },
+      {
+        "timeUtc": "2026-09-24T05:50:00.000Z",
+        "path": "/v2/radar/0c05f4016ec6"
+      },
+      {
+        "timeUtc": "2026-09-24T06:00:00.000Z",
+        "path": "/v2/radar/652e0288b908"
+      },
+      {
+        "timeUtc": "2026-09-24T06:10:00.000Z",
+        "path": "/v2/radar/5286daa61fc4"
+      },
+      {
+        "timeUtc": "2026-09-24T06:20:00.000Z",
+        "path": "/v2/radar/d9cdf8127f35"
+      },
+      {
+        "timeUtc": "2026-09-24T06:30:00.000Z",
+        "path": "/v2/radar/a03f5a145740"
+      },
+      {
+        "timeUtc": "2026-09-24T06:40:00.000Z",
+        "path": "/v2/radar/bbb902da9fb6"
+      },
+      {
+        "timeUtc": "2026-09-24T06:50:00.000Z",
+        "path": "/v2/radar/f4105ee0c849"
+      },
+      {
+        "timeUtc": "2026-09-24T07:00:00.000Z",
+        "path": "/v2/radar/ebcf87583f20"
+      },
+      {
+        "timeUtc": "2026-09-24T07:10:00.000Z",
+        "path": "/v2/radar/27dba11d2da7"
+      },
+      {
+        "timeUtc": "2026-09-24T07:20:00.000Z",
+        "path": "/v2/radar/eff363269eae"
+      }
+    ],
+    "hostedMapUrl": "https://www.rainviewer.com/map.html",
+    "visualMode": "HOSTED_EMBED",
+    "attribution": "Hosted radar animation: RainViewer; Thailand source attribution includes the Thai Meteorological Department.",
+    "caveat": "Hosted visual mosaic only. Numeric rain-rate calculations use the separate official TMD composite frames."
+  },
+  "provinces": [
+    {
+      "iso": "TH-10",
+      "nameTh": "กรุงเทพมหานคร",
+      "nameEn": "Bangkok",
+      "districtCode": 1001,
+      "districtNameTh": "พระนคร",
+      "districtNameEn": "Phra Nakhon",
+      "latitude": 13.75567,
+      "longitude": 100.49688,
+      "observations": [
+        {
+          "timeUtc": "2026-09-24T06:15:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T06:30:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T06:45:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T07:00:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T07:15:00.000Z",
+          "rateMmH": 0
+        }
+      ],
+      "latestRateMmH": 0,
+      "oneHourAccumMm": 0,
+      "previousRateMmH": 0,
+      "trend": "DRY",
+      "persistenceAdditionalMm": [
+        {
+          "minutes": 15,
+          "millimeters": 0
+        },
+        {
+          "minutes": 30,
+          "millimeters": 0
+        },
+        {
+          "minutes": 45,
+          "millimeters": 0
+        },
+        {
+          "minutes": 60,
+          "millimeters": 0
+        }
+      ]
+    },
+    {
+      "iso": "TH-11",
+      "nameTh": "สมุทรปราการ",
+      "nameEn": "Samut Prakan",
+      "districtCode": 1101,
+      "districtNameTh": "เมืองสมุทรปราการ",
+      "districtNameEn": "Mueang Samut Prakan",
+      "latitude": 13.57724,
+      "longitude": 100.64013,
+      "observations": [
+        {
+          "timeUtc": "2026-09-24T06:15:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T06:30:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T06:45:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T07:00:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T07:15:00.000Z",
+          "rateMmH": 0
+        }
+      ],
+      "latestRateMmH": 0,
+      "oneHourAccumMm": 0,
+      "previousRateMmH": 0,
+      "trend": "DRY",
+      "persistenceAdditionalMm": [
+        {
+          "minutes": 15,
+          "millimeters": 0
+        },
+        {
+          "minutes": 30,
+          "millimeters": 0
+        },
+        {
+          "minutes": 45,
+          "millimeters": 0
+        },
+        {
+          "minutes": 60,
+          "millimeters": 0
+        }
+      ]
+    },
+    {
+      "iso": "TH-12",
+      "nameTh": "นนทบุรี",
+      "nameEn": "Nonthaburi",
+      "districtCode": 1201,
+      "districtNameTh": "เมืองนนทบุรี",
+      "districtNameEn": "Mueang Nonthaburi",
+      "latitude": 13.85236,
+      "longitude": 100.49314,
+      "observations": [
+        {
+          "timeUtc": "2026-09-24T06:15:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T06:30:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T06:45:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T07:00:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T07:15:00.000Z",
+          "rateMmH": 0
+        }
+      ],
+      "latestRateMmH": 0,
+      "oneHourAccumMm": 0,
+      "previousRateMmH": 0,
+      "trend": "DRY",
+      "persistenceAdditionalMm": [
+        {
+          "minutes": 15,
+          "millimeters": 0
+        },
+        {
+          "minutes": 30,
+          "millimeters": 0
+        },
+        {
+          "minutes": 45,
+          "millimeters": 0
+        },
+        {
+          "minutes": 60,
+          "millimeters": 0
+        }
+      ]
+    },
+    {
+      "iso": "TH-13",
+      "nameTh": "ปทุมธานี",
+      "nameEn": "Pathum Thani",
+      "districtCode": 1301,
+      "districtNameTh": "เมืองปทุมธานี",
+      "districtNameEn": "Mueang Pathum Thani",
+      "latitude": 14.0048,
+      "longitude": 100.52826,
+      "observations": [
+        {
+          "timeUtc": "2026-09-24T06:15:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T06:30:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T06:45:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T07:00:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T07:15:00.000Z",
+          "rateMmH": 0
+        }
+      ],
+      "latestRateMmH": 0,
+      "oneHourAccumMm": 0,
+      "previousRateMmH": 0,
+      "trend": "DRY",
+      "persistenceAdditionalMm": [
+        {
+          "minutes": 15,
+          "millimeters": 0
+        },
+        {
+          "minutes": 30,
+          "millimeters": 0
+        },
+        {
+          "minutes": 45,
+          "millimeters": 0
+        },
+        {
+          "minutes": 60,
+          "millimeters": 0
+        }
+      ]
+    },
+    {
+      "iso": "TH-14",
+      "nameTh": "พระนครศรีอยุธยา",
+      "nameEn": "Phra Nakhon Si Ayutthaya",
+      "districtCode": 1401,
+      "districtNameTh": "พระนครศรีอยุธยา",
+      "districtNameEn": "Phra Nakhon Si Ayutthaya",
+      "latitude": 14.34338,
+      "longitude": 100.55594,
+      "observations": [
+        {
+          "timeUtc": "2026-09-24T06:15:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T06:30:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T06:45:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T07:00:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T07:15:00.000Z",
+          "rateMmH": 0
+        }
+      ],
+      "latestRateMmH": 0,
+      "oneHourAccumMm": 0,
+      "previousRateMmH": 0,
+      "trend": "DRY",
+      "persistenceAdditionalMm": [
+        {
+          "minutes": 15,
+          "millimeters": 0
+        },
+        {
+          "minutes": 30,
+          "millimeters": 0
+        },
+        {
+          "minutes": 45,
+          "millimeters": 0
+        },
+        {
+          "minutes": 60,
+          "millimeters": 0
+        }
+      ]
+    },
+    {
+      "iso": "TH-15",
+      "nameTh": "อ่างทอง",
+      "nameEn": "Ang Thong",
+      "districtCode": 1501,
+      "districtNameTh": "เมืองอ่างทอง",
+      "districtNameEn": "Mueang Ang Thong",
+      "latitude": 14.57498,
+      "longitude": 100.44117,
+      "observations": [
+        {
+          "timeUtc": "2026-09-24T06:15:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T06:30:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T06:45:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T07:00:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T07:15:00.000Z",
+          "rateMmH": 0
+        }
+      ],
+      "latestRateMmH": 0,
+      "oneHourAccumMm": 0,
+      "previousRateMmH": 0,
+      "trend": "DRY",
+      "persistenceAdditionalMm": [
+        {
+          "minutes": 15,
+          "millimeters": 0
+        },
+        {
+          "minutes": 30,
+          "millimeters": 0
+        },
+        {
+          "minutes": 45,
+          "millimeters": 0
+        },
+        {
+          "minutes": 60,
+          "millimeters": 0
+        }
+      ]
+    },
+    {
+      "iso": "TH-16",
+      "nameTh": "ลพบุรี",
+      "nameEn": "Lop Buri",
+      "districtCode": 1601,
+      "districtNameTh": "เมืองลพบุรี",
+      "districtNameEn": "Mueang Lop Buri",
+      "latitude": 14.80435,
+      "longitude": 100.69968,
+      "observations": [
+        {
+          "timeUtc": "2026-09-24T06:15:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T06:30:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T06:45:00.000Z",
+          "rateMmH": 24
+        },
+        {
+          "timeUtc": "2026-09-24T07:00:00.000Z",
+          "rateMmH": 4
+        },
+        {
+          "timeUtc": "2026-09-24T07:15:00.000Z",
+          "rateMmH": 1
+        }
+      ],
+      "latestRateMmH": 1,
+      "oneHourAccumMm": 7.3,
+      "previousRateMmH": 4,
+      "trend": "WEAKENING",
+      "persistenceAdditionalMm": [
+        {
+          "minutes": 15,
+          "millimeters": 0.3
+        },
+        {
+          "minutes": 30,
+          "millimeters": 0.5
+        },
+        {
+          "minutes": 45,
+          "millimeters": 0.8
+        },
+        {
+          "minutes": 60,
+          "millimeters": 1
+        }
+      ]
+    },
+    {
+      "iso": "TH-17",
+      "nameTh": "สิงห์บุรี",
+      "nameEn": "Sing Buri",
+      "districtCode": 1701,
+      "districtNameTh": "เมืองสิงห์บุรี",
+      "districtNameEn": "Mueang Sing Buri",
+      "latitude": 14.90614,
+      "longitude": 100.38163,
+      "observations": [
+        {
+          "timeUtc": "2026-09-24T06:15:00.000Z",
+          "rateMmH": 2
+        },
+        {
+          "timeUtc": "2026-09-24T06:30:00.000Z",
+          "rateMmH": 1
+        },
+        {
+          "timeUtc": "2026-09-24T06:45:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T07:00:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T07:15:00.000Z",
+          "rateMmH": 0
+        }
+      ],
+      "latestRateMmH": 0,
+      "oneHourAccumMm": 0.3,
+      "previousRateMmH": 0,
+      "trend": "DRY",
+      "persistenceAdditionalMm": [
+        {
+          "minutes": 15,
+          "millimeters": 0
+        },
+        {
+          "minutes": 30,
+          "millimeters": 0
+        },
+        {
+          "minutes": 45,
+          "millimeters": 0
+        },
+        {
+          "minutes": 60,
+          "millimeters": 0
+        }
+      ]
+    },
+    {
+      "iso": "TH-18",
+      "nameTh": "ชัยนาท",
+      "nameEn": "Chai Nat",
+      "districtCode": 1801,
+      "districtNameTh": "เมืองชัยนาท",
+      "districtNameEn": "Mueang Chai Nat",
+      "latitude": 15.18402,
+      "longitude": 100.11475,
+      "observations": [
+        {
+          "timeUtc": "2026-09-24T06:15:00.000Z",
+          "rateMmH": 1
+        },
+        {
+          "timeUtc": "2026-09-24T06:30:00.000Z",
+          "rateMmH": 0.1
+        },
+        {
+          "timeUtc": "2026-09-24T06:45:00.000Z",
+          "rateMmH": 1
+        },
+        {
+          "timeUtc": "2026-09-24T07:00:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T07:15:00.000Z",
+          "rateMmH": 0
+        }
+      ],
+      "latestRateMmH": 0,
+      "oneHourAccumMm": 0.3,
+      "previousRateMmH": 0,
+      "trend": "DRY",
+      "persistenceAdditionalMm": [
+        {
+          "minutes": 15,
+          "millimeters": 0
+        },
+        {
+          "minutes": 30,
+          "millimeters": 0
+        },
+        {
+          "minutes": 45,
+          "millimeters": 0
+        },
+        {
+          "minutes": 60,
+          "millimeters": 0
+        }
+      ]
+    },
+    {
+      "iso": "TH-19",
+      "nameTh": "สระบุรี",
+      "nameEn": "Saraburi",
+      "districtCode": 1901,
+      "districtNameTh": "เมืองสระบุรี",
+      "districtNameEn": "Mueang Saraburi",
+      "latitude": 14.49831,
+      "longitude": 100.92041,
+      "observations": [
+        {
+          "timeUtc": "2026-09-24T06:15:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T06:30:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T06:45:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T07:00:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T07:15:00.000Z",
+          "rateMmH": 2
+        }
+      ],
+      "latestRateMmH": 2,
+      "oneHourAccumMm": 0.5,
+      "previousRateMmH": 0,
+      "trend": "INTENSIFYING",
+      "persistenceAdditionalMm": [
+        {
+          "minutes": 15,
+          "millimeters": 0.5
+        },
+        {
+          "minutes": 30,
+          "millimeters": 1
+        },
+        {
+          "minutes": 45,
+          "millimeters": 1.5
+        },
+        {
+          "minutes": 60,
+          "millimeters": 2
+        }
+      ]
+    },
+    {
+      "iso": "TH-20",
+      "nameTh": "ชลบุรี",
+      "nameEn": "Chon Buri",
+      "districtCode": 2001,
+      "districtNameTh": "เมืองชลบุรี",
+      "districtNameEn": "Mueang Chon Buri",
+      "latitude": 13.35109,
+      "longitude": 101.00757,
+      "observations": [
+        {
+          "timeUtc": "2026-09-24T06:15:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T06:30:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T06:45:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T07:00:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T07:15:00.000Z",
+          "rateMmH": 0
+        }
+      ],
+      "latestRateMmH": 0,
+      "oneHourAccumMm": 0,
+      "previousRateMmH": 0,
+      "trend": "DRY",
+      "persistenceAdditionalMm": [
+        {
+          "minutes": 15,
+          "millimeters": 0
+        },
+        {
+          "minutes": 30,
+          "millimeters": 0
+        },
+        {
+          "minutes": 45,
+          "millimeters": 0
+        },
+        {
+          "minutes": 60,
+          "millimeters": 0
+        }
+      ]
+    },
+    {
+      "iso": "TH-21",
+      "nameTh": "ระยอง",
+      "nameEn": "Rayong",
+      "districtCode": 2101,
+      "districtNameTh": "เมืองระยอง",
+      "districtNameEn": "Mueang Rayong",
+      "latitude": 12.72646,
+      "longitude": 101.42395,
+      "observations": [
+        {
+          "timeUtc": "2026-09-24T06:15:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T06:30:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T06:45:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T07:00:00.000Z",
+          "rateMmH": 1
+        },
+        {
+          "timeUtc": "2026-09-24T07:15:00.000Z",
+          "rateMmH": 1
+        }
+      ],
+      "latestRateMmH": 1,
+      "oneHourAccumMm": 0.5,
+      "previousRateMmH": 1,
+      "trend": "STEADY",
+      "persistenceAdditionalMm": [
+        {
+          "minutes": 15,
+          "millimeters": 0.3
+        },
+        {
+          "minutes": 30,
+          "millimeters": 0.5
+        },
+        {
+          "minutes": 45,
+          "millimeters": 0.8
+        },
+        {
+          "minutes": 60,
+          "millimeters": 1
+        }
+      ]
+    },
+    {
+      "iso": "TH-22",
+      "nameTh": "จันทบุรี",
+      "nameEn": "Chanthaburi",
+      "districtCode": 2201,
+      "districtNameTh": "เมืองจันทบุรี",
+      "districtNameEn": "Mueang Chanthaburi",
+      "latitude": 12.62978,
+      "longitude": 102.11579,
+      "observations": [
+        {
+          "timeUtc": "2026-09-24T06:15:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T06:30:00.000Z",
+          "rateMmH": 2
+        },
+        {
+          "timeUtc": "2026-09-24T06:45:00.000Z",
+          "rateMmH": 1
+        },
+        {
+          "timeUtc": "2026-09-24T07:00:00.000Z",
+          "rateMmH": 2
+        },
+        {
+          "timeUtc": "2026-09-24T07:15:00.000Z",
+          "rateMmH": 0
+        }
+      ],
+      "latestRateMmH": 0,
+      "oneHourAccumMm": 1.3,
+      "previousRateMmH": 2,
+      "trend": "WEAKENING",
+      "persistenceAdditionalMm": [
+        {
+          "minutes": 15,
+          "millimeters": 0
+        },
+        {
+          "minutes": 30,
+          "millimeters": 0
+        },
+        {
+          "minutes": 45,
+          "millimeters": 0
+        },
+        {
+          "minutes": 60,
+          "millimeters": 0
+        }
+      ]
+    },
+    {
+      "iso": "TH-23",
+      "nameTh": "ตราด",
+      "nameEn": "Trat",
+      "districtCode": 2301,
+      "districtNameTh": "เมืองตราด",
+      "districtNameEn": "Mueang Trat",
+      "latitude": 12.22003,
+      "longitude": 102.5754,
+      "observations": [
+        {
+          "timeUtc": "2026-09-24T06:15:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T06:30:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T06:45:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T07:00:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T07:15:00.000Z",
+          "rateMmH": 0
+        }
+      ],
+      "latestRateMmH": 0,
+      "oneHourAccumMm": 0,
+      "previousRateMmH": 0,
+      "trend": "DRY",
+      "persistenceAdditionalMm": [
+        {
+          "minutes": 15,
+          "millimeters": 0
+        },
+        {
+          "minutes": 30,
+          "millimeters": 0
+        },
+        {
+          "minutes": 45,
+          "millimeters": 0
+        },
+        {
+          "minutes": 60,
+          "millimeters": 0
+        }
+      ]
+    },
+    {
+      "iso": "TH-24",
+      "nameTh": "ฉะเชิงเทรา",
+      "nameEn": "Chachoengsao",
+      "districtCode": 2401,
+      "districtNameTh": "เมืองฉะเชิงเทรา",
+      "districtNameEn": "Mueang Chachoengsao",
+      "latitude": 13.71762,
+      "longitude": 101.00283,
+      "observations": [
+        {
+          "timeUtc": "2026-09-24T06:15:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T06:30:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T06:45:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T07:00:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T07:15:00.000Z",
+          "rateMmH": 0
+        }
+      ],
+      "latestRateMmH": 0,
+      "oneHourAccumMm": 0,
+      "previousRateMmH": 0,
+      "trend": "DRY",
+      "persistenceAdditionalMm": [
+        {
+          "minutes": 15,
+          "millimeters": 0
+        },
+        {
+          "minutes": 30,
+          "millimeters": 0
+        },
+        {
+          "minutes": 45,
+          "millimeters": 0
+        },
+        {
+          "minutes": 60,
+          "millimeters": 0
+        }
+      ]
+    },
+    {
+      "iso": "TH-25",
+      "nameTh": "ปราจีนบุรี",
+      "nameEn": "Prachin Buri",
+      "districtCode": 2501,
+      "districtNameTh": "เมืองปราจีนบุรี",
+      "districtNameEn": "Mueang Prachin Buri",
+      "latitude": 14.11026,
+      "longitude": 101.39939,
+      "observations": [
+        {
+          "timeUtc": "2026-09-24T06:15:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T06:30:00.000Z",
+          "rateMmH": 0.1
+        },
+        {
+          "timeUtc": "2026-09-24T06:45:00.000Z",
+          "rateMmH": 1
+        },
+        {
+          "timeUtc": "2026-09-24T07:00:00.000Z",
+          "rateMmH": 0.1
+        },
+        {
+          "timeUtc": "2026-09-24T07:15:00.000Z",
+          "rateMmH": 4
+        }
+      ],
+      "latestRateMmH": 4,
+      "oneHourAccumMm": 1.3,
+      "previousRateMmH": 0.1,
+      "trend": "INTENSIFYING",
+      "persistenceAdditionalMm": [
+        {
+          "minutes": 15,
+          "millimeters": 1
+        },
+        {
+          "minutes": 30,
+          "millimeters": 2
+        },
+        {
+          "minutes": 45,
+          "millimeters": 3
+        },
+        {
+          "minutes": 60,
+          "millimeters": 4
+        }
+      ]
+    },
+    {
+      "iso": "TH-26",
+      "nameTh": "นครนายก",
+      "nameEn": "Nakhon Nayok",
+      "districtCode": 2601,
+      "districtNameTh": "เมืองนครนายก",
+      "districtNameEn": "Mueang Nakhon Nayok",
+      "latitude": 14.26,
+      "longitude": 101.22766,
+      "observations": [
+        {
+          "timeUtc": "2026-09-24T06:15:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T06:30:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T06:45:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T07:00:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T07:15:00.000Z",
+          "rateMmH": 0
+        }
+      ],
+      "latestRateMmH": 0,
+      "oneHourAccumMm": 0,
+      "previousRateMmH": 0,
+      "trend": "DRY",
+      "persistenceAdditionalMm": [
+        {
+          "minutes": 15,
+          "millimeters": 0
+        },
+        {
+          "minutes": 30,
+          "millimeters": 0
+        },
+        {
+          "minutes": 45,
+          "millimeters": 0
+        },
+        {
+          "minutes": 60,
+          "millimeters": 0
+        }
+      ]
+    },
+    {
+      "iso": "TH-27",
+      "nameTh": "สระแก้ว",
+      "nameEn": "Sa Kaeo",
+      "districtCode": 2701,
+      "districtNameTh": "เมืองสระแก้ว",
+      "districtNameEn": "Mueang Sa Kaeo",
+      "latitude": 13.93852,
+      "longitude": 102.0803,
+      "observations": [
+        {
+          "timeUtc": "2026-09-24T06:15:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T06:30:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T06:45:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T07:00:00.000Z",
+          "rateMmH": 1
+        },
+        {
+          "timeUtc": "2026-09-24T07:15:00.000Z",
+          "rateMmH": 2
+        }
+      ],
+      "latestRateMmH": 2,
+      "oneHourAccumMm": 0.8,
+      "previousRateMmH": 1,
+      "trend": "STEADY",
+      "persistenceAdditionalMm": [
+        {
+          "minutes": 15,
+          "millimeters": 0.5
+        },
+        {
+          "minutes": 30,
+          "millimeters": 1
+        },
+        {
+          "minutes": 45,
+          "millimeters": 1.5
+        },
+        {
+          "minutes": 60,
+          "millimeters": 2
+        }
+      ]
+    },
+    {
+      "iso": "TH-30",
+      "nameTh": "นครราชสีมา",
+      "nameEn": "Nakhon Ratchasima",
+      "districtCode": 3001,
+      "districtNameTh": "เมืองนครราชสีมา",
+      "districtNameEn": "Mueang Nakhon Ratchasima",
+      "latitude": 14.96537,
+      "longitude": 102.10744,
+      "observations": [
+        {
+          "timeUtc": "2026-09-24T06:15:00.000Z",
+          "rateMmH": 1
+        },
+        {
+          "timeUtc": "2026-09-24T06:30:00.000Z",
+          "rateMmH": 1
+        },
+        {
+          "timeUtc": "2026-09-24T06:45:00.000Z",
+          "rateMmH": 1
+        },
+        {
+          "timeUtc": "2026-09-24T07:00:00.000Z",
+          "rateMmH": 1
+        },
+        {
+          "timeUtc": "2026-09-24T07:15:00.000Z",
+          "rateMmH": 0.1
+        }
+      ],
+      "latestRateMmH": 0.1,
+      "oneHourAccumMm": 0.8,
+      "previousRateMmH": 1,
+      "trend": "STEADY",
+      "persistenceAdditionalMm": [
+        {
+          "minutes": 15,
+          "millimeters": 0
+        },
+        {
+          "minutes": 30,
+          "millimeters": 0.1
+        },
+        {
+          "minutes": 45,
+          "millimeters": 0.1
+        },
+        {
+          "minutes": 60,
+          "millimeters": 0.1
+        }
+      ]
+    },
+    {
+      "iso": "TH-31",
+      "nameTh": "บุรีรัมย์",
+      "nameEn": "Buri Ram",
+      "districtCode": 3101,
+      "districtNameTh": "เมืองบุรีรัมย์",
+      "districtNameEn": "Mueang Buri Ram",
+      "latitude": 14.94827,
+      "longitude": 103.05493,
+      "observations": [
+        {
+          "timeUtc": "2026-09-24T06:15:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T06:30:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T06:45:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T07:00:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T07:15:00.000Z",
+          "rateMmH": 0
+        }
+      ],
+      "latestRateMmH": 0,
+      "oneHourAccumMm": 0,
+      "previousRateMmH": 0,
+      "trend": "DRY",
+      "persistenceAdditionalMm": [
+        {
+          "minutes": 15,
+          "millimeters": 0
+        },
+        {
+          "minutes": 30,
+          "millimeters": 0
+        },
+        {
+          "minutes": 45,
+          "millimeters": 0
+        },
+        {
+          "minutes": 60,
+          "millimeters": 0
+        }
+      ]
+    },
+    {
+      "iso": "TH-32",
+      "nameTh": "สุรินทร์",
+      "nameEn": "Surin",
+      "districtCode": 3201,
+      "districtNameTh": "เมืองสุรินทร์",
+      "districtNameEn": "Mueang Surin",
+      "latitude": 14.91432,
+      "longitude": 103.54311,
+      "observations": [
+        {
+          "timeUtc": "2026-09-24T06:15:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T06:30:00.000Z",
+          "rateMmH": 8
+        },
+        {
+          "timeUtc": "2026-09-24T06:45:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T07:00:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T07:15:00.000Z",
+          "rateMmH": 0
+        }
+      ],
+      "latestRateMmH": 0,
+      "oneHourAccumMm": 2,
+      "previousRateMmH": 0,
+      "trend": "DRY",
+      "persistenceAdditionalMm": [
+        {
+          "minutes": 15,
+          "millimeters": 0
+        },
+        {
+          "minutes": 30,
+          "millimeters": 0
+        },
+        {
+          "minutes": 45,
+          "millimeters": 0
+        },
+        {
+          "minutes": 60,
+          "millimeters": 0
+        }
+      ]
+    },
+    {
+      "iso": "TH-33",
+      "nameTh": "ศรีสะเกษ",
+      "nameEn": "Si Sa Ket",
+      "districtCode": 3301,
+      "districtNameTh": "เมืองศรีสะเกษ",
+      "districtNameEn": "Mueang Si Sa Ket",
+      "latitude": 15.09939,
+      "longitude": 104.37349,
+      "observations": [
+        {
+          "timeUtc": "2026-09-24T06:15:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T06:30:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T06:45:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T07:00:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T07:15:00.000Z",
+          "rateMmH": 0
+        }
+      ],
+      "latestRateMmH": 0,
+      "oneHourAccumMm": 0,
+      "previousRateMmH": 0,
+      "trend": "DRY",
+      "persistenceAdditionalMm": [
+        {
+          "minutes": 15,
+          "millimeters": 0
+        },
+        {
+          "minutes": 30,
+          "millimeters": 0
+        },
+        {
+          "minutes": 45,
+          "millimeters": 0
+        },
+        {
+          "minutes": 60,
+          "millimeters": 0
+        }
+      ]
+    },
+    {
+      "iso": "TH-34",
+      "nameTh": "อุบลราชธานี",
+      "nameEn": "Ubon Ratchathani",
+      "districtCode": 3401,
+      "districtNameTh": "เมืองอุบลราชธานี",
+      "districtNameEn": "Mueang Ubon Ratchathani",
+      "latitude": 15.29755,
+      "longitude": 104.86902,
+      "observations": [
+        {
+          "timeUtc": "2026-09-24T06:15:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T06:30:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T06:45:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T07:00:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T07:15:00.000Z",
+          "rateMmH": 0
+        }
+      ],
+      "latestRateMmH": 0,
+      "oneHourAccumMm": 0,
+      "previousRateMmH": 0,
+      "trend": "DRY",
+      "persistenceAdditionalMm": [
+        {
+          "minutes": 15,
+          "millimeters": 0
+        },
+        {
+          "minutes": 30,
+          "millimeters": 0
+        },
+        {
+          "minutes": 45,
+          "millimeters": 0
+        },
+        {
+          "minutes": 60,
+          "millimeters": 0
+        }
+      ]
+    },
+    {
+      "iso": "TH-35",
+      "nameTh": "ยโสธร",
+      "nameEn": "Yasothon",
+      "districtCode": 3501,
+      "districtNameTh": "เมืองยโสธร",
+      "districtNameEn": "Mueang Yasothon",
+      "latitude": 15.83169,
+      "longitude": 104.19061,
+      "observations": [
+        {
+          "timeUtc": "2026-09-24T06:15:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T06:30:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T06:45:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T07:00:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T07:15:00.000Z",
+          "rateMmH": 0
+        }
+      ],
+      "latestRateMmH": 0,
+      "oneHourAccumMm": 0,
+      "previousRateMmH": 0,
+      "trend": "DRY",
+      "persistenceAdditionalMm": [
+        {
+          "minutes": 15,
+          "millimeters": 0
+        },
+        {
+          "minutes": 30,
+          "millimeters": 0
+        },
+        {
+          "minutes": 45,
+          "millimeters": 0
+        },
+        {
+          "minutes": 60,
+          "millimeters": 0
+        }
+      ]
+    },
+    {
+      "iso": "TH-36",
+      "nameTh": "ชัยภูมิ",
+      "nameEn": "Chaiyaphum",
+      "districtCode": 3601,
+      "districtNameTh": "เมืองชัยภูมิ",
+      "districtNameEn": "Mueang Chaiyaphum",
+      "latitude": 15.93592,
+      "longitude": 102.00649,
+      "observations": [
+        {
+          "timeUtc": "2026-09-24T06:15:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T06:30:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T06:45:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T07:00:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T07:15:00.000Z",
+          "rateMmH": 0
+        }
+      ],
+      "latestRateMmH": 0,
+      "oneHourAccumMm": 0,
+      "previousRateMmH": 0,
+      "trend": "DRY",
+      "persistenceAdditionalMm": [
+        {
+          "minutes": 15,
+          "millimeters": 0
+        },
+        {
+          "minutes": 30,
+          "millimeters": 0
+        },
+        {
+          "minutes": 45,
+          "millimeters": 0
+        },
+        {
+          "minutes": 60,
+          "millimeters": 0
+        }
+      ]
+    },
+    {
+      "iso": "TH-37",
+      "nameTh": "อำนาจเจริญ",
+      "nameEn": "Amnat Charoen",
+      "districtCode": 3701,
+      "districtNameTh": "เมืองอำนาจเจริญ",
+      "districtNameEn": "Mueang Amnat Charoen",
+      "latitude": 15.87495,
+      "longitude": 104.63538,
+      "observations": [
+        {
+          "timeUtc": "2026-09-24T06:15:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T06:30:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T06:45:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T07:00:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T07:15:00.000Z",
+          "rateMmH": 0
+        }
+      ],
+      "latestRateMmH": 0,
+      "oneHourAccumMm": 0,
+      "previousRateMmH": 0,
+      "trend": "DRY",
+      "persistenceAdditionalMm": [
+        {
+          "minutes": 15,
+          "millimeters": 0
+        },
+        {
+          "minutes": 30,
+          "millimeters": 0
+        },
+        {
+          "minutes": 45,
+          "millimeters": 0
+        },
+        {
+          "minutes": 60,
+          "millimeters": 0
+        }
+      ]
+    },
+    {
+      "iso": "TH-38",
+      "nameTh": "บึงกาฬ",
+      "nameEn": "Bueng Kan",
+      "districtCode": 3801,
+      "districtNameTh": "เมืองบึงกาฬ",
+      "districtNameEn": "Mueang Bueng Kan",
+      "latitude": 18.28464,
+      "longitude": 103.6952,
+      "observations": [
+        {
+          "timeUtc": "2026-09-24T06:15:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T06:30:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T06:45:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T07:00:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T07:15:00.000Z",
+          "rateMmH": 0
+        }
+      ],
+      "latestRateMmH": 0,
+      "oneHourAccumMm": 0,
+      "previousRateMmH": 0,
+      "trend": "DRY",
+      "persistenceAdditionalMm": [
+        {
+          "minutes": 15,
+          "millimeters": 0
+        },
+        {
+          "minutes": 30,
+          "millimeters": 0
+        },
+        {
+          "minutes": 45,
+          "millimeters": 0
+        },
+        {
+          "minutes": 60,
+          "millimeters": 0
+        }
+      ]
+    },
+    {
+      "iso": "TH-39",
+      "nameTh": "หนองบัวลำภู",
+      "nameEn": "Nong Bua Lam Phu",
+      "districtCode": 3901,
+      "districtNameTh": "เมืองหนองบัวลำภู",
+      "districtNameEn": "Mueang Nong Bua Lam Phu",
+      "latitude": 17.15053,
+      "longitude": 102.37322,
+      "observations": [
+        {
+          "timeUtc": "2026-09-24T06:15:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T06:30:00.000Z",
+          "rateMmH": 0.1
+        },
+        {
+          "timeUtc": "2026-09-24T06:45:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T07:00:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T07:15:00.000Z",
+          "rateMmH": 0
+        }
+      ],
+      "latestRateMmH": 0,
+      "oneHourAccumMm": 0,
+      "previousRateMmH": 0,
+      "trend": "DRY",
+      "persistenceAdditionalMm": [
+        {
+          "minutes": 15,
+          "millimeters": 0
+        },
+        {
+          "minutes": 30,
+          "millimeters": 0
+        },
+        {
+          "minutes": 45,
+          "millimeters": 0
+        },
+        {
+          "minutes": 60,
+          "millimeters": 0
+        }
+      ]
+    },
+    {
+      "iso": "TH-40",
+      "nameTh": "ขอนแก่น",
+      "nameEn": "Khon Kaen",
+      "districtCode": 4001,
+      "districtNameTh": "เมืองขอนแก่น",
+      "districtNameEn": "Mueang Khon Kaen",
+      "latitude": 16.4273,
+      "longitude": 102.80856,
+      "observations": [
+        {
+          "timeUtc": "2026-09-24T06:15:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T06:30:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T06:45:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T07:00:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T07:15:00.000Z",
+          "rateMmH": 0
+        }
+      ],
+      "latestRateMmH": 0,
+      "oneHourAccumMm": 0,
+      "previousRateMmH": 0,
+      "trend": "DRY",
+      "persistenceAdditionalMm": [
+        {
+          "minutes": 15,
+          "millimeters": 0
+        },
+        {
+          "minutes": 30,
+          "millimeters": 0
+        },
+        {
+          "minutes": 45,
+          "millimeters": 0
+        },
+        {
+          "minutes": 60,
+          "millimeters": 0
+        }
+      ]
+    },
+    {
+      "iso": "TH-41",
+      "nameTh": "อุดรธานี",
+      "nameEn": "Udon Thani",
+      "districtCode": 4101,
+      "districtNameTh": "เมืองอุดรธานี",
+      "districtNameEn": "Mueang Udon Thani",
+      "latitude": 17.39043,
+      "longitude": 102.77706,
+      "observations": [
+        {
+          "timeUtc": "2026-09-24T06:15:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T06:30:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T06:45:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T07:00:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T07:15:00.000Z",
+          "rateMmH": 0
+        }
+      ],
+      "latestRateMmH": 0,
+      "oneHourAccumMm": 0,
+      "previousRateMmH": 0,
+      "trend": "DRY",
+      "persistenceAdditionalMm": [
+        {
+          "minutes": 15,
+          "millimeters": 0
+        },
+        {
+          "minutes": 30,
+          "millimeters": 0
+        },
+        {
+          "minutes": 45,
+          "millimeters": 0
+        },
+        {
+          "minutes": 60,
+          "millimeters": 0
+        }
+      ]
+    },
+    {
+      "iso": "TH-42",
+      "nameTh": "เลย",
+      "nameEn": "Loei",
+      "districtCode": 4201,
+      "districtNameTh": "เมืองเลย",
+      "districtNameEn": "Mueang Loei",
+      "latitude": 17.5436,
+      "longitude": 101.7072,
+      "observations": [
+        {
+          "timeUtc": "2026-09-24T06:15:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T06:30:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T06:45:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T07:00:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T07:15:00.000Z",
+          "rateMmH": 0
+        }
+      ],
+      "latestRateMmH": 0,
+      "oneHourAccumMm": 0,
+      "previousRateMmH": 0,
+      "trend": "DRY",
+      "persistenceAdditionalMm": [
+        {
+          "minutes": 15,
+          "millimeters": 0
+        },
+        {
+          "minutes": 30,
+          "millimeters": 0
+        },
+        {
+          "minutes": 45,
+          "millimeters": 0
+        },
+        {
+          "minutes": 60,
+          "millimeters": 0
+        }
+      ]
+    },
+    {
+      "iso": "TH-43",
+      "nameTh": "หนองคาย",
+      "nameEn": "Nong Khai",
+      "districtCode": 4301,
+      "districtNameTh": "เมืองหนองคาย",
+      "districtNameEn": "Mueang Nong Khai",
+      "latitude": 17.84473,
+      "longitude": 102.76966,
+      "observations": [
+        {
+          "timeUtc": "2026-09-24T06:15:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T06:30:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T06:45:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T07:00:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T07:15:00.000Z",
+          "rateMmH": 0
+        }
+      ],
+      "latestRateMmH": 0,
+      "oneHourAccumMm": 0,
+      "previousRateMmH": 0,
+      "trend": "DRY",
+      "persistenceAdditionalMm": [
+        {
+          "minutes": 15,
+          "millimeters": 0
+        },
+        {
+          "minutes": 30,
+          "millimeters": 0
+        },
+        {
+          "minutes": 45,
+          "millimeters": 0
+        },
+        {
+          "minutes": 60,
+          "millimeters": 0
+        }
+      ]
+    },
+    {
+      "iso": "TH-44",
+      "nameTh": "มหาสารคาม",
+      "nameEn": "Maha Sarakham",
+      "districtCode": 4401,
+      "districtNameTh": "เมืองมหาสารคาม",
+      "districtNameEn": "Mueang Maha Sarakham",
+      "latitude": 16.10447,
+      "longitude": 103.28224,
+      "observations": [
+        {
+          "timeUtc": "2026-09-24T06:15:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T06:30:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T06:45:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T07:00:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T07:15:00.000Z",
+          "rateMmH": 0
+        }
+      ],
+      "latestRateMmH": 0,
+      "oneHourAccumMm": 0,
+      "previousRateMmH": 0,
+      "trend": "DRY",
+      "persistenceAdditionalMm": [
+        {
+          "minutes": 15,
+          "millimeters": 0
+        },
+        {
+          "minutes": 30,
+          "millimeters": 0
+        },
+        {
+          "minutes": 45,
+          "millimeters": 0
+        },
+        {
+          "minutes": 60,
+          "millimeters": 0
+        }
+      ]
+    },
+    {
+      "iso": "TH-45",
+      "nameTh": "ร้อยเอ็ด",
+      "nameEn": "Roi Et",
+      "districtCode": 4501,
+      "districtNameTh": "เมืองร้อยเอ็ด",
+      "districtNameEn": "Mueang Roi Et",
+      "latitude": 16.01364,
+      "longitude": 103.62391,
+      "observations": [
+        {
+          "timeUtc": "2026-09-24T06:15:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T06:30:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T06:45:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T07:00:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T07:15:00.000Z",
+          "rateMmH": 0
+        }
+      ],
+      "latestRateMmH": 0,
+      "oneHourAccumMm": 0,
+      "previousRateMmH": 0,
+      "trend": "DRY",
+      "persistenceAdditionalMm": [
+        {
+          "minutes": 15,
+          "millimeters": 0
+        },
+        {
+          "minutes": 30,
+          "millimeters": 0
+        },
+        {
+          "minutes": 45,
+          "millimeters": 0
+        },
+        {
+          "minutes": 60,
+          "millimeters": 0
+        }
+      ]
+    },
+    {
+      "iso": "TH-46",
+      "nameTh": "กาฬสินธุ์",
+      "nameEn": "Kalasin",
+      "districtCode": 4601,
+      "districtNameTh": "เมืองกาฬสินธุ์",
+      "districtNameEn": "Mueang Kalasin",
+      "latitude": 16.50395,
+      "longitude": 103.56316,
+      "observations": [
+        {
+          "timeUtc": "2026-09-24T06:15:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T06:30:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T06:45:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T07:00:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T07:15:00.000Z",
+          "rateMmH": 0
+        }
+      ],
+      "latestRateMmH": 0,
+      "oneHourAccumMm": 0,
+      "previousRateMmH": 0,
+      "trend": "DRY",
+      "persistenceAdditionalMm": [
+        {
+          "minutes": 15,
+          "millimeters": 0
+        },
+        {
+          "minutes": 30,
+          "millimeters": 0
+        },
+        {
+          "minutes": 45,
+          "millimeters": 0
+        },
+        {
+          "minutes": 60,
+          "millimeters": 0
+        }
+      ]
+    },
+    {
+      "iso": "TH-47",
+      "nameTh": "สกลนคร",
+      "nameEn": "Sakon Nakhon",
+      "districtCode": 4701,
+      "districtNameTh": "เมืองสกลนคร",
+      "districtNameEn": "Mueang Sakon Nakhon",
+      "latitude": 17.1962,
+      "longitude": 104.07074,
+      "observations": [
+        {
+          "timeUtc": "2026-09-24T06:15:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T06:30:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T06:45:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T07:00:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T07:15:00.000Z",
+          "rateMmH": 0
+        }
+      ],
+      "latestRateMmH": 0,
+      "oneHourAccumMm": 0,
+      "previousRateMmH": 0,
+      "trend": "DRY",
+      "persistenceAdditionalMm": [
+        {
+          "minutes": 15,
+          "millimeters": 0
+        },
+        {
+          "minutes": 30,
+          "millimeters": 0
+        },
+        {
+          "minutes": 45,
+          "millimeters": 0
+        },
+        {
+          "minutes": 60,
+          "millimeters": 0
+        }
+      ]
+    },
+    {
+      "iso": "TH-48",
+      "nameTh": "นครพนม",
+      "nameEn": "Nakhon Phanom",
+      "districtCode": 4801,
+      "districtNameTh": "เมืองนครพนม",
+      "districtNameEn": "Mueang Nakhon Phanom",
+      "latitude": 17.30952,
+      "longitude": 104.54508,
+      "observations": [
+        {
+          "timeUtc": "2026-09-24T06:15:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T06:30:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T06:45:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T07:00:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T07:15:00.000Z",
+          "rateMmH": 0
+        }
+      ],
+      "latestRateMmH": 0,
+      "oneHourAccumMm": 0,
+      "previousRateMmH": 0,
+      "trend": "DRY",
+      "persistenceAdditionalMm": [
+        {
+          "minutes": 15,
+          "millimeters": 0
+        },
+        {
+          "minutes": 30,
+          "millimeters": 0
+        },
+        {
+          "minutes": 45,
+          "millimeters": 0
+        },
+        {
+          "minutes": 60,
+          "millimeters": 0
+        }
+      ]
+    },
+    {
+      "iso": "TH-49",
+      "nameTh": "มุกดาหาร",
+      "nameEn": "Mukdahan",
+      "districtCode": 4901,
+      "districtNameTh": "เมืองมุกดาหาร",
+      "districtNameEn": "Mueang Mukdahan",
+      "latitude": 16.53331,
+      "longitude": 104.62333,
+      "observations": [
+        {
+          "timeUtc": "2026-09-24T06:15:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T06:30:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T06:45:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T07:00:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T07:15:00.000Z",
+          "rateMmH": 0
+        }
+      ],
+      "latestRateMmH": 0,
+      "oneHourAccumMm": 0,
+      "previousRateMmH": 0,
+      "trend": "DRY",
+      "persistenceAdditionalMm": [
+        {
+          "minutes": 15,
+          "millimeters": 0
+        },
+        {
+          "minutes": 30,
+          "millimeters": 0
+        },
+        {
+          "minutes": 45,
+          "millimeters": 0
+        },
+        {
+          "minutes": 60,
+          "millimeters": 0
+        }
+      ]
+    },
+    {
+      "iso": "TH-50",
+      "nameTh": "เชียงใหม่",
+      "nameEn": "Chiang Mai",
+      "districtCode": 5001,
+      "districtNameTh": "เมืองเชียงใหม่",
+      "districtNameEn": "Mueang Chiang Mai",
+      "latitude": 18.78749,
+      "longitude": 98.96724,
+      "observations": [
+        {
+          "timeUtc": "2026-09-24T06:15:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T06:30:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T06:45:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T07:00:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T07:15:00.000Z",
+          "rateMmH": 0
+        }
+      ],
+      "latestRateMmH": 0,
+      "oneHourAccumMm": 0,
+      "previousRateMmH": 0,
+      "trend": "DRY",
+      "persistenceAdditionalMm": [
+        {
+          "minutes": 15,
+          "millimeters": 0
+        },
+        {
+          "minutes": 30,
+          "millimeters": 0
+        },
+        {
+          "minutes": 45,
+          "millimeters": 0
+        },
+        {
+          "minutes": 60,
+          "millimeters": 0
+        }
+      ]
+    },
+    {
+      "iso": "TH-51",
+      "nameTh": "ลำพูน",
+      "nameEn": "Lamphun",
+      "districtCode": 5101,
+      "districtNameTh": "เมืองลำพูน",
+      "districtNameEn": "Mueang Lamphun",
+      "latitude": 18.55134,
+      "longitude": 99.0698,
+      "observations": [
+        {
+          "timeUtc": "2026-09-24T06:15:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T06:30:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T06:45:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T07:00:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T07:15:00.000Z",
+          "rateMmH": 0
+        }
+      ],
+      "latestRateMmH": 0,
+      "oneHourAccumMm": 0,
+      "previousRateMmH": 0,
+      "trend": "DRY",
+      "persistenceAdditionalMm": [
+        {
+          "minutes": 15,
+          "millimeters": 0
+        },
+        {
+          "minutes": 30,
+          "millimeters": 0
+        },
+        {
+          "minutes": 45,
+          "millimeters": 0
+        },
+        {
+          "minutes": 60,
+          "millimeters": 0
+        }
+      ]
+    },
+    {
+      "iso": "TH-52",
+      "nameTh": "ลำปาง",
+      "nameEn": "Lampang",
+      "districtCode": 5201,
+      "districtNameTh": "เมืองลำปาง",
+      "districtNameEn": "Mueang Lampang",
+      "latitude": 18.39403,
+      "longitude": 99.53206,
+      "observations": [
+        {
+          "timeUtc": "2026-09-24T06:15:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T06:30:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T06:45:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T07:00:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T07:15:00.000Z",
+          "rateMmH": 0
+        }
+      ],
+      "latestRateMmH": 0,
+      "oneHourAccumMm": 0,
+      "previousRateMmH": 0,
+      "trend": "DRY",
+      "persistenceAdditionalMm": [
+        {
+          "minutes": 15,
+          "millimeters": 0
+        },
+        {
+          "minutes": 30,
+          "millimeters": 0
+        },
+        {
+          "minutes": 45,
+          "millimeters": 0
+        },
+        {
+          "minutes": 60,
+          "millimeters": 0
+        }
+      ]
+    },
+    {
+      "iso": "TH-53",
+      "nameTh": "อุตรดิตถ์",
+      "nameEn": "Uttaradit",
+      "districtCode": 5301,
+      "districtNameTh": "เมืองอุตรดิตถ์",
+      "districtNameEn": "Mueang Uttaradit",
+      "latitude": 17.6852,
+      "longitude": 100.22727,
+      "observations": [
+        {
+          "timeUtc": "2026-09-24T06:15:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T06:30:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T06:45:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T07:00:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T07:15:00.000Z",
+          "rateMmH": 0
+        }
+      ],
+      "latestRateMmH": 0,
+      "oneHourAccumMm": 0,
+      "previousRateMmH": 0,
+      "trend": "DRY",
+      "persistenceAdditionalMm": [
+        {
+          "minutes": 15,
+          "millimeters": 0
+        },
+        {
+          "minutes": 30,
+          "millimeters": 0
+        },
+        {
+          "minutes": 45,
+          "millimeters": 0
+        },
+        {
+          "minutes": 60,
+          "millimeters": 0
+        }
+      ]
+    },
+    {
+      "iso": "TH-54",
+      "nameTh": "แพร่",
+      "nameEn": "Phrae",
+      "districtCode": 5401,
+      "districtNameTh": "เมืองแพร่",
+      "districtNameEn": "Mueang Phrae",
+      "latitude": 18.08398,
+      "longitude": 100.28944,
+      "observations": [
+        {
+          "timeUtc": "2026-09-24T06:15:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T06:30:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T06:45:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T07:00:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T07:15:00.000Z",
+          "rateMmH": 1
+        }
+      ],
+      "latestRateMmH": 1,
+      "oneHourAccumMm": 0.3,
+      "previousRateMmH": 0,
+      "trend": "STEADY",
+      "persistenceAdditionalMm": [
+        {
+          "minutes": 15,
+          "millimeters": 0.3
+        },
+        {
+          "minutes": 30,
+          "millimeters": 0.5
+        },
+        {
+          "minutes": 45,
+          "millimeters": 0.8
+        },
+        {
+          "minutes": 60,
+          "millimeters": 1
+        }
+      ]
+    },
+    {
+      "iso": "TH-55",
+      "nameTh": "น่าน",
+      "nameEn": "Nan",
+      "districtCode": 5501,
+      "districtNameTh": "เมืองน่าน",
+      "districtNameEn": "Mueang Nan",
+      "latitude": 18.86498,
+      "longitude": 100.65957,
+      "observations": [
+        {
+          "timeUtc": "2026-09-24T06:15:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T06:30:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T06:45:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T07:00:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T07:15:00.000Z",
+          "rateMmH": 0
+        }
+      ],
+      "latestRateMmH": 0,
+      "oneHourAccumMm": 0,
+      "previousRateMmH": 0,
+      "trend": "DRY",
+      "persistenceAdditionalMm": [
+        {
+          "minutes": 15,
+          "millimeters": 0
+        },
+        {
+          "minutes": 30,
+          "millimeters": 0
+        },
+        {
+          "minutes": 45,
+          "millimeters": 0
+        },
+        {
+          "minutes": 60,
+          "millimeters": 0
+        }
+      ]
+    },
+    {
+      "iso": "TH-56",
+      "nameTh": "พะเยา",
+      "nameEn": "Phayao",
+      "districtCode": 5601,
+      "districtNameTh": "เมืองพะเยา",
+      "districtNameEn": "Mueang Phayao",
+      "latitude": 19.15071,
+      "longitude": 99.83741,
+      "observations": [
+        {
+          "timeUtc": "2026-09-24T06:15:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T06:30:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T06:45:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T07:00:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T07:15:00.000Z",
+          "rateMmH": 0
+        }
+      ],
+      "latestRateMmH": 0,
+      "oneHourAccumMm": 0,
+      "previousRateMmH": 0,
+      "trend": "DRY",
+      "persistenceAdditionalMm": [
+        {
+          "minutes": 15,
+          "millimeters": 0
+        },
+        {
+          "minutes": 30,
+          "millimeters": 0
+        },
+        {
+          "minutes": 45,
+          "millimeters": 0
+        },
+        {
+          "minutes": 60,
+          "millimeters": 0
+        }
+      ]
+    },
+    {
+      "iso": "TH-57",
+      "nameTh": "เชียงราย",
+      "nameEn": "Chiang Rai",
+      "districtCode": 5701,
+      "districtNameTh": "เมืองเชียงราย",
+      "districtNameEn": "Mueang Chiang Rai",
+      "latitude": 19.87773,
+      "longitude": 99.71918,
+      "observations": [
+        {
+          "timeUtc": "2026-09-24T06:15:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T06:30:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T06:45:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T07:00:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T07:15:00.000Z",
+          "rateMmH": 0
+        }
+      ],
+      "latestRateMmH": 0,
+      "oneHourAccumMm": 0,
+      "previousRateMmH": 0,
+      "trend": "DRY",
+      "persistenceAdditionalMm": [
+        {
+          "minutes": 15,
+          "millimeters": 0
+        },
+        {
+          "minutes": 30,
+          "millimeters": 0
+        },
+        {
+          "minutes": 45,
+          "millimeters": 0
+        },
+        {
+          "minutes": 60,
+          "millimeters": 0
+        }
+      ]
+    },
+    {
+      "iso": "TH-58",
+      "nameTh": "แม่ฮ่องสอน",
+      "nameEn": "Mae Hong Son",
+      "districtCode": 5801,
+      "districtNameTh": "เมืองแม่ฮ่องสอน",
+      "districtNameEn": "Mueang Mae Hong Son",
+      "latitude": 19.28704,
+      "longitude": 97.98051,
+      "observations": [
+        {
+          "timeUtc": "2026-09-24T06:15:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T06:30:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T06:45:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T07:00:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T07:15:00.000Z",
+          "rateMmH": 0
+        }
+      ],
+      "latestRateMmH": 0,
+      "oneHourAccumMm": 0,
+      "previousRateMmH": 0,
+      "trend": "DRY",
+      "persistenceAdditionalMm": [
+        {
+          "minutes": 15,
+          "millimeters": 0
+        },
+        {
+          "minutes": 30,
+          "millimeters": 0
+        },
+        {
+          "minutes": 45,
+          "millimeters": 0
+        },
+        {
+          "minutes": 60,
+          "millimeters": 0
+        }
+      ]
+    },
+    {
+      "iso": "TH-60",
+      "nameTh": "นครสวรรค์",
+      "nameEn": "Nakhon Sawan",
+      "districtCode": 6001,
+      "districtNameTh": "เมืองนครสวรรค์",
+      "districtNameEn": "Mueang Nakhon Sawan",
+      "latitude": 15.70454,
+      "longitude": 100.08729,
+      "observations": [
+        {
+          "timeUtc": "2026-09-24T06:15:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T06:30:00.000Z",
+          "rateMmH": 1
+        },
+        {
+          "timeUtc": "2026-09-24T06:45:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T07:00:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T07:15:00.000Z",
+          "rateMmH": 0
+        }
+      ],
+      "latestRateMmH": 0,
+      "oneHourAccumMm": 0.3,
+      "previousRateMmH": 0,
+      "trend": "DRY",
+      "persistenceAdditionalMm": [
+        {
+          "minutes": 15,
+          "millimeters": 0
+        },
+        {
+          "minutes": 30,
+          "millimeters": 0
+        },
+        {
+          "minutes": 45,
+          "millimeters": 0
+        },
+        {
+          "minutes": 60,
+          "millimeters": 0
+        }
+      ]
+    },
+    {
+      "iso": "TH-61",
+      "nameTh": "อุทัยธานี",
+      "nameEn": "Uthai Thani",
+      "districtCode": 6101,
+      "districtNameTh": "เมืองอุทัยธานี",
+      "districtNameEn": "Mueang Uthai Thani",
+      "latitude": 15.38695,
+      "longitude": 100.01539,
+      "observations": [
+        {
+          "timeUtc": "2026-09-24T06:15:00.000Z",
+          "rateMmH": 2
+        },
+        {
+          "timeUtc": "2026-09-24T06:30:00.000Z",
+          "rateMmH": 4
+        },
+        {
+          "timeUtc": "2026-09-24T06:45:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T07:00:00.000Z",
+          "rateMmH": 0.1
+        },
+        {
+          "timeUtc": "2026-09-24T07:15:00.000Z",
+          "rateMmH": 0
+        }
+      ],
+      "latestRateMmH": 0,
+      "oneHourAccumMm": 1,
+      "previousRateMmH": 0.1,
+      "trend": "STEADY",
+      "persistenceAdditionalMm": [
+        {
+          "minutes": 15,
+          "millimeters": 0
+        },
+        {
+          "minutes": 30,
+          "millimeters": 0
+        },
+        {
+          "minutes": 45,
+          "millimeters": 0
+        },
+        {
+          "minutes": 60,
+          "millimeters": 0
+        }
+      ]
+    },
+    {
+      "iso": "TH-62",
+      "nameTh": "กำแพงเพชร",
+      "nameEn": "Kamphaeng Phet",
+      "districtCode": 6201,
+      "districtNameTh": "เมืองกำแพงเพชร",
+      "districtNameEn": "Mueang Kamphaeng Phet",
+      "latitude": 16.41985,
+      "longitude": 99.50618,
+      "observations": [
+        {
+          "timeUtc": "2026-09-24T06:15:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T06:30:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T06:45:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T07:00:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T07:15:00.000Z",
+          "rateMmH": 0
+        }
+      ],
+      "latestRateMmH": 0,
+      "oneHourAccumMm": 0,
+      "previousRateMmH": 0,
+      "trend": "DRY",
+      "persistenceAdditionalMm": [
+        {
+          "minutes": 15,
+          "millimeters": 0
+        },
+        {
+          "minutes": 30,
+          "millimeters": 0
+        },
+        {
+          "minutes": 45,
+          "millimeters": 0
+        },
+        {
+          "minutes": 60,
+          "millimeters": 0
+        }
+      ]
+    },
+    {
+      "iso": "TH-63",
+      "nameTh": "ตาก",
+      "nameEn": "Tak",
+      "districtCode": 6301,
+      "districtNameTh": "เมืองตาก",
+      "districtNameEn": "Mueang Tak",
+      "latitude": 16.88698,
+      "longitude": 99.13861,
+      "observations": [
+        {
+          "timeUtc": "2026-09-24T06:15:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T06:30:00.000Z",
+          "rateMmH": 8
+        },
+        {
+          "timeUtc": "2026-09-24T06:45:00.000Z",
+          "rateMmH": 56
+        },
+        {
+          "timeUtc": "2026-09-24T07:00:00.000Z",
+          "rateMmH": 1
+        },
+        {
+          "timeUtc": "2026-09-24T07:15:00.000Z",
+          "rateMmH": 0
+        }
+      ],
+      "latestRateMmH": 0,
+      "oneHourAccumMm": 16.3,
+      "previousRateMmH": 1,
+      "trend": "STEADY",
+      "persistenceAdditionalMm": [
+        {
+          "minutes": 15,
+          "millimeters": 0
+        },
+        {
+          "minutes": 30,
+          "millimeters": 0
+        },
+        {
+          "minutes": 45,
+          "millimeters": 0
+        },
+        {
+          "minutes": 60,
+          "millimeters": 0
+        }
+      ]
+    },
+    {
+      "iso": "TH-64",
+      "nameTh": "สุโขทัย",
+      "nameEn": "Sukhothai",
+      "districtCode": 6401,
+      "districtNameTh": "เมืองสุโขทัย",
+      "districtNameEn": "Mueang Sukhothai",
+      "latitude": 17.0149,
+      "longitude": 99.78557,
+      "observations": [
+        {
+          "timeUtc": "2026-09-24T06:15:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T06:30:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T06:45:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T07:00:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T07:15:00.000Z",
+          "rateMmH": 1
+        }
+      ],
+      "latestRateMmH": 1,
+      "oneHourAccumMm": 0.3,
+      "previousRateMmH": 0,
+      "trend": "STEADY",
+      "persistenceAdditionalMm": [
+        {
+          "minutes": 15,
+          "millimeters": 0.3
+        },
+        {
+          "minutes": 30,
+          "millimeters": 0.5
+        },
+        {
+          "minutes": 45,
+          "millimeters": 0.8
+        },
+        {
+          "minutes": 60,
+          "millimeters": 1
+        }
+      ]
+    },
+    {
+      "iso": "TH-65",
+      "nameTh": "พิษณุโลก",
+      "nameEn": "Phitsanulok",
+      "districtCode": 6501,
+      "districtNameTh": "เมืองพิษณุโลก",
+      "districtNameEn": "Mueang Phitsanulok",
+      "latitude": 16.80458,
+      "longitude": 100.2481,
+      "observations": [
+        {
+          "timeUtc": "2026-09-24T06:15:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T06:30:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T06:45:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T07:00:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T07:15:00.000Z",
+          "rateMmH": 0
+        }
+      ],
+      "latestRateMmH": 0,
+      "oneHourAccumMm": 0,
+      "previousRateMmH": 0,
+      "trend": "DRY",
+      "persistenceAdditionalMm": [
+        {
+          "minutes": 15,
+          "millimeters": 0
+        },
+        {
+          "minutes": 30,
+          "millimeters": 0
+        },
+        {
+          "minutes": 45,
+          "millimeters": 0
+        },
+        {
+          "minutes": 60,
+          "millimeters": 0
+        }
+      ]
+    },
+    {
+      "iso": "TH-66",
+      "nameTh": "พิจิตร",
+      "nameEn": "Phichit",
+      "districtCode": 6601,
+      "districtNameTh": "เมืองพิจิตร",
+      "districtNameEn": "Mueang Phichit",
+      "latitude": 16.40291,
+      "longitude": 100.37244,
+      "observations": [
+        {
+          "timeUtc": "2026-09-24T06:15:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T06:30:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T06:45:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T07:00:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T07:15:00.000Z",
+          "rateMmH": 0
+        }
+      ],
+      "latestRateMmH": 0,
+      "oneHourAccumMm": 0,
+      "previousRateMmH": 0,
+      "trend": "DRY",
+      "persistenceAdditionalMm": [
+        {
+          "minutes": 15,
+          "millimeters": 0
+        },
+        {
+          "minutes": 30,
+          "millimeters": 0
+        },
+        {
+          "minutes": 45,
+          "millimeters": 0
+        },
+        {
+          "minutes": 60,
+          "millimeters": 0
+        }
+      ]
+    },
+    {
+      "iso": "TH-67",
+      "nameTh": "เพชรบูรณ์",
+      "nameEn": "Phetchabun",
+      "districtCode": 6701,
+      "districtNameTh": "เมืองเพชรบูรณ์",
+      "districtNameEn": "Mueang Phetchabun",
+      "latitude": 16.36758,
+      "longitude": 101.19296,
+      "observations": [
+        {
+          "timeUtc": "2026-09-24T06:15:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T06:30:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T06:45:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T07:00:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T07:15:00.000Z",
+          "rateMmH": 0
+        }
+      ],
+      "latestRateMmH": 0,
+      "oneHourAccumMm": 0,
+      "previousRateMmH": 0,
+      "trend": "DRY",
+      "persistenceAdditionalMm": [
+        {
+          "minutes": 15,
+          "millimeters": 0
+        },
+        {
+          "minutes": 30,
+          "millimeters": 0
+        },
+        {
+          "minutes": 45,
+          "millimeters": 0
+        },
+        {
+          "minutes": 60,
+          "millimeters": 0
+        }
+      ]
+    },
+    {
+      "iso": "TH-70",
+      "nameTh": "ราชบุรี",
+      "nameEn": "Ratchaburi",
+      "districtCode": 7001,
+      "districtNameTh": "เมืองราชบุรี",
+      "districtNameEn": "Mueang Ratchaburi",
+      "latitude": 13.54457,
+      "longitude": 99.74883,
+      "observations": [
+        {
+          "timeUtc": "2026-09-24T06:15:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T06:30:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T06:45:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T07:00:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T07:15:00.000Z",
+          "rateMmH": 0
+        }
+      ],
+      "latestRateMmH": 0,
+      "oneHourAccumMm": 0,
+      "previousRateMmH": 0,
+      "trend": "DRY",
+      "persistenceAdditionalMm": [
+        {
+          "minutes": 15,
+          "millimeters": 0
+        },
+        {
+          "minutes": 30,
+          "millimeters": 0
+        },
+        {
+          "minutes": 45,
+          "millimeters": 0
+        },
+        {
+          "minutes": 60,
+          "millimeters": 0
+        }
+      ]
+    },
+    {
+      "iso": "TH-71",
+      "nameTh": "กาญจนบุรี",
+      "nameEn": "Kanchanaburi",
+      "districtCode": 7101,
+      "districtNameTh": "เมืองกาญจนบุรี",
+      "districtNameEn": "Mueang Kanchanaburi",
+      "latitude": 14.05133,
+      "longitude": 99.44776,
+      "observations": [
+        {
+          "timeUtc": "2026-09-24T06:15:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T06:30:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T06:45:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T07:00:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T07:15:00.000Z",
+          "rateMmH": 0
+        }
+      ],
+      "latestRateMmH": 0,
+      "oneHourAccumMm": 0,
+      "previousRateMmH": 0,
+      "trend": "DRY",
+      "persistenceAdditionalMm": [
+        {
+          "minutes": 15,
+          "millimeters": 0
+        },
+        {
+          "minutes": 30,
+          "millimeters": 0
+        },
+        {
+          "minutes": 45,
+          "millimeters": 0
+        },
+        {
+          "minutes": 60,
+          "millimeters": 0
+        }
+      ]
+    },
+    {
+      "iso": "TH-72",
+      "nameTh": "สุพรรณบุรี",
+      "nameEn": "Suphan Buri",
+      "districtCode": 7201,
+      "districtNameTh": "เมืองสุพรรณบุรี",
+      "districtNameEn": "Mueang Suphan Buri",
+      "latitude": 14.4722,
+      "longitude": 100.10809,
+      "observations": [
+        {
+          "timeUtc": "2026-09-24T06:15:00.000Z",
+          "rateMmH": 2
+        },
+        {
+          "timeUtc": "2026-09-24T06:30:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T06:45:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T07:00:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T07:15:00.000Z",
+          "rateMmH": 0
+        }
+      ],
+      "latestRateMmH": 0,
+      "oneHourAccumMm": 0,
+      "previousRateMmH": 0,
+      "trend": "DRY",
+      "persistenceAdditionalMm": [
+        {
+          "minutes": 15,
+          "millimeters": 0
+        },
+        {
+          "minutes": 30,
+          "millimeters": 0
+        },
+        {
+          "minutes": 45,
+          "millimeters": 0
+        },
+        {
+          "minutes": 60,
+          "millimeters": 0
+        }
+      ]
+    },
+    {
+      "iso": "TH-73",
+      "nameTh": "นครปฐม",
+      "nameEn": "Nakhon Pathom",
+      "districtCode": 7301,
+      "districtNameTh": "เมืองนครปฐม",
+      "districtNameEn": "Mueang Nakhon Pathom",
+      "latitude": 13.81846,
+      "longitude": 100.04415,
+      "observations": [
+        {
+          "timeUtc": "2026-09-24T06:15:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T06:30:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T06:45:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T07:00:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T07:15:00.000Z",
+          "rateMmH": 0
+        }
+      ],
+      "latestRateMmH": 0,
+      "oneHourAccumMm": 0,
+      "previousRateMmH": 0,
+      "trend": "DRY",
+      "persistenceAdditionalMm": [
+        {
+          "minutes": 15,
+          "millimeters": 0
+        },
+        {
+          "minutes": 30,
+          "millimeters": 0
+        },
+        {
+          "minutes": 45,
+          "millimeters": 0
+        },
+        {
+          "minutes": 60,
+          "millimeters": 0
+        }
+      ]
+    },
+    {
+      "iso": "TH-74",
+      "nameTh": "สมุทรสาคร",
+      "nameEn": "Samut Sakhon",
+      "districtCode": 7401,
+      "districtNameTh": "เมืองสมุทรสาคร",
+      "districtNameEn": "Mueang Samut Sakhon",
+      "latitude": 13.53303,
+      "longitude": 100.27705,
+      "observations": [
+        {
+          "timeUtc": "2026-09-24T06:15:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T06:30:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T06:45:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T07:00:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T07:15:00.000Z",
+          "rateMmH": 0
+        }
+      ],
+      "latestRateMmH": 0,
+      "oneHourAccumMm": 0,
+      "previousRateMmH": 0,
+      "trend": "DRY",
+      "persistenceAdditionalMm": [
+        {
+          "minutes": 15,
+          "millimeters": 0
+        },
+        {
+          "minutes": 30,
+          "millimeters": 0
+        },
+        {
+          "minutes": 45,
+          "millimeters": 0
+        },
+        {
+          "minutes": 60,
+          "millimeters": 0
+        }
+      ]
+    },
+    {
+      "iso": "TH-75",
+      "nameTh": "สมุทรสงคราม",
+      "nameEn": "Samut Songkhram",
+      "districtCode": 7501,
+      "districtNameTh": "เมืองสมุทรสงคราม",
+      "districtNameEn": "Mueang Samut Songkhram",
+      "latitude": 13.39592,
+      "longitude": 99.99344,
+      "observations": [
+        {
+          "timeUtc": "2026-09-24T06:15:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T06:30:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T06:45:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T07:00:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T07:15:00.000Z",
+          "rateMmH": 0
+        }
+      ],
+      "latestRateMmH": 0,
+      "oneHourAccumMm": 0,
+      "previousRateMmH": 0,
+      "trend": "DRY",
+      "persistenceAdditionalMm": [
+        {
+          "minutes": 15,
+          "millimeters": 0
+        },
+        {
+          "minutes": 30,
+          "millimeters": 0
+        },
+        {
+          "minutes": 45,
+          "millimeters": 0
+        },
+        {
+          "minutes": 60,
+          "millimeters": 0
+        }
+      ]
+    },
+    {
+      "iso": "TH-76",
+      "nameTh": "เพชรบุรี",
+      "nameEn": "Phetchaburi",
+      "districtCode": 7601,
+      "districtNameTh": "เมืองเพชรบุรี",
+      "districtNameEn": "Mueang Phetchaburi",
+      "latitude": 13.07117,
+      "longitude": 100.00242,
+      "observations": [
+        {
+          "timeUtc": "2026-09-24T06:15:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T06:30:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T06:45:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T07:00:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T07:15:00.000Z",
+          "rateMmH": 0
+        }
+      ],
+      "latestRateMmH": 0,
+      "oneHourAccumMm": 0,
+      "previousRateMmH": 0,
+      "trend": "DRY",
+      "persistenceAdditionalMm": [
+        {
+          "minutes": 15,
+          "millimeters": 0
+        },
+        {
+          "minutes": 30,
+          "millimeters": 0
+        },
+        {
+          "minutes": 45,
+          "millimeters": 0
+        },
+        {
+          "minutes": 60,
+          "millimeters": 0
+        }
+      ]
+    },
+    {
+      "iso": "TH-77",
+      "nameTh": "ประจวบคีรีขันธ์",
+      "nameEn": "Prachuap Khiri Khan",
+      "districtCode": 7701,
+      "districtNameTh": "เมืองประจวบคีรีขันธ์",
+      "districtNameEn": "Mueang Prachuap Khiri Khan",
+      "latitude": 11.85898,
+      "longitude": 99.71842,
+      "observations": [
+        {
+          "timeUtc": "2026-09-24T06:15:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T06:30:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T06:45:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T07:00:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T07:15:00.000Z",
+          "rateMmH": 0
+        }
+      ],
+      "latestRateMmH": 0,
+      "oneHourAccumMm": 0,
+      "previousRateMmH": 0,
+      "trend": "DRY",
+      "persistenceAdditionalMm": [
+        {
+          "minutes": 15,
+          "millimeters": 0
+        },
+        {
+          "minutes": 30,
+          "millimeters": 0
+        },
+        {
+          "minutes": 45,
+          "millimeters": 0
+        },
+        {
+          "minutes": 60,
+          "millimeters": 0
+        }
+      ]
+    },
+    {
+      "iso": "TH-80",
+      "nameTh": "นครศรีธรรมราช",
+      "nameEn": "Nakhon Si Thammarat",
+      "districtCode": 8001,
+      "districtNameTh": "นครศรีธรรมราช",
+      "districtNameEn": "Mueang Nakhon Si Thammarat",
+      "latitude": 8.42514,
+      "longitude": 99.9567,
+      "observations": [
+        {
+          "timeUtc": "2026-09-24T06:15:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T06:30:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T06:45:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T07:00:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T07:15:00.000Z",
+          "rateMmH": 0
+        }
+      ],
+      "latestRateMmH": 0,
+      "oneHourAccumMm": 0,
+      "previousRateMmH": 0,
+      "trend": "DRY",
+      "persistenceAdditionalMm": [
+        {
+          "minutes": 15,
+          "millimeters": 0
+        },
+        {
+          "minutes": 30,
+          "millimeters": 0
+        },
+        {
+          "minutes": 45,
+          "millimeters": 0
+        },
+        {
+          "minutes": 60,
+          "millimeters": 0
+        }
+      ]
+    },
+    {
+      "iso": "TH-81",
+      "nameTh": "กระบี่",
+      "nameEn": "Krabi",
+      "districtCode": 8101,
+      "districtNameTh": "เมืองกระบี่",
+      "districtNameEn": "Mueang Krabi",
+      "latitude": 8.14765,
+      "longitude": 98.8707,
+      "observations": [
+        {
+          "timeUtc": "2026-09-24T06:15:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T06:30:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T06:45:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T07:00:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T07:15:00.000Z",
+          "rateMmH": 0
+        }
+      ],
+      "latestRateMmH": 0,
+      "oneHourAccumMm": 0,
+      "previousRateMmH": 0,
+      "trend": "DRY",
+      "persistenceAdditionalMm": [
+        {
+          "minutes": 15,
+          "millimeters": 0
+        },
+        {
+          "minutes": 30,
+          "millimeters": 0
+        },
+        {
+          "minutes": 45,
+          "millimeters": 0
+        },
+        {
+          "minutes": 60,
+          "millimeters": 0
+        }
+      ]
+    },
+    {
+      "iso": "TH-82",
+      "nameTh": "พังงา",
+      "nameEn": "Phangnga",
+      "districtCode": 8201,
+      "districtNameTh": "เมืองพังงา",
+      "districtNameEn": "Mueang Phangnga",
+      "latitude": 8.49402,
+      "longitude": 98.47937,
+      "observations": [
+        {
+          "timeUtc": "2026-09-24T06:15:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T06:30:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T06:45:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T07:00:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T07:15:00.000Z",
+          "rateMmH": 0
+        }
+      ],
+      "latestRateMmH": 0,
+      "oneHourAccumMm": 0,
+      "previousRateMmH": 0,
+      "trend": "DRY",
+      "persistenceAdditionalMm": [
+        {
+          "minutes": 15,
+          "millimeters": 0
+        },
+        {
+          "minutes": 30,
+          "millimeters": 0
+        },
+        {
+          "minutes": 45,
+          "millimeters": 0
+        },
+        {
+          "minutes": 60,
+          "millimeters": 0
+        }
+      ]
+    },
+    {
+      "iso": "TH-83",
+      "nameTh": "ภูเก็ต",
+      "nameEn": "Phuket",
+      "districtCode": 8301,
+      "districtNameTh": "เมืองภูเก็ต",
+      "districtNameEn": "Mueang Phuket",
+      "latitude": 7.86711,
+      "longitude": 98.33726,
+      "observations": [
+        {
+          "timeUtc": "2026-09-24T06:15:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T06:30:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T06:45:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T07:00:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T07:15:00.000Z",
+          "rateMmH": 0
+        }
+      ],
+      "latestRateMmH": 0,
+      "oneHourAccumMm": 0,
+      "previousRateMmH": 0,
+      "trend": "DRY",
+      "persistenceAdditionalMm": [
+        {
+          "minutes": 15,
+          "millimeters": 0
+        },
+        {
+          "minutes": 30,
+          "millimeters": 0
+        },
+        {
+          "minutes": 45,
+          "millimeters": 0
+        },
+        {
+          "minutes": 60,
+          "millimeters": 0
+        }
+      ]
+    },
+    {
+      "iso": "TH-84",
+      "nameTh": "สุราษฎร์ธานี",
+      "nameEn": "Surat Thani",
+      "districtCode": 8401,
+      "districtNameTh": "เมืองสุราษฎร์ธานี",
+      "districtNameEn": "Mueang Surat Thani",
+      "latitude": 9.09989,
+      "longitude": 99.32953,
+      "observations": [
+        {
+          "timeUtc": "2026-09-24T06:15:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T06:30:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T06:45:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T07:00:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T07:15:00.000Z",
+          "rateMmH": 0.1
+        }
+      ],
+      "latestRateMmH": 0.1,
+      "oneHourAccumMm": 0,
+      "previousRateMmH": 0,
+      "trend": "STEADY",
+      "persistenceAdditionalMm": [
+        {
+          "minutes": 15,
+          "millimeters": 0
+        },
+        {
+          "minutes": 30,
+          "millimeters": 0.1
+        },
+        {
+          "minutes": 45,
+          "millimeters": 0.1
+        },
+        {
+          "minutes": 60,
+          "millimeters": 0.1
+        }
+      ]
+    },
+    {
+      "iso": "TH-85",
+      "nameTh": "ระนอง",
+      "nameEn": "Ranong",
+      "districtCode": 8501,
+      "districtNameTh": "เมืองระนอง",
+      "districtNameEn": "Mueang Ranong",
+      "latitude": 9.89959,
+      "longitude": 98.6486,
+      "observations": [
+        {
+          "timeUtc": "2026-09-24T06:15:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T06:30:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T06:45:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T07:00:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T07:15:00.000Z",
+          "rateMmH": 0
+        }
+      ],
+      "latestRateMmH": 0,
+      "oneHourAccumMm": 0,
+      "previousRateMmH": 0,
+      "trend": "DRY",
+      "persistenceAdditionalMm": [
+        {
+          "minutes": 15,
+          "millimeters": 0
+        },
+        {
+          "minutes": 30,
+          "millimeters": 0
+        },
+        {
+          "minutes": 45,
+          "millimeters": 0
+        },
+        {
+          "minutes": 60,
+          "millimeters": 0
+        }
+      ]
+    },
+    {
+      "iso": "TH-86",
+      "nameTh": "ชุมพร",
+      "nameEn": "Chumphon",
+      "districtCode": 8601,
+      "districtNameTh": "เมืองชุมพร",
+      "districtNameEn": "Mueang Chumphon",
+      "latitude": 10.45151,
+      "longitude": 99.06285,
+      "observations": [
+        {
+          "timeUtc": "2026-09-24T06:15:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T06:30:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T06:45:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T07:00:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T07:15:00.000Z",
+          "rateMmH": 0
+        }
+      ],
+      "latestRateMmH": 0,
+      "oneHourAccumMm": 0,
+      "previousRateMmH": 0,
+      "trend": "DRY",
+      "persistenceAdditionalMm": [
+        {
+          "minutes": 15,
+          "millimeters": 0
+        },
+        {
+          "minutes": 30,
+          "millimeters": 0
+        },
+        {
+          "minutes": 45,
+          "millimeters": 0
+        },
+        {
+          "minutes": 60,
+          "millimeters": 0
+        }
+      ]
+    },
+    {
+      "iso": "TH-90",
+      "nameTh": "สงขลา",
+      "nameEn": "Songkhla",
+      "districtCode": 9001,
+      "districtNameTh": "เมืองสงขลา",
+      "districtNameEn": "Mueang Songkhla",
+      "latitude": 7.12346,
+      "longitude": 100.60783,
+      "observations": [
+        {
+          "timeUtc": "2026-09-24T06:15:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T06:30:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T06:45:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T07:00:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T07:15:00.000Z",
+          "rateMmH": 0
+        }
+      ],
+      "latestRateMmH": 0,
+      "oneHourAccumMm": 0,
+      "previousRateMmH": 0,
+      "trend": "DRY",
+      "persistenceAdditionalMm": [
+        {
+          "minutes": 15,
+          "millimeters": 0
+        },
+        {
+          "minutes": 30,
+          "millimeters": 0
+        },
+        {
+          "minutes": 45,
+          "millimeters": 0
+        },
+        {
+          "minutes": 60,
+          "millimeters": 0
+        }
+      ]
+    },
+    {
+      "iso": "TH-91",
+      "nameTh": "สตูล",
+      "nameEn": "Satun",
+      "districtCode": 9101,
+      "districtNameTh": "เมืองสตูล",
+      "districtNameEn": "Mueang Satun",
+      "latitude": 6.61403,
+      "longitude": 100.06002,
+      "observations": [
+        {
+          "timeUtc": "2026-09-24T06:15:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T06:30:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T06:45:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T07:00:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T07:15:00.000Z",
+          "rateMmH": 0
+        }
+      ],
+      "latestRateMmH": 0,
+      "oneHourAccumMm": 0,
+      "previousRateMmH": 0,
+      "trend": "DRY",
+      "persistenceAdditionalMm": [
+        {
+          "minutes": 15,
+          "millimeters": 0
+        },
+        {
+          "minutes": 30,
+          "millimeters": 0
+        },
+        {
+          "minutes": 45,
+          "millimeters": 0
+        },
+        {
+          "minutes": 60,
+          "millimeters": 0
+        }
+      ]
+    },
+    {
+      "iso": "TH-92",
+      "nameTh": "ตรัง",
+      "nameEn": "Trang",
+      "districtCode": 9201,
+      "districtNameTh": "เมืองตรัง",
+      "districtNameEn": "Mueang Trang",
+      "latitude": 7.59211,
+      "longitude": 99.57756,
+      "observations": [
+        {
+          "timeUtc": "2026-09-24T06:15:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T06:30:00.000Z",
+          "rateMmH": 2
+        },
+        {
+          "timeUtc": "2026-09-24T06:45:00.000Z",
+          "rateMmH": 0.1
+        },
+        {
+          "timeUtc": "2026-09-24T07:00:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T07:15:00.000Z",
+          "rateMmH": 0
+        }
+      ],
+      "latestRateMmH": 0,
+      "oneHourAccumMm": 0.5,
+      "previousRateMmH": 0,
+      "trend": "DRY",
+      "persistenceAdditionalMm": [
+        {
+          "minutes": 15,
+          "millimeters": 0
+        },
+        {
+          "minutes": 30,
+          "millimeters": 0
+        },
+        {
+          "minutes": 45,
+          "millimeters": 0
+        },
+        {
+          "minutes": 60,
+          "millimeters": 0
+        }
+      ]
+    },
+    {
+      "iso": "TH-93",
+      "nameTh": "พัทลุง",
+      "nameEn": "Phatthalung",
+      "districtCode": 9301,
+      "districtNameTh": "เมืองพัทลุง",
+      "districtNameEn": "Mueang Phatthalung",
+      "latitude": 7.58822,
+      "longitude": 100.10973,
+      "observations": [
+        {
+          "timeUtc": "2026-09-24T06:15:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T06:30:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T06:45:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T07:00:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T07:15:00.000Z",
+          "rateMmH": 0
+        }
+      ],
+      "latestRateMmH": 0,
+      "oneHourAccumMm": 0,
+      "previousRateMmH": 0,
+      "trend": "DRY",
+      "persistenceAdditionalMm": [
+        {
+          "minutes": 15,
+          "millimeters": 0
+        },
+        {
+          "minutes": 30,
+          "millimeters": 0
+        },
+        {
+          "minutes": 45,
+          "millimeters": 0
+        },
+        {
+          "minutes": 60,
+          "millimeters": 0
+        }
+      ]
+    },
+    {
+      "iso": "TH-94",
+      "nameTh": "ปัตตานี",
+      "nameEn": "Pattani",
+      "districtCode": 9401,
+      "districtNameTh": "เมืองปัตตานี",
+      "districtNameEn": "Mueang Pattani",
+      "latitude": 6.85369,
+      "longitude": 101.27609,
+      "observations": [
+        {
+          "timeUtc": "2026-09-24T06:15:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T06:30:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T06:45:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T07:00:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T07:15:00.000Z",
+          "rateMmH": 0
+        }
+      ],
+      "latestRateMmH": 0,
+      "oneHourAccumMm": 0,
+      "previousRateMmH": 0,
+      "trend": "DRY",
+      "persistenceAdditionalMm": [
+        {
+          "minutes": 15,
+          "millimeters": 0
+        },
+        {
+          "minutes": 30,
+          "millimeters": 0
+        },
+        {
+          "minutes": 45,
+          "millimeters": 0
+        },
+        {
+          "minutes": 60,
+          "millimeters": 0
+        }
+      ]
+    },
+    {
+      "iso": "TH-95",
+      "nameTh": "ยะลา",
+      "nameEn": "Yala",
+      "districtCode": 9501,
+      "districtNameTh": "เมืองยะลา",
+      "districtNameEn": "Mueang Yala",
+      "latitude": 6.56401,
+      "longitude": 101.2315,
+      "observations": [
+        {
+          "timeUtc": "2026-09-24T06:15:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T06:30:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T06:45:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T07:00:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T07:15:00.000Z",
+          "rateMmH": 0
+        }
+      ],
+      "latestRateMmH": 0,
+      "oneHourAccumMm": 0,
+      "previousRateMmH": 0,
+      "trend": "DRY",
+      "persistenceAdditionalMm": [
+        {
+          "minutes": 15,
+          "millimeters": 0
+        },
+        {
+          "minutes": 30,
+          "millimeters": 0
+        },
+        {
+          "minutes": 45,
+          "millimeters": 0
+        },
+        {
+          "minutes": 60,
+          "millimeters": 0
+        }
+      ]
+    },
+    {
+      "iso": "TH-96",
+      "nameTh": "นราธิวาส",
+      "nameEn": "Narathiwat",
+      "districtCode": 9601,
+      "districtNameTh": "เมืองนราธิวาส",
+      "districtNameEn": "Mueang Narathiwat",
+      "latitude": 6.42996,
+      "longitude": 101.81408,
+      "observations": [
+        {
+          "timeUtc": "2026-09-24T06:15:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T06:30:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T06:45:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T07:00:00.000Z",
+          "rateMmH": 0
+        },
+        {
+          "timeUtc": "2026-09-24T07:15:00.000Z",
+          "rateMmH": 0
+        }
+      ],
+      "latestRateMmH": 0,
+      "oneHourAccumMm": 0,
+      "previousRateMmH": 0,
+      "trend": "DRY",
+      "persistenceAdditionalMm": [
+        {
+          "minutes": 15,
+          "millimeters": 0
+        },
+        {
+          "minutes": 30,
+          "millimeters": 0
+        },
+        {
+          "minutes": 45,
+          "millimeters": 0
+        },
+        {
+          "minutes": 60,
+          "millimeters": 0
+        }
+      ]
+    }
+  ],
+  "persisted": true
+}

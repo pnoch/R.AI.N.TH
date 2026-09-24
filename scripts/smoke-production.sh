@@ -31,6 +31,7 @@ done
 
 grep -q "RAIN//TH Intelligence" "$RUNTIME_DIR/index.html"
 curl -fsS "http://127.0.0.1:$PORT/api/trpc/weather.latest?input=%7B%22json%22%3Anull%7D" >"$RUNTIME_DIR/weather.json"
+curl -fsS "http://127.0.0.1:$PORT/api/trpc/radar.latest?input=%7B%22json%22%3Anull%7D" >"$RUNTIME_DIR/radar.json"
 code="$(curl -sS -o "$RUNTIME_DIR/cron.json" -w '%{http_code}' -X POST "http://127.0.0.1:$PORT/api/scheduled/refresh-data" -H 'content-type: application/json' -d '{}')"
 test "$code" = "403"
 

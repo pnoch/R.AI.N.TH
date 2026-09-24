@@ -4,6 +4,7 @@ const mocks = vi.hoisted(() => ({
   updateAutomationRun: vi.fn(),
   refreshSnapshot: vi.fn(),
   refreshOfficialWarnings: vi.fn(),
+  refreshRadarSnapshot: vi.fn(),
   refreshSatelliteSnapshot: vi.fn(),
   refreshVerification: vi.fn(),
 }));
@@ -14,11 +15,12 @@ vi.mock("./db", () => ({
 }));
 vi.mock("./weather", () => ({ refreshSnapshot: mocks.refreshSnapshot }));
 vi.mock("./officialWarnings", () => ({ refreshOfficialWarnings: mocks.refreshOfficialWarnings }));
+vi.mock("./radar", () => ({ refreshRadarSnapshot: mocks.refreshRadarSnapshot }));
 vi.mock("./satellite", () => ({ refreshSatelliteSnapshot: mocks.refreshSatelliteSnapshot }));
 vi.mock("./verification", () => ({ refreshVerification: mocks.refreshVerification }));
 vi.mock("./_core/sdk", () => ({ sdk: { authenticateRequest: vi.fn() } }));
 
-import { runForecastWarningRefresh } from "./scheduled";
+import { runForecastWarningRefresh, runRadarRefresh } from "./scheduled";
 
 describe("scheduled refresh resilience", () => {
   beforeEach(() => {
@@ -72,5 +74,36 @@ describe("scheduled refresh resilience", () => {
       satelliteStatus: "STALE_LAST_KNOWN",
       satelliteError: "IMERG API unavailable",
     });
+  });
+
+  it("tracks the independent radar job without affecting forecast or verification state", async () => {
+    mocks.refreshRadarSnapshot.mockResolvedValue({
+      radarKey: "tmd-radar-test",
+      window: { endUtc: "2026-09-24T06:30:00.000Z" },
+      summary: { rainingPointCount: 11 },
+    });
+
+    const result = await runRadarRefresh();
+
+    expect(result).toMatchObject({
+      ok: true,
+      jobKey: "radar-refresh",
+      radarKey: "tmd-radar-test",
+      rainingPointCount: 11,
+    });
+    expect(mocks.updateAutomationRun).toHaveBeenLastCalledWith(
+      "radar-refresh",
+      expect.objectContaining({ lastStatus: "success", lastError: null }),
+    );
+  });
+
+  it("records a radar-source failure on the radar job only", async () => {
+    mocks.refreshRadarSnapshot.mockRejectedValue(new Error("TMD radar unavailable"));
+
+    await expect(runRadarRefresh()).rejects.toThrow("TMD radar unavailable");
+    expect(mocks.updateAutomationRun).toHaveBeenLastCalledWith(
+      "radar-refresh",
+      expect.objectContaining({ lastStatus: "failed", lastError: "TMD radar unavailable" }),
+    );
   });
 });

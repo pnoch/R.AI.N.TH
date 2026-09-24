@@ -1,5 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { TMD_WARNING_TIMEOUT_MS } from "./officialWarnings";
+import { RADAR_FETCH_TIMEOUT_MS, RAINVIEWER_TIMELINE_URL, TMD_RADAR_LIST_URL } from "./radar";
 import { DYNAMICAL_ANALYSES_URL, SATELLITE_API_TIMEOUT_MS } from "./satellite";
 import {
   isUsableVerification,
@@ -19,7 +20,10 @@ describe("scheduled pipeline runtime contract", () => {
     expect(VERIFICATION_PIPELINE_TIMEOUT_MS).toBeLessThan(25_000);
     expect(TMD_WARNING_TIMEOUT_MS).toBeLessThan(10_000);
     expect(SATELLITE_API_TIMEOUT_MS).toBeLessThan(25_000);
+    expect(RADAR_FETCH_TIMEOUT_MS).toBeLessThan(25_000);
     expect(DYNAMICAL_ANALYSES_URL).toBe("https://api.dynamical.org/v1/analyses");
+    expect(TMD_RADAR_LIST_URL).toBe("https://weather.tmd.go.th/composite/images_composite.list");
+    expect(RAINVIEWER_TIMELINE_URL).toBe("https://api.rainviewer.com/public/weather-maps.json");
   });
 
   it("rejects partial off-window observations before they can replace valid evidence", () => {

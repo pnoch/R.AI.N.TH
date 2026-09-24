@@ -75,7 +75,7 @@ export default function OfficialWarningPanel() {
         <p>{data.ddpm.note}</p>
         <div className="schedule-readiness">
           <AlertTriangle />
-          <span><b>{automation.data?.configured ? "Automatic refresh configured" : "Automatic refresh ready after deployment"}</b>{automation.data?.jobs?.map(job => job.cronExpression).join(" · ") || "forecast + satellite 4× daily · verification daily"} UTC</span>
+          <span><b>{automation.data?.configured ? "Automatic refresh configured" : "Automatic refresh ready after deployment"}</b>{automation.data?.jobs?.map(job => job.cronExpression).join(" · ") || "radar every 15 min · forecast + satellite 4× daily · verification daily"} UTC</span>
         </div>
       </aside>
     </section>

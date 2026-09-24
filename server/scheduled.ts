@@ -2,12 +2,14 @@ import type { Request, Response } from "express";
 import { HttpError } from "@shared/_core/errors";
 import * as db from "./db";
 import { refreshOfficialWarnings } from "./officialWarnings";
+import { refreshRadarSnapshot } from "./radar";
 import { refreshSatelliteSnapshot } from "./satellite";
 import { refreshVerification } from "./verification";
 import { refreshSnapshot } from "./weather";
 import { sdk } from "./_core/sdk";
 
 export const FORECAST_REFRESH_JOB_KEY = "forecast-warning-refresh";
+export const RADAR_REFRESH_JOB_KEY = "radar-refresh";
 export const VERIFICATION_REFRESH_JOB_KEY = "verification-refresh";
 
 async function runTracked(jobKey: string, work: () => Promise<Record<string, any>>) {
@@ -57,6 +59,17 @@ export function runForecastWarningRefresh() {
   });
 }
 
+export function runRadarRefresh() {
+  return runTracked(RADAR_REFRESH_JOB_KEY, async () => {
+    const radar = await refreshRadarSnapshot();
+    return {
+      radarKey: radar.radarKey,
+      observedAtUtc: radar.window.endUtc,
+      rainingPointCount: radar.summary.rainingPointCount,
+    };
+  });
+}
+
 export function runVerificationRefresh() {
   return runTracked(VERIFICATION_REFRESH_JOB_KEY, async () => {
     const verification = await refreshVerification();
@@ -73,6 +86,7 @@ export async function scheduledDataRefreshHandler(req: Request, res: Response) {
     const job = await db.getAutomationJobByTaskUid(taskUid);
     if (!job) return res.json({ ok: true, skipped: "orphan" });
     if (job.jobKey === FORECAST_REFRESH_JOB_KEY) return res.json(await runForecastWarningRefresh());
+    if (job.jobKey === RADAR_REFRESH_JOB_KEY) return res.json(await runRadarRefresh());
     if (job.jobKey === VERIFICATION_REFRESH_JOB_KEY) return res.json(await runVerificationRefresh());
     return res.json({ ok: true, skipped: "unknown-job" });
   } catch (error) {

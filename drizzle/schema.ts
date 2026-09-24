@@ -68,6 +68,19 @@ export const satelliteRuns = mysqlTable("satellite_runs", {
 export type SatelliteRun = typeof satelliteRuns.$inferSelect;
 export type InsertSatelliteRun = typeof satelliteRuns.$inferInsert;
 
+export const radarRuns = mysqlTable("radar_runs", {
+  id: int("id").autoincrement().primaryKey(),
+  radarKey: varchar("radarKey", { length: 191 }).notNull().unique(),
+  observedAtUtc: bigint("observedAtUtc", { mode: "number" }).notNull(),
+  generatedAtUtc: bigint("generatedAtUtc", { mode: "number" }).notNull(),
+  payload: json("payload").notNull(),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+});
+
+export type RadarRun = typeof radarRuns.$inferSelect;
+export type InsertRadarRun = typeof radarRuns.$inferInsert;
+
 export const officialWarnings = mysqlTable("official_warnings", {
   id: int("id").autoincrement().primaryKey(),
   source: varchar("source", { length: 32 }).notNull(),

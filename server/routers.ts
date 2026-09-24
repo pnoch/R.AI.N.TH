@@ -4,6 +4,7 @@ import { systemRouter } from "./_core/systemRouter";
 import { publicProcedure, router } from "./_core/trpc";
 import { automationRouter } from "./routers/automation";
 import { locationsRouter } from "./routers/locations";
+import { radarRouter } from "./routers/radar";
 import { satelliteRouter } from "./routers/satellite";
 import { verificationRouter } from "./routers/verification";
 import { weatherRouter } from "./routers/weather";
@@ -24,6 +25,7 @@ export const appRouter = router({
   }),
   automation: automationRouter,
   locations: locationsRouter,
+  radar: radarRouter,
   satellite: satelliteRouter,
   weather: weatherRouter,
   verification: verificationRouter,

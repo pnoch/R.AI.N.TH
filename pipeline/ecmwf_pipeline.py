@@ -210,7 +210,8 @@ def make_draft(provinces: list[dict[str, Any]], run_meta: dict[str, Any], genera
         f"{highest['rainMm']['24hMean']:.0f} มม. และค่าสูงสุดในกริดประมาณ "
         f"{highest['rainMm']['24hMax']:.0f} มม.\n\n"
         "สถานะ: OUR RISK ANALYSIS — เป็นการคัดกรองจากปริมาณฝนของแบบจำลองเดียว "
-        "ไม่ใช่ประกาศเตือนภัยอย่างเป็นทางการ และยังไม่รวมระดับน้ำ สภาพดิน หรือเรดาร์\n\n"
+        "ไม่ใช่ประกาศเตือนภัยอย่างเป็นทางการ คะแนนนี้ยังไม่รวมระดับน้ำ สภาพดิน หรือเรดาร์ "
+        "ซึ่งแสดงเป็นชั้นข้อมูลหลักฐานแยกต่างหาก\n\n"
         f"ข้อมูล: ECMWF IFS Open Data 0.25° | สร้างเมื่อ {generated_at} | "
         "ควรตรวจสอบประกาศล่าสุดจากกรมอุตุนิยมวิทยาและหน่วยงานป้องกันภัย"
     )
@@ -259,7 +260,7 @@ def build_snapshot(boundary_path: Path, grib_path: Path) -> dict[str, Any]:
             "officialWarningLabel": "ตรวจประกาศทางการจาก TMD ในชั้นข้อมูลแยก",
             "limitations": [
                 "Single deterministic ECMWF model only",
-                "No river, soil moisture, radar, observed rainfall, or population exposure yet",
+                "ECMWF score excludes river levels, soil moisture, radar, observations, and population exposure; observed layers are shown separately",
                 "0.25° grid can require nearest-cell sampling for small provinces",
                 "Scores are relative screening indicators, not probabilities or official warnings",
             ],

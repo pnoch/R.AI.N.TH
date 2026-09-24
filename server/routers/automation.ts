@@ -7,6 +7,7 @@ import { adminProcedure, publicProcedure, router } from "../_core/trpc";
 import * as db from "../db";
 import {
   FORECAST_REFRESH_JOB_KEY,
+  RADAR_REFRESH_JOB_KEY,
   VERIFICATION_REFRESH_JOB_KEY,
 } from "../scheduled";
 
@@ -15,6 +16,11 @@ const JOBS = {
     cron: "0 45 0,6,12,18 * * *",
     name: "rain-th-forecast-warning-refresh",
     description: "Refresh ECMWF forecast, NASA IMERG observations, and TMD warning at 07:45, 13:45, 19:45, and 01:45 ICT.",
+  },
+  [RADAR_REFRESH_JOB_KEY]: {
+    cron: "0 */15 * * * *",
+    name: "rain-th-radar-refresh",
+    description: "Refresh official TMD national radar trends every 15 minutes.",
   },
   [VERIFICATION_REFRESH_JOB_KEY]: {
     cron: "0 30 1 * * *",
@@ -66,7 +72,7 @@ export const automationRouter = router({
     return { configured: true, jobs: activated };
   }),
   setEnabled: adminProcedure
-    .input(z.object({ jobKey: z.enum([FORECAST_REFRESH_JOB_KEY, VERIFICATION_REFRESH_JOB_KEY]), enabled: z.boolean() }))
+    .input(z.object({ jobKey: z.enum([FORECAST_REFRESH_JOB_KEY, RADAR_REFRESH_JOB_KEY, VERIFICATION_REFRESH_JOB_KEY]), enabled: z.boolean() }))
     .mutation(async ({ ctx, input }) => {
       const job = await db.getAutomationJob(input.jobKey);
       if (!job?.scheduleCronTaskUid) throw new TRPCError({ code: "NOT_FOUND", message: "The refresh schedule has not been activated" });

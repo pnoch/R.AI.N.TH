@@ -4,6 +4,7 @@ import {
   automationJobs,
   InsertUser,
   officialWarnings,
+  radarRuns,
   satelliteRuns,
   users,
   verificationRuns,
@@ -229,6 +230,35 @@ export async function saveSatelliteRun(payload: Record<string, any>) {
     .select()
     .from(satelliteRuns)
     .where(eq(satelliteRuns.satelliteKey, payload.satelliteKey))
+    .limit(1);
+  return rows[0];
+}
+
+export async function getLatestRadarRun() {
+  const db = await getDb();
+  if (!db) return undefined;
+  const rows = await db
+    .select()
+    .from(radarRuns)
+    .orderBy(desc(radarRuns.observedAtUtc), desc(radarRuns.generatedAtUtc))
+    .limit(1);
+  return rows[0];
+}
+
+export async function saveRadarRun(payload: Record<string, any>) {
+  const db = await getDb();
+  if (!db) throw new Error("Database is not available");
+  const values = {
+    radarKey: payload.radarKey,
+    observedAtUtc: Date.parse(payload.window.endUtc),
+    generatedAtUtc: Date.parse(payload.generatedAtUtc),
+    payload,
+  };
+  await db.insert(radarRuns).values(values).onDuplicateKeyUpdate({ set: values });
+  const rows = await db
+    .select()
+    .from(radarRuns)
+    .where(eq(radarRuns.radarKey, payload.radarKey))
     .limit(1);
   return rows[0];
 }

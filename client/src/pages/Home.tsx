@@ -1,5 +1,6 @@
 import { useAuth } from "@/_core/hooks/useAuth";
 import LocationExplorer from "@/components/LocationExplorer";
+import RadarNowcastPanel from "@/components/RadarNowcastPanel";
 import SatelliteObservationPanel from "@/components/SatelliteObservationPanel";
 import ThailandRiskMap from "@/components/ThailandRiskMap";
 import VerificationPanel from "@/components/VerificationPanel";
@@ -144,9 +145,9 @@ export default function Home() {
         </div>
         <div className="topbar-status">
           <span className="live-pulse" />
-          <span>ECMWF + IMERG</span>
+          <span>ECMWF + IMERG + RADAR</span>
           <span className="topbar-separator" />
-          <span>V0.7</span>
+          <span>V0.8</span>
         </div>
         <div className="topbar-actions">
           {user ? (
@@ -166,8 +167,8 @@ export default function Home() {
             <div className="mission-kicker"><Waves /> MONSOON WATCH / OPERATIONS CONSOLE</div>
             <h1>Rainfall intelligence,<br /><em>with receipts.</em></h1>
             <p>
-              Direct IFS GRIB ingestion, independent NASA IMERG satellite observations, explicit risk logic,
-              and a human approval gate. Every layer discloses its own scale and latency.
+              Direct IFS GRIB ingestion, NASA IMERG satellite observations, official TMD radar trends,
+              and a human approval gate. Every layer discloses its own scale, latency, and limits.
             </p>
           </div>
           <div className="run-command">
@@ -188,7 +189,7 @@ export default function Home() {
         <section className="truth-strip">
           <div><Database /><span><b>Source</b>ECMWF IFS Open Data</span></div>
           <div><Gauge /><span><b>Resolution</b>0.25° / 3–72h</span></div>
-          <div><Satellite /><span><b>Observed layer</b>IMERG LATE · 0.1° / ~14H LATENCY</span></div>
+          <div><Satellite /><span><b>Observed layers</b>IMERG 0.1° + TMD RADAR 15 MIN</span></div>
           <div><ShieldCheck /><span><b>Classification</b>OUR RISK ANALYSIS</span></div>
           <div className="official-state"><AlertTriangle /><span><b>Official warning</b>LIVE TMD FEED · SEPARATE LAYER</span></div>
         </section>
@@ -291,6 +292,8 @@ export default function Home() {
 
         <SatelliteObservationPanel selectedIso={selected?.iso || ""} selectedLocation={selectedLocation} />
 
+        <RadarNowcastPanel selectedIso={selected?.iso || ""} selectedLocation={selectedLocation} />
+
         <VerificationPanel />
 
         <section className="review-grid">
@@ -339,6 +342,7 @@ export default function Home() {
               <div><dt>Boundary source</dt><dd>geoBoundaries ADM1 · 77 units</dd></div>
               <div><dt>Location index</dt><dd>OCHA/HDX COD-AB · 928 districts · 7,425 subdistricts</dd></div>
               <div><dt>Satellite observations</dt><dd>NASA GPM IMERG Late via dynamical.org · 0.1° representative cells</dd></div>
+              <div><dt>Radar observations</dt><dd>Official TMD PCAPPI composite · 15-minute classes + RainViewer visual mosaic</dd></div>
               <div><dt>Persistence</dt><dd>{data.persisted ? "Database snapshot" : "Bundled verified snapshot"}</dd></div>
             </dl>
             <div className="limitations">
@@ -354,6 +358,7 @@ export default function Home() {
         <span>Administrative boundaries: geoBoundaries / CC BY 3.0 IGO.</span>
         <span>District geometry and names: OCHA/HDX COD-AB / CC BY 3.0 IGO.</span>
         <span>NASA GPM IMERG data processed by dynamical.org / CC BY 4.0.</span>
+        <span>Radar: Thai Meteorological Department · visual animation: RainViewer.</span>
         <span>For operational awareness only.</span>
       </footer>
     </div>

@@ -4,17 +4,25 @@
 
 | Work item | Status | Verification |
 | --- | --- | --- |
-| Validate a credential-free NASA IMERG Late access path | Completed | Public point API returned current 0.1° half-hour data, quality index, and snapshot ID |
-| Benchmark national refresh within the callback budget | Completed | 77 representative points completed in approximately 17 seconds across eight concurrent batches |
-| Integrate 24-hour accumulation and completeness checks | Completed | 48 half-hour intervals, minimum 44 valid, deterministic unit tests |
-| Persist and bundle satellite snapshots | Completed | `satellite_runs` migration applied; bundled fallback generated |
-| Add selected district/subdistrict cell observations | Completed | Public tRPC point query validated for Chatuchak |
-| Add satellite map metric and evidence panel | Completed | TypeScript and component integration complete |
-| Isolate satellite failures from ECMWF refresh success | Completed | Scheduled resilience test covers stale-last-known behavior |
-| Validate desktop and mobile UI | Completed | Full-page desktop/mobile screenshots; Chatuchak selection and satellite map interaction verified |
-| Run final release gates | Completed | TypeScript, 29 Vitest tests, 7 Python tests, build, production smoke, and diff check passed |
-| Save WebDev checkpoint and push GitHub | Pending | Pending final validation |
+| Validate credential-free IMERG access and national runtime | Completed | 77 representative points within callback budget |
+| Integrate, persist, test, and display satellite observations | Completed | API, UI, fallback, quality gates, and Chatuchak selected-cell flow verified |
+| Save checkpoint and push GitHub | Completed | WebDev checkpoint `787a7658` pushed to `pnoch/R.AI.N.TH` |
+
+## V0.8 — official radar trend and visual animation
+
+| Work item | Status | Verification |
+| --- | --- | --- |
+| Validate official TMD national radar source | Completed | 15-minute manifest, 1,800 × 2,644 PNGs, bounds, and legend audited |
+| Implement quantitative centroid sampling | Completed | Five-frame trend, previous-hour indication, and 15–60 minute persistence baseline |
+| Persist quality-controlled national radar snapshots | Completed | `radar_runs` migration applied; 77-point fallback generated |
+| Add selected district/subdistrict radar trend | Completed | Chatuchak tRPC point smoke check passed |
+| Add RainViewer visual layer | Completed | Supported hosted no-key embed used; direct raw images rejected after watermark validation |
+| Add independent 15-minute scheduled callback | Completed in code | Authenticated route, ownership config, runtime budget, and failure isolation tested |
+| Validate desktop and mobile UI | Completed | Responsive full-page layouts pass; hosted RainViewer map verified directly and frame policy confirmed |
+| Run final release gates | Completed | TypeScript, 37 Vitest tests, 7 Python tests, build, isolated production smoke, shell syntax, and diff check passed |
+| Save checkpoint and push GitHub | Pending | After final gates |
+| Publish and activate radar heartbeat | Pending | Requires deployment of V0.8 checkpoint before creating the production job |
 
 ## Next milestone candidates
 
-Radar nowcasting and official river-level observations remain the highest-value missing operational layers. After enough scheduled satellite history accumulates, add IMERG-versus-ThaiWater bias tracking by season and region before using satellite rainfall in the screening score.
+Official river levels, catchment-aware antecedent rainfall, and retrospectively verified radar motion extrapolation are the highest-value next reliability layers.

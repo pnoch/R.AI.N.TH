@@ -1,14 +1,16 @@
-# RAIN//TH Intelligence V0.7
+# RAIN//TH Intelligence V0.8
 
 **RAIN//TH Intelligence** is a working review dashboard for Thailand rainfall analysis. It downloads ECMWF Integrated Forecasting System (IFS) open data directly, reads total-precipitation fields from GRIB2 files, aggregates the forecast over all 77 Thai provinces, assigns a transparent screening score, and generates a Thai-language content draft. The product keeps internal analysis separate from official warnings and requires human approval before a draft can move downstream.
 
-The current version is a **validation prototype**, not a public warning service. It uses one deterministic weather model, NASA GPM IMERG Late satellite rainfall, and observed ThaiWater station verification. It does not yet include radar, river levels, soil moisture, watershed response, or population exposure.
+The current version is a **validation prototype**, not a public warning service. It uses one deterministic weather model, NASA GPM IMERG Late satellite rainfall, official TMD radar classes, and observed ThaiWater station verification. It does not yet include river levels, soil moisture, watershed response, or population exposure.
 
 ## What works now
 
 The direct data path has been validated against live ECMWF IFS runs. The processor retrieves the 3-, 24-, and 72-hour fields used by the dashboard and risk score from ECMWF's Google Cloud open-data mirror, selected after bounded benchmarks against the scheduler's 30-second callback window. It converts total precipitation from metres to millimetres, crops the global field to Thailand, and aggregates grid points within open province boundaries. Small provinces without an interior 0.25-degree grid point use their nearest grid point and receive lower confidence.
 
-The web dashboard shows the resulting province map, leading signals, selected-province statistics, model provenance, scoring limitations, and a Thai draft. A searchable coded location index covers all 77 provinces, 928 districts, and 7,425 subdistricts in Thai and English, including postal-code lookup. District selections zoom to their true administrative boundary; subdistrict selections add the official centroid inside that parent district. Both deliberately inherit their parent province's ECMWF screening values because the 0.25-degree model does not support reliable district-level claims. Users can opt into browser geolocation to select the nearest official subdistrict centroid and save up to eight quick-access locations on their device; coordinates never leave the browser. The satellite layer adds an independent IMERG 24-hour accumulation at the nearest 0.1-degree cell for a selected district or subdistrict, plus one transparently labeled representative cell per province for the national map. The dashboard also performs a live 24-hour hindcast check against the public ThaiWater station feed, persists rolling verification runs, and charts absolute error nationally or for a selected province with Thai seasonal groupings. A separate official layer ingests TMD `WeatherWarningNews` bulletins with issue, announcement, effect timestamps, source PDF, and provenance. An authenticated operator can retrieve the latest ECMWF run, refresh satellite observations, warnings, or evidence, refine the copy with `gpt-5-mini`, or approve the draft. Approval is an internal state change only. The application has no Facebook, LINE, or public-publishing connection.
+The web dashboard shows the resulting province map, leading signals, selected-province statistics, model provenance, scoring limitations, and a Thai draft. A searchable coded location index covers all 77 provinces, 928 districts, and 7,425 subdistricts in Thai and English, including postal-code lookup. District selections zoom to their true administrative boundary; subdistrict selections add the official centroid inside that parent district. Both deliberately inherit their parent province's ECMWF screening values because the 0.25-degree model does not support reliable district-level claims. Users can opt into browser geolocation to select the nearest official subdistrict centroid and save up to eight quick-access locations on their device; coordinates never leave the browser. The satellite layer adds an independent IMERG 24-hour accumulation at the nearest 0.1-degree cell for a selected district or subdistrict, plus one transparently labeled representative cell per province for the national map.
+
+The radar layer samples five official TMD 15-minute nationwide PCAPPI composite frames at the selected administrative centroid and at 77 representative province points. It reports the observed rain-rate class, an indicative previous-hour accumulation, and trend. The displayed +15 to +60 minute amounts are explicitly labeled **persistence baselines**, not forecasts. A separate hosted RainViewer map supplies an animated visual mosaic and is never used for numeric calculations. The dashboard also performs a live 24-hour hindcast check against the public ThaiWater station feed, persists rolling verification runs, and charts absolute error nationally or for a selected province with Thai seasonal groupings. A separate official layer ingests TMD `WeatherWarningNews` bulletins with issue, announcement, effect timestamps, source PDF, and provenance. An authenticated operator can retrieve the latest ECMWF run, refresh radar, satellite observations, warnings, or evidence, refine the copy with `gpt-5-mini`, or approve the draft. Approval is an internal state change only. The application has no Facebook, LINE, or public-publishing connection.
 
 ## Architecture
 
@@ -65,12 +67,24 @@ dynamical.org credential-free point API
                 ├──────────────► selected district/subdistrict centroid cell
                 └──────────────► 77 representative province cells + MySQL snapshot
 
+TMD nationwide PCAPPI composite (15-minute PNG frames)
+                │
+                ▼
+Official palette-class decode + five-frame centroid sampling
+                │
+                ├──────────────► observed class trend + persistence baseline
+                └──────────────► 77 representative province points + MySQL snapshot
+
+RainViewer hosted radar map
+                └──────────────► independently attributed visual animation only
+
 Managed HTTP callbacks after deployment
                 ├──────────────► ECMWF + IMERG + TMD four times daily
+                ├──────────────► official radar every 15 minutes
                 └──────────────► ThaiWater verification daily
 ```
 
-The production container combines the TypeScript application and a small Python runtime. Scheduled ECMWF subprocesses are capped at 23 seconds, TMD is capped below 10 seconds, and the IMERG point API is capped at 22 seconds. The three sources refresh concurrently. A temporary TMD or satellite failure cannot invalidate a successful ECMWF run; the interface retains and labels the last known snapshot. Simultaneous source refresh requests are deduplicated within one application instance.
+The production container combines the TypeScript application and a small Python runtime. Scheduled ECMWF subprocesses are capped at 23 seconds, the TMD warning API is capped below 10 seconds, the IMERG point API is capped at 22 seconds, and the independent radar callback is capped below the platform's 30-second deadline. Forecast, warning, and satellite sources refresh concurrently; radar has its own 15-minute job. A temporary warning or satellite failure cannot invalidate a successful ECMWF run, and a radar failure cannot replace the last valid radar snapshot. Simultaneous refresh requests are deduplicated within one application instance.
 
 ## Data sources and attribution
 
@@ -85,6 +99,8 @@ Observed 24-hour rainfall comes from the public endpoint used by the ThaiWater r
 Official weather warnings come from the TMD `WeatherWarningNews` version 2 XML endpoint documented in the agency's open-data catalog.[5] The system preserves the official bulletin URL and timestamps. No equivalent authoritative public machine-readable DDPM feed was found, so the interface states that limitation instead of substituting social media or an unofficial scraper.
 
 Satellite precipitation comes from NASA GPM IMERG Late Run V07, a half-hourly 0.1-degree analysis with nominal latency of about 14 hours.[8] The credential-free production access path is the dynamical.org point API and cloud-optimized archive, which identifies NASA GES DISC and PPS as the upstream archives and publishes the data under CC BY 4.0.[9] RAIN//TH integrates the most recent 48 half-hour mean rates into a 24-hour accumulation and requires at least 44 finite intervals. The national map uses one declared representative cell per province; it does not label these values as province means. Selected district and subdistrict values sample the nearest IMERG cell to the official administrative centroid. IMERG does not resolve streets, drainage, rivers, or flood depth.
+
+Official quantitative radar data comes from the TMD nationwide PCAPPI composite viewer and its quarter-hour PNG frame manifest.[10] The viewer describes a 2 km-altitude national mosaic and publishes a discrete rain-rate legend. RAIN//TH maps administrative centroids to the declared 95–108°E, 4–22.5°N image bounds and decodes the actual PNG palette to the conservative lower bound of each class. Radar can be affected by beam blockage, range, attenuation, clutter, anomalous propagation, and source gaps. RainViewer supplies the separately labeled hosted visual animation and identifies TMD as its Thailand source.[11] RainViewer imagery is not used in scoring, accumulation, or trend calculations.
 
 ## Forecast verification
 
@@ -158,7 +174,13 @@ Refresh and persist the official TMD bulletin with:
 pnpm warnings:refresh
 ```
 
-Two bounded scheduled handlers are prepared for managed deployment: ECMWF, IMERG, and TMD at `00:45`, `06:45`, `12:45`, and `18:45` UTC, and ThaiWater verification daily at `01:30` UTC. The callback is cron-authenticated, looks up the job by platform-issued task UID, and rejects normal requests. Satellite and warning failures are isolated from forecast success while their prior snapshots remain available.
+Refresh, quality-check, persist, and bundle the latest official TMD radar snapshot with:
+
+```bash
+pnpm radar:refresh
+```
+
+Three bounded scheduled handlers are prepared for managed deployment: ECMWF, IMERG, and TMD warnings at `00:45`, `06:45`, `12:45`, and `18:45` UTC; official TMD radar every 15 minutes; and ThaiWater verification daily at `01:30` UTC. Each callback is cron-authenticated, looks up the job by platform-issued task UID, and rejects normal requests. Satellite and warning failures are isolated from forecast success, while radar failures retain the prior valid snapshot.
 
 The standalone processor can also emit a JSON snapshot without starting the web application:
 
@@ -171,11 +193,11 @@ python3 pipeline/ecmwf_pipeline.py \
 
 ## Important files
 
-`pipeline/ecmwf_pipeline.py` contains retrieval, GRIB decoding, province aggregation, scoring, confidence assignment, and deterministic draft generation. `pipeline/verification_pipeline.py` retrieves ThaiWater observations and builds the time-matched 24-hour verification snapshot. `pipeline/build_location_assets.py` builds the coded search index and validates all district overlays. `server/satellite.ts` retrieves, integrates, quality-checks, and persists NASA IMERG observations. `server/officialWarnings.ts` parses and persists the official TMD XML feed. `server/scheduled.ts` contains the bounded authenticated callbacks. The tRPC routers expose public reads and authenticated operational mutations. `client/src/components/LocationExplorer.tsx`, `ThailandRiskMap.tsx`, `SatelliteObservationPanel.tsx`, `OfficialWarningPanel.tsx`, and `VerificationPanel.tsx` render location search, geographic focus, satellite evidence, the warning layer, and rolling skill views.
+`pipeline/ecmwf_pipeline.py` contains retrieval, GRIB decoding, province aggregation, scoring, confidence assignment, and deterministic draft generation. `pipeline/verification_pipeline.py` retrieves ThaiWater observations and builds the time-matched 24-hour verification snapshot. `pipeline/build_location_assets.py` builds the coded search index and validates all district overlays. `server/satellite.ts` retrieves, integrates, quality-checks, and persists NASA IMERG observations. `server/radar.ts` ingests official TMD frames, decodes rain-rate classes, builds selected-point trends and persistence baselines, and persists quality-controlled snapshots. `server/officialWarnings.ts` parses and persists the official TMD XML feed. `server/scheduled.ts` contains the bounded authenticated callbacks. The tRPC routers expose public reads and authenticated operational mutations. `client/src/components/LocationExplorer.tsx`, `ThailandRiskMap.tsx`, `SatelliteObservationPanel.tsx`, `RadarNowcastPanel.tsx`, `OfficialWarningPanel.tsx`, and `VerificationPanel.tsx` render location search, geographic focus, satellite evidence, radar evidence, the warning layer, and rolling skill views.
 
 ## Next implementation priorities
 
-The next technical milestone should add radar nowcasting and official river-level observations. Antecedent rainfall and watershed sensitivity can then improve the rainfall-only screening score. IMERG-versus-ThaiWater bias tracking, a GFS comparison, and per-lead-time calibration should follow after enough scheduled history has accumulated.
+The next technical milestone should add official river-level observations and catchment-aware antecedent rainfall. Radar motion-vector extrapolation should only replace the current persistence baseline after retrospective verification. IMERG-versus-ThaiWater bias tracking, a GFS comparison, and per-lead-time calibration should follow after enough scheduled history has accumulated.
 
 ## References
 
@@ -188,3 +210,5 @@ The next technical milestone should add radar nowcasting and official river-leve
 [7]: https://github.com/thailand-geography-data/thailand-geography-json "Thailand Geography JSON"
 [8]: https://gpm.nasa.gov/taxonomy/term/1415 "NASA GPM IMERG Late Run"
 [9]: https://dynamical.org/catalog/nasa-imerg-analysis-late/ "Dynamical NASA IMERG Analysis Late"
+[10]: https://weather.tmd.go.th/composite/index_composite.html "TMD Nationwide Radar Composite"
+[11]: https://www.rainviewer.com/api/weather-maps-api.html "RainViewer Weather Maps API"
