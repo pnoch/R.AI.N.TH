@@ -4,6 +4,7 @@ import {
   automationJobs,
   InsertUser,
   officialWarnings,
+  satelliteRuns,
   users,
   verificationRuns,
   weatherRuns,
@@ -201,6 +202,35 @@ export async function getVerificationHistory(limit = 30) {
     .from(verificationRuns)
     .orderBy(desc(verificationRuns.validEndUtc))
     .limit(Math.min(Math.max(limit, 1), 90));
+}
+
+export async function getLatestSatelliteRun() {
+  const db = await getDb();
+  if (!db) return undefined;
+  const rows = await db
+    .select()
+    .from(satelliteRuns)
+    .orderBy(desc(satelliteRuns.windowEndUtc), desc(satelliteRuns.generatedAtUtc))
+    .limit(1);
+  return rows[0];
+}
+
+export async function saveSatelliteRun(payload: Record<string, any>) {
+  const db = await getDb();
+  if (!db) throw new Error("Database is not available");
+  const values = {
+    satelliteKey: payload.satelliteKey,
+    windowEndUtc: Date.parse(payload.window.endUtc),
+    generatedAtUtc: Date.parse(payload.generatedAtUtc),
+    payload,
+  };
+  await db.insert(satelliteRuns).values(values).onDuplicateKeyUpdate({ set: values });
+  const rows = await db
+    .select()
+    .from(satelliteRuns)
+    .where(eq(satelliteRuns.satelliteKey, payload.satelliteKey))
+    .limit(1);
+  return rows[0];
 }
 
 export async function upsertOfficialWarning(payload: Record<string, any>) {

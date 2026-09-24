@@ -2,6 +2,7 @@ import type { Request, Response } from "express";
 import { HttpError } from "@shared/_core/errors";
 import * as db from "./db";
 import { refreshOfficialWarnings } from "./officialWarnings";
+import { refreshSatelliteSnapshot } from "./satellite";
 import { refreshVerification } from "./verification";
 import { refreshSnapshot } from "./weather";
 import { sdk } from "./_core/sdk";
@@ -30,9 +31,10 @@ async function runTracked(jobKey: string, work: () => Promise<Record<string, any
 
 export function runForecastWarningRefresh() {
   return runTracked(FORECAST_REFRESH_JOB_KEY, async () => {
-    const [weatherResult, warningResult] = await Promise.allSettled([
+    const [weatherResult, warningResult, satelliteResult] = await Promise.allSettled([
       refreshSnapshot(),
       refreshOfficialWarnings(),
+      refreshSatelliteSnapshot(),
     ]);
     if (weatherResult.status === "rejected") throw weatherResult.reason;
     const weather = weatherResult.value;
@@ -44,6 +46,12 @@ export function runForecastWarningRefresh() {
       warningError:
         warningResult.status === "rejected"
           ? String(warningResult.reason instanceof Error ? warningResult.reason.message : warningResult.reason).slice(0, 500)
+          : null,
+      satelliteKey: satelliteResult.status === "fulfilled" ? satelliteResult.value.satelliteKey : null,
+      satelliteStatus: satelliteResult.status === "fulfilled" ? "FRESH" : "STALE_LAST_KNOWN",
+      satelliteError:
+        satelliteResult.status === "rejected"
+          ? String(satelliteResult.reason instanceof Error ? satelliteResult.reason.message : satelliteResult.reason).slice(0, 500)
           : null,
     };
   });

@@ -55,6 +55,19 @@ export const verificationRuns = mysqlTable("verification_runs", {
 export type VerificationRun = typeof verificationRuns.$inferSelect;
 export type InsertVerificationRun = typeof verificationRuns.$inferInsert;
 
+export const satelliteRuns = mysqlTable("satellite_runs", {
+  id: int("id").autoincrement().primaryKey(),
+  satelliteKey: varchar("satelliteKey", { length: 191 }).notNull().unique(),
+  windowEndUtc: bigint("windowEndUtc", { mode: "number" }).notNull(),
+  generatedAtUtc: bigint("generatedAtUtc", { mode: "number" }).notNull(),
+  payload: json("payload").notNull(),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+});
+
+export type SatelliteRun = typeof satelliteRuns.$inferSelect;
+export type InsertSatelliteRun = typeof satelliteRuns.$inferInsert;
+
 export const officialWarnings = mysqlTable("official_warnings", {
   id: int("id").autoincrement().primaryKey(),
   source: varchar("source", { length: 32 }).notNull(),

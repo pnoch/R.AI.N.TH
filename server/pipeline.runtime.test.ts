@@ -1,5 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { TMD_WARNING_TIMEOUT_MS } from "./officialWarnings";
+import { DYNAMICAL_ANALYSES_URL, SATELLITE_API_TIMEOUT_MS } from "./satellite";
 import {
   isUsableVerification,
   VERIFICATION_PIPELINE_SOURCE,
@@ -17,6 +18,8 @@ describe("scheduled pipeline runtime contract", () => {
     expect(WEATHER_PIPELINE_TIMEOUT_MS).toBeLessThan(25_000);
     expect(VERIFICATION_PIPELINE_TIMEOUT_MS).toBeLessThan(25_000);
     expect(TMD_WARNING_TIMEOUT_MS).toBeLessThan(10_000);
+    expect(SATELLITE_API_TIMEOUT_MS).toBeLessThan(25_000);
+    expect(DYNAMICAL_ANALYSES_URL).toBe("https://api.dynamical.org/v1/analyses");
   });
 
   it("rejects partial off-window observations before they can replace valid evidence", () => {

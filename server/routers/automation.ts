@@ -14,7 +14,7 @@ const JOBS = {
   [FORECAST_REFRESH_JOB_KEY]: {
     cron: "0 45 0,6,12,18 * * *",
     name: "rain-th-forecast-warning-refresh",
-    description: "Refresh ECMWF forecast and TMD warning at 07:45, 13:45, 19:45, and 01:45 ICT.",
+    description: "Refresh ECMWF forecast, NASA IMERG observations, and TMD warning at 07:45, 13:45, 19:45, and 01:45 ICT.",
   },
   [VERIFICATION_REFRESH_JOB_KEY]: {
     cron: "0 30 1 * * *",

@@ -1,5 +1,6 @@
 import { useAuth } from "@/_core/hooks/useAuth";
 import LocationExplorer from "@/components/LocationExplorer";
+import SatelliteObservationPanel from "@/components/SatelliteObservationPanel";
 import ThailandRiskMap from "@/components/ThailandRiskMap";
 import VerificationPanel from "@/components/VerificationPanel";
 import OfficialWarningPanel from "@/components/OfficialWarningPanel";
@@ -22,6 +23,7 @@ import {
   Loader2,
   LogIn,
   RefreshCw,
+  Satellite,
   ShieldCheck,
   Sparkles,
   Waves,
@@ -50,6 +52,7 @@ export default function Home() {
   const utils = trpc.useUtils();
   const { user, isAuthenticated, logout } = useAuth();
   const latest = trpc.weather.latest.useQuery(undefined, { refetchOnWindowFocus: false });
+  const satellite = trpc.satellite.latest.useQuery(undefined, { refetchOnWindowFocus: false });
   const [selectedIso, setSelectedIso] = useState("");
   const [selectedLocation, setSelectedLocation] = useState<LocationResult | null>(null);
   const data = latest.data as any;
@@ -141,9 +144,9 @@ export default function Home() {
         </div>
         <div className="topbar-status">
           <span className="live-pulse" />
-          <span>ECMWF DIRECT</span>
+          <span>ECMWF + IMERG</span>
           <span className="topbar-separator" />
-          <span>V0.6</span>
+          <span>V0.7</span>
         </div>
         <div className="topbar-actions">
           {user ? (
@@ -163,8 +166,8 @@ export default function Home() {
             <div className="mission-kicker"><Waves /> MONSOON WATCH / OPERATIONS CONSOLE</div>
             <h1>Rainfall intelligence,<br /><em>with receipts.</em></h1>
             <p>
-              Direct IFS GRIB ingestion, province-level spatial aggregation, explicit risk logic,
-              and a human approval gate. No Windy screenshots. No automatic publishing.
+              Direct IFS GRIB ingestion, independent NASA IMERG satellite observations, explicit risk logic,
+              and a human approval gate. Every layer discloses its own scale and latency.
             </p>
           </div>
           <div className="run-command">
@@ -185,6 +188,7 @@ export default function Home() {
         <section className="truth-strip">
           <div><Database /><span><b>Source</b>ECMWF IFS Open Data</span></div>
           <div><Gauge /><span><b>Resolution</b>0.25° / 3–72h</span></div>
+          <div><Satellite /><span><b>Observed layer</b>IMERG LATE · 0.1° / ~14H LATENCY</span></div>
           <div><ShieldCheck /><span><b>Classification</b>OUR RISK ANALYSIS</span></div>
           <div className="official-state"><AlertTriangle /><span><b>Official warning</b>LIVE TMD FEED · SEPARATE LAYER</span></div>
         </section>
@@ -206,6 +210,7 @@ export default function Home() {
               boundaries={data.boundaries}
               districtBoundaries={districtBoundaries.data}
               provinces={data.provinces}
+              satelliteProvinces={(satellite.data as any)?.provinces ?? []}
               selectedIso={selected?.iso || ""}
               selectedLocation={selectedLocation}
               onSelect={iso => {
@@ -284,6 +289,8 @@ export default function Home() {
           </aside>
         </section>
 
+        <SatelliteObservationPanel selectedIso={selected?.iso || ""} selectedLocation={selectedLocation} />
+
         <VerificationPanel />
 
         <section className="review-grid">
@@ -331,6 +338,7 @@ export default function Home() {
               <div><dt>License</dt><dd>{data.source.license}</dd></div>
               <div><dt>Boundary source</dt><dd>geoBoundaries ADM1 · 77 units</dd></div>
               <div><dt>Location index</dt><dd>OCHA/HDX COD-AB · 928 districts · 7,425 subdistricts</dd></div>
+              <div><dt>Satellite observations</dt><dd>NASA GPM IMERG Late via dynamical.org · 0.1° representative cells</dd></div>
               <div><dt>Persistence</dt><dd>{data.persisted ? "Database snapshot" : "Bundled verified snapshot"}</dd></div>
             </dl>
             <div className="limitations">
@@ -345,6 +353,7 @@ export default function Home() {
         <span>ECMWF data © ECMWF, licensed CC BY 4.0.</span>
         <span>Administrative boundaries: geoBoundaries / CC BY 3.0 IGO.</span>
         <span>District geometry and names: OCHA/HDX COD-AB / CC BY 3.0 IGO.</span>
+        <span>NASA GPM IMERG data processed by dynamical.org / CC BY 4.0.</span>
         <span>For operational awareness only.</span>
       </footer>
     </div>

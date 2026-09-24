@@ -15,6 +15,7 @@
     "weather:refresh": "tsx scripts/smoke-refresh.ts",
     "weather:refine": "tsx scripts/smoke-refine.ts",
     "verification:refresh": "tsx scripts/smoke-verification.ts",
+    "satellite:refresh": "tsx scripts/smoke-satellite.ts",
     "warnings:refresh": "tsx scripts/smoke-warnings.ts",
     "smoke:production": "bash scripts/smoke-production.sh"
   },

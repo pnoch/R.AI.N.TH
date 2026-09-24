@@ -4,6 +4,7 @@ const mocks = vi.hoisted(() => ({
   updateAutomationRun: vi.fn(),
   refreshSnapshot: vi.fn(),
   refreshOfficialWarnings: vi.fn(),
+  refreshSatelliteSnapshot: vi.fn(),
   refreshVerification: vi.fn(),
 }));
 
@@ -13,6 +14,7 @@ vi.mock("./db", () => ({
 }));
 vi.mock("./weather", () => ({ refreshSnapshot: mocks.refreshSnapshot }));
 vi.mock("./officialWarnings", () => ({ refreshOfficialWarnings: mocks.refreshOfficialWarnings }));
+vi.mock("./satellite", () => ({ refreshSatelliteSnapshot: mocks.refreshSatelliteSnapshot }));
 vi.mock("./verification", () => ({ refreshVerification: mocks.refreshVerification }));
 vi.mock("./_core/sdk", () => ({ sdk: { authenticateRequest: vi.fn() } }));
 
@@ -27,6 +29,7 @@ describe("scheduled refresh resilience", () => {
   it("persists forecast success while explicitly marking a temporary warning-source failure", async () => {
     mocks.refreshSnapshot.mockResolvedValue({ runKey: "ifs-test" });
     mocks.refreshOfficialWarnings.mockRejectedValue(new Error("TMD unavailable"));
+    mocks.refreshSatelliteSnapshot.mockResolvedValue({ satelliteKey: "imerg-test" });
 
     const result = await runForecastWarningRefresh();
 
@@ -35,6 +38,8 @@ describe("scheduled refresh resilience", () => {
       weatherRunKey: "ifs-test",
       warningStatus: "STALE_LAST_KNOWN",
       warningError: "TMD unavailable",
+      satelliteKey: "imerg-test",
+      satelliteStatus: "FRESH",
     });
     expect(mocks.updateAutomationRun).toHaveBeenLastCalledWith(
       "forecast-warning-refresh",
@@ -45,11 +50,27 @@ describe("scheduled refresh resilience", () => {
   it("still fails the tracked run when the ECMWF forecast itself fails", async () => {
     mocks.refreshSnapshot.mockRejectedValue(new Error("ECMWF unavailable"));
     mocks.refreshOfficialWarnings.mockResolvedValue({ tmd: { status: "ACTIVE" } });
+    mocks.refreshSatelliteSnapshot.mockResolvedValue({ satelliteKey: "imerg-test" });
 
     await expect(runForecastWarningRefresh()).rejects.toThrow("ECMWF unavailable");
     expect(mocks.updateAutomationRun).toHaveBeenLastCalledWith(
       "forecast-warning-refresh",
       expect.objectContaining({ lastStatus: "failed", lastError: "ECMWF unavailable" }),
     );
+  });
+
+  it("persists forecast success while retaining the last satellite snapshot after an API failure", async () => {
+    mocks.refreshSnapshot.mockResolvedValue({ runKey: "ifs-test" });
+    mocks.refreshOfficialWarnings.mockResolvedValue({ tmd: { status: "NO_ACTIVE_WARNING" } });
+    mocks.refreshSatelliteSnapshot.mockRejectedValue(new Error("IMERG API unavailable"));
+
+    const result = await runForecastWarningRefresh();
+
+    expect(result).toMatchObject({
+      ok: true,
+      weatherRunKey: "ifs-test",
+      satelliteStatus: "STALE_LAST_KNOWN",
+      satelliteError: "IMERG API unavailable",
+    });
   });
 });
